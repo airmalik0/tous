@@ -1,0 +1,158 @@
+import { motion } from 'framer-motion'
+import { ArrowDown } from '@phosphor-icons/react'
+
+export function Hero() {
+  return (
+    <section className="relative min-h-[100dvh] flex items-center overflow-hidden">
+      {/* Background: large green rounded container like flecto */}
+      <div className="absolute inset-x-4 md:inset-x-8 top-24 bottom-8 bg-forest rounded-[2.5rem] md:rounded-[3rem] overflow-hidden">
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+        {/* Mint glow */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-mint/5 rounded-full blur-[100px]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-8 md:px-16 pt-32 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Left: Text */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-mint/15 rounded-pill mb-8"
+            >
+              <span className="w-2 h-2 bg-mint rounded-full animate-pulse" />
+              <span className="text-mint/90 text-sm font-medium">Веб-студия полного цикла</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]"
+            >
+              Создаём сайты
+              <br />
+              <span className="text-mint">любой</span>
+              <br />
+              сложности
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed"
+            >
+              От лендингов до сложных веб-приложений. Превращаем идеи в цифровые продукты, которые работают на ваш бизнес.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-10 flex flex-wrap gap-4"
+            >
+              <a
+                href="#contact"
+                className="inline-flex items-center px-8 py-4 bg-mint text-forest rounded-pill text-[15px] font-bold hover:bg-mint/90 transition-all duration-300 active:scale-[0.98]"
+              >
+                Обсудить проект
+              </a>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center px-8 py-4 border border-white/20 text-white rounded-pill text-[15px] font-medium hover:bg-white/5 transition-all duration-300"
+              >
+                Смотреть работы
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right: Visual — stacked rounded cards like flecto */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative w-full max-w-[500px] mx-auto">
+              {/* Main "browser" card */}
+              <div className="bg-white/10 backdrop-blur-md rounded-[2rem] p-6 border border-white/10">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-white/20" />
+                  <div className="w-3 h-3 rounded-full bg-white/20" />
+                  <div className="w-3 h-3 rounded-full bg-white/20" />
+                  <div className="ml-4 h-7 flex-1 bg-white/5 rounded-pill px-3 flex items-center">
+                    <span className="text-white/30 text-xs font-mono">yoursite.uz</span>
+                  </div>
+                </div>
+                <div className="bg-forest-light rounded-[1.5rem] p-6 space-y-4">
+                  <div className="h-8 w-1/3 bg-mint/20 rounded-xl" />
+                  <div className="h-4 w-full bg-white/10 rounded-lg" />
+                  <div className="h-4 w-4/5 bg-white/10 rounded-lg" />
+                  <div className="grid grid-cols-3 gap-3 mt-4">
+                    <div className="h-20 bg-mint/10 rounded-xl" />
+                    <div className="h-20 bg-mint/10 rounded-xl" />
+                    <div className="h-20 bg-mint/10 rounded-xl" />
+                  </div>
+                  <div className="flex gap-3 mt-4">
+                    <div className="h-10 flex-1 bg-mint rounded-xl" />
+                    <div className="h-10 w-10 bg-white/10 rounded-xl" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating card — notification */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -bottom-6 -left-8 bg-white rounded-[1.5rem] p-4 shadow-xl shadow-black/10 flex items-center gap-3"
+              >
+                <div className="w-10 h-10 bg-mint-bg rounded-xl flex items-center justify-center">
+                  <span className="text-forest font-bold text-sm">+</span>
+                </div>
+                <div>
+                  <p className="text-dark text-sm font-semibold">Новая заявка</p>
+                  <p className="text-muted text-xs">с вашего сайта</p>
+                </div>
+              </motion.div>
+
+              {/* Floating card — performance */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -top-4 -right-6 bg-white rounded-[1.25rem] p-3 px-4 shadow-xl shadow-black/10"
+              >
+                <p className="text-xs text-muted font-medium">PageSpeed</p>
+                <p className="text-forest font-bold text-xl">98<span className="text-mint">/100</span></p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Scroll indicator — right side */}
+      <motion.a
+        href="#services"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="absolute bottom-12 right-8 md:right-12 w-12 h-12 rounded-full border border-dark/10 bg-white flex items-center justify-center hover:bg-dark/5 transition-colors duration-300"
+      >
+        <ArrowDown size={18} className="text-dark/50" />
+      </motion.a>
+    </section>
+  )
+}
