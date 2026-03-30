@@ -117,14 +117,14 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-6 -left-8 bg-white rounded-[1.5rem] p-4 shadow-xl shadow-black/10 flex items-center gap-3"
+                className="absolute -bottom-6 -left-8 bg-white/10 backdrop-blur-md border border-white/10 rounded-[1.5rem] p-4 pr-6 shadow-xl shadow-black/10 flex items-center gap-3"
               >
-                <div className="w-10 h-10 bg-mint-bg rounded-xl flex items-center justify-center">
-                  <span className="text-forest font-bold text-sm">+</span>
+                <div className="w-10 h-10 bg-mint/15 rounded-xl flex items-center justify-center">
+                  <span className="text-mint font-bold text-sm">+</span>
                 </div>
                 <div>
-                  <p className="text-dark text-sm font-semibold">Новая заявка</p>
-                  <p className="text-muted text-xs">с вашего сайта</p>
+                  <p className="text-white text-sm font-semibold">Новая заявка</p>
+                  <p className="text-white/50 text-xs">с вашего сайта</p>
                 </div>
               </motion.div>
 
@@ -133,10 +133,10 @@ export function Hero() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-4 -right-6 bg-white rounded-[1.25rem] p-3 px-4 shadow-xl shadow-black/10"
+                className="absolute -top-4 -right-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-[1.25rem] p-3 px-4 shadow-xl shadow-black/10"
               >
-                <p className="text-xs text-muted font-medium">PageSpeed</p>
-                <p className="text-forest font-bold text-xl">98<span className="text-mint">/100</span></p>
+                <p className="text-xs text-white/50 font-medium">PageSpeed</p>
+                <p className="text-white font-bold text-xl tracking-[0.5px]">98<span className="text-mint ml-[2px]">/100</span></p>
               </motion.div>
             </div>
           </motion.div>
@@ -149,9 +149,9 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-12 right-8 md:right-12 w-12 h-12 rounded-full border border-dark/10 bg-white flex items-center justify-center hover:bg-dark/5 transition-colors duration-300"
+        className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-300"
       >
-        <ArrowDown size={18} className="text-dark/50" />
+        <ArrowDown size={18} className="text-forest/60" />
       </motion.a>
     </section>
   )

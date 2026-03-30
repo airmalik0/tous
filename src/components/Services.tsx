@@ -66,7 +66,7 @@ export function Services() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
-            <ScrollReveal key={s.title} delay={i * 0.08}>
+            <ScrollReveal key={s.title} delay={(i % 3) * 0.15}>
               <div
                 className={`group relative p-8 rounded-[2rem] transition-all duration-500 h-full ${
                   s.accent

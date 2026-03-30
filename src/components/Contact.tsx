@@ -23,7 +23,7 @@ export function Contact() {
                   <span className="text-mint">что-то крутое</span>
                 </h2>
                 <p className="text-white/50 text-lg leading-relaxed max-w-[480px]">
-                  Напишите нашему боту в Telegram — он ответит на вопросы об услугах и ценах, или сразу свяжет вас с менеджером.
+                  Напишите нам в Telegram — обсудим ваш проект и ответим на все вопросы.
                 </p>
               </div>
             </ScrollReveal>
@@ -33,7 +33,7 @@ export function Contact() {
               <div className="flex flex-col gap-5">
                 {/* Main CTA — Telegram bot */}
                 <a
-                  href="https://t.me/imbim_bot"
+                  href="https://t.me/imbim2004"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-5 bg-mint rounded-[2rem] p-6 md:p-8 no-underline hover:scale-[1.02] active:scale-[0.99] transition-transform duration-500"
@@ -44,7 +44,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-forest font-bold text-lg md:text-xl">Написать в Telegram</p>
-                    <p className="text-forest/60 text-sm">Бот ответит мгновенно, 24/7</p>
+                    <p className="text-forest/60 text-sm">Ответим в ближайшее время</p>
                   </div>
                 </a>
 
