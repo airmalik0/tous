@@ -45,7 +45,7 @@ export function Footer() {
 
           <div className="mt-10 pt-6 border-t border-dark/5 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-muted text-xs">&copy; 2025 imbim. Все права защищены.</p>
-            <p className="text-muted/70 text-xs">Сделано с заботой о каждом пикселе</p>
+            <p className="text-muted text-xs">Сделано с заботой о каждом пикселе</p>
           </div>
         </div>
       </div>

@@ -36,27 +36,17 @@ export function Hero() {
               <span className="text-mint/90 text-sm font-medium">Веб-студия полного цикла</span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: d + 0.08, ease }}
-              className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]"
-            >
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]">
               Создаём сайты
               <br />
               <span className="text-mint">любой</span>
               <br />
               сложности
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: d + 0.16, ease }}
-              className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed"
-            >
+            <p className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed">
               От лендингов до сложных веб-приложений. Превращаем идеи в цифровые продукты, которые работают на ваш бизнес.
-            </motion.p>
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
