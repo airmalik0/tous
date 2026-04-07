@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Services } from './components/Services'
-import { Process } from './components/Process'
-import { Portfolio } from './components/Portfolio'
-import { Stats } from './components/Stats'
-import { Contact } from './components/Contact'
-import { Footer } from './components/Footer'
+
+const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
+const Process = lazy(() => import('./components/Process').then(m => ({ default: m.Process })))
+const Portfolio = lazy(() => import('./components/Portfolio').then(m => ({ default: m.Portfolio })))
+const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })))
+const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })))
+const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
 
 export default function App() {
   useEffect(() => {
@@ -19,7 +20,6 @@ export default function App() {
       setTimeout(() => loader.remove(), 400)
     }
 
-    // Wait for fonts + double rAF to ensure browser has fully painted
     const waitAndHide = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(hide)
@@ -38,13 +38,17 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Services />
-        <Process />
-        <Portfolio />
-        <Stats />
-        <Contact />
+        <Suspense>
+          <Services />
+          <Process />
+          <Portfolio />
+          <Stats />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense>
+        <Footer />
+      </Suspense>
     </>
   )
 }
