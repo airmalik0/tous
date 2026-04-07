@@ -21,12 +21,11 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)]'
+          ? 'bg-white/90 shadow-[0_1px_0_rgba(0,0,0,0.06)]'
           : 'bg-transparent'
       }`}
-      style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-10 h-18 md:h-20">
         {/* Logo */}
@@ -47,7 +46,7 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="text-dark/70 hover:text-forest text-[15px] font-medium transition-colors duration-300"
+              className="text-dark/70 hover:text-forest text-[15px] font-medium transition-colors duration-200"
             >
               {l.label}
             </a>
@@ -58,7 +57,7 @@ export function Header() {
         <div className="hidden md:block">
           <a
             href="#contact"
-            className="inline-flex items-center px-6 py-2.5 bg-forest text-mint rounded-pill text-[15px] font-semibold hover:bg-forest-light transition-colors duration-300 active:scale-[0.98]"
+            className="inline-flex items-center px-6 py-2.5 bg-forest text-mint rounded-pill text-[15px] font-semibold hover:bg-forest-light transition-colors duration-200 active:scale-[0.98]"
           >
             Обсудить проект
           </a>
@@ -81,8 +80,8 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-white/95 backdrop-blur-xl overflow-hidden border-t border-forest/5"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-white/95 overflow-hidden border-t border-forest/5"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {links.map((l) => (

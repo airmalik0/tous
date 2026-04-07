@@ -35,7 +35,7 @@ export function Process() {
         {/* Large green container like flecto */}
         <div className="bg-forest rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-16 overflow-hidden relative">
           {/* Decorative glow */}
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-mint/8 rounded-full blur-[100px]" />
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.08) 0%, transparent 70%)' }} />
 
           <ScrollReveal>
             <div className="relative z-10 mb-12 md:mb-16">
@@ -53,7 +53,7 @@ export function Process() {
           <div className="relative z-10 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {steps.map((step, i) => (
               <ScrollReveal key={step.num} delay={i * 0.12}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[2rem] p-7 h-full hover:bg-white/10 transition-colors duration-500">
+                <div className="bg-white/5 border border-white/10 rounded-[2rem] p-7 h-full hover:bg-white/10 transition-colors duration-200">
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-12 h-12 bg-mint/15 rounded-[1rem] flex items-center justify-center">
                       <step.icon size={24} weight="duotone" className="text-mint" />

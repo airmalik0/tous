@@ -68,7 +68,7 @@ export function Services() {
           {services.map((s, i) => (
             <ScrollReveal key={s.title} delay={(i % 3) * 0.15}>
               <div
-                className={`group relative p-8 rounded-[2rem] transition-all duration-500 h-full ${
+                className={`group relative p-8 rounded-[2rem] transition-colors duration-200 h-full ${
                   s.accent
                     ? 'bg-forest text-white'
                     : 'bg-mint-bg hover:bg-mint-soft'

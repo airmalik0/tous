@@ -41,9 +41,9 @@ function AnimatedNumber({ target, suffix = '' }: { target: number; suffix?: stri
 }
 
 const stats = [
-  { value: 27, suffix: '', label: 'Заказов выполнено' },
-  { value: 25, suffix: '', label: 'Довольных клиентов' },
-  { value: 2.5, suffix: '', label: 'Года на рынке', isDecimal: true },
+  { value: 50, suffix: '+', label: 'Заказов выполнено' },
+  { value: 50, suffix: '+', label: 'Довольных клиентов' },
+  { value: 2, suffix: '', label: 'Года на рынке' },
 ]
 
 export function Stats() {

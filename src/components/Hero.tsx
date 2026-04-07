@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from '@phosphor-icons/react'
 
+const ease = [0.16, 1, 0.3, 1] as const
+const d = 0.4 // base delay — wait for loader to fade
+
 export function Hero() {
   return (
-    <section className="relative min-h-[100dvh] flex items-center overflow-hidden">
-      {/* Background: large green rounded container like flecto */}
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
+      {/* Background — no animation, static */}
       <div className="absolute inset-x-4 md:inset-x-8 top-24 bottom-8 bg-forest rounded-[2.5rem] md:rounded-[3rem] overflow-hidden">
-        {/* Grid pattern overlay */}
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -15,9 +17,8 @@ export function Hero() {
             backgroundSize: '60px 60px',
           }}
         />
-        {/* Mint glow */}
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px]" />
-        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-mint/5 rounded-full blur-[100px]" />
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.1) 0%, transparent 70%)' }} />
+        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.05) 0%, transparent 70%)' }} />
       </div>
 
       {/* Content */}
@@ -26,19 +27,19 @@ export function Hero() {
           {/* Left: Text */}
           <div>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: d, ease }}
               className="inline-flex items-center gap-2 px-4 py-2 bg-mint/15 rounded-pill mb-8"
             >
-              <span className="w-2 h-2 bg-mint rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-mint rounded-full" />
               <span className="text-mint/90 text-sm font-medium">Веб-студия полного цикла</span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: d + 0.08, ease }}
               className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]"
             >
               Создаём сайты
@@ -49,45 +50,44 @@ export function Hero() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: d + 0.16, ease }}
               className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed"
             >
               От лендингов до сложных веб-приложений. Превращаем идеи в цифровые продукты, которые работают на ваш бизнес.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: d + 0.24, ease }}
               className="mt-10 flex flex-wrap gap-4"
             >
               <a
                 href="#contact"
-                className="inline-flex items-center px-8 py-4 bg-mint text-forest rounded-pill text-[15px] font-bold hover:bg-mint/90 transition-all duration-300 active:scale-[0.98]"
+                className="inline-flex items-center px-8 py-4 bg-mint text-forest rounded-pill text-[15px] font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]"
               >
                 Обсудить проект
               </a>
               <a
                 href="#portfolio"
-                className="inline-flex items-center px-8 py-4 border border-white/20 text-white rounded-pill text-[15px] font-medium hover:bg-white/5 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 border border-white/20 text-white rounded-pill text-[15px] font-medium hover:bg-white/5 transition-colors duration-200"
               >
                 Смотреть работы
               </a>
             </motion.div>
           </div>
 
-          {/* Right: Visual — stacked rounded cards like flecto */}
+          {/* Right: Visual */}
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: d + 0.1, ease }}
             className="relative hidden lg:block"
           >
             <div className="relative w-full max-w-[500px] mx-auto">
-              {/* Main "browser" card */}
-              <div className="bg-white/10 backdrop-blur-md rounded-[2rem] p-6 border border-white/10">
+              <div className="bg-white/10 rounded-[2rem] p-6 border border-white/10">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-white/20" />
                   <div className="w-3 h-3 rounded-full bg-white/20" />
@@ -112,12 +112,11 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Floating card — notification */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-6 -left-8 bg-white/10 backdrop-blur-md border border-white/10 rounded-[1.5rem] p-4 pr-6 shadow-xl shadow-black/10 flex items-center gap-3"
+                transition={{ duration: 0.5, delay: d + 0.5, ease }}
+                className="absolute -bottom-6 -left-8 bg-forest-light border border-white/10 rounded-[1.5rem] p-4 pr-6 shadow-lg shadow-black/15 flex items-center gap-3"
               >
                 <div className="w-10 h-10 bg-mint/15 rounded-xl flex items-center justify-center">
                   <span className="text-mint font-bold text-sm">+</span>
@@ -128,12 +127,11 @@ export function Hero() {
                 </div>
               </motion.div>
 
-              {/* Floating card — performance */}
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-4 -right-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-[1.25rem] p-3 px-4 shadow-xl shadow-black/10"
+                transition={{ duration: 0.5, delay: d + 0.65, ease }}
+                className="absolute -top-4 -right-6 bg-forest-light border border-white/10 rounded-[1.25rem] p-3 px-4 shadow-lg shadow-black/15"
               >
                 <p className="text-xs text-white/50 font-medium">PageSpeed</p>
                 <p className="text-white font-bold text-xl tracking-[0.5px]">98<span className="text-mint ml-[2px]">/100</span></p>
@@ -143,13 +141,12 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator — right side */}
       <motion.a
         href="#services"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-300"
+        transition={{ delay: d + 0.8, duration: 0.5 }}
+        className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-200"
       >
         <ArrowDown size={18} className="text-forest/60" />
       </motion.a>

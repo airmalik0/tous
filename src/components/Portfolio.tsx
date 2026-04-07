@@ -65,8 +65,7 @@ export function Portfolio() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative ${p.color} rounded-[2rem] p-8 md:p-10 h-full min-h-[280px] flex flex-col justify-between overflow-hidden cursor-pointer transition-transform duration-500 hover:scale-[1.01] active:scale-[0.99] block no-underline`}
-                style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                className={`group relative ${p.color} rounded-[2rem] p-8 md:p-10 h-full min-h-[280px] flex flex-col justify-between overflow-hidden cursor-pointer transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] block no-underline`}
               >
                 {/* Mock UI elements for visual interest */}
                 <div className="absolute top-6 right-6 opacity-[0.08] pointer-events-none">

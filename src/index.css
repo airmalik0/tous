@@ -25,7 +25,7 @@
 }
 
 /* ─── Base ─── */
-html {
+html.ready {
   scroll-behavior: smooth;
 }
 

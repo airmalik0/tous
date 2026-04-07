@@ -22,6 +22,7 @@ bot/.env
 *.png
 .claude/
 .playwright-mcp/
+instagram-content/
 *.suo
 *.ntvs*
 *.njsproj
