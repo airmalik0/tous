@@ -20,6 +20,7 @@ bot/.env
 .idea
 .DS_Store
 *.png
+!public/og.png
 .claude/
 .playwright-mcp/
 instagram-content/
