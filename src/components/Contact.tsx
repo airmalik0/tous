@@ -3,8 +3,8 @@ import { ScrollReveal } from './ScrollReveal'
 import { PaperPlaneTilt, Phone, CheckCircle, CircleNotch } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const BOT_TOKEN = import.meta.env.VITE_TG_BOT_TOKEN
-const CHAT_ID = import.meta.env.VITE_TG_CHAT_ID
+const BOT_TOKEN = '8324034030:AAGRPx6LQxINwGPnWXrz9tlJx78G9JAAWjc'
+const CHAT_ID = '531955649'
 
 export function Contact() {
   const [contact, setContact] = useState('')
