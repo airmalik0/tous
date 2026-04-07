@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown } from '@phosphor-icons/react'
 
 const ease = [0.16, 1, 0.3, 1] as const
-const d = 0.4 // base delay — wait for loader to fade
+const d = 0.15 // base delay
 
 export function Hero() {
   return (
@@ -146,6 +146,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: d + 0.8, duration: 0.5 }}
+        aria-label="Прокрутить вниз"
         className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-200"
       >
         <ArrowDown size={18} className="text-forest/60" />
