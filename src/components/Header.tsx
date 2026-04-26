@@ -1,23 +1,42 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { List, X } from '@phosphor-icons/react'
-
-const links = [
-  { label: 'Услуги', href: '#services' },
-  { label: 'Процесс', href: '#process' },
-  { label: 'Портфолио', href: '#portfolio' },
-  { label: 'О нас', href: '#stats' },
-]
+import { useT, type Locale } from '../i18n'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { t, locale, setLocale } = useT()
+
+  const links = [
+    { label: t.navServices, href: '#services' },
+    { label: t.navProcess, href: '#process' },
+    { label: t.navAbout, href: '#stats' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const LangSwitch = ({ className = '' }: { className?: string }) => (
+    <div className={`inline-flex items-center bg-forest/5 rounded-pill p-1 ${className}`}>
+      {(['ru', 'uz'] as Locale[]).map(l => (
+        <button
+          key={l}
+          type="button"
+          onClick={() => setLocale(l)}
+          aria-pressed={locale === l}
+          className={`px-3 py-1 rounded-pill text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${
+            locale === l ? 'bg-forest text-mint' : 'text-forest/60 hover:text-forest'
+          }`}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  )
 
   return (
     <header
@@ -53,24 +72,28 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden md:block">
+        {/* CTA + Lang */}
+        <div className="hidden md:flex items-center gap-4">
+          <LangSwitch />
           <a
             href="#contact"
             className="inline-flex items-center px-6 py-2.5 bg-forest text-mint rounded-pill text-[15px] font-semibold hover:bg-forest-light transition-colors duration-200 active:scale-[0.98]"
           >
-            Обсудить проект
+            {t.ctaDiscuss}
           </a>
         </div>
 
         {/* Mobile burger */}
-        <button
-          className="md:hidden p-2 text-forest"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Меню"
-        >
-          {menuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <LangSwitch />
+          <button
+            className="p-2 text-forest"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={t.menuAria}
+          >
+            {menuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -99,7 +122,7 @@ export function Header() {
                 className="mt-2 inline-flex items-center justify-center px-6 py-3 bg-forest text-mint rounded-pill font-semibold"
                 onClick={() => setMenuOpen(false)}
               >
-                Обсудить проект
+                {t.ctaDiscuss}
               </a>
             </div>
           </motion.div>

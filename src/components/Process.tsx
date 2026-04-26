@@ -1,34 +1,17 @@
 import { ScrollReveal } from './ScrollReveal'
 import { ChatDots, PenNib, Code, RocketLaunch } from '@phosphor-icons/react'
-
-const steps = [
-  {
-    num: '01',
-    icon: ChatDots,
-    title: 'Обсуждение',
-    desc: 'Узнаём ваши цели, аудиторию и задачи. Формируем бриф и определяем объём работ.',
-  },
-  {
-    num: '02',
-    icon: PenNib,
-    title: 'Дизайн',
-    desc: 'Проектируем структуру и создаём визуальный дизайн, который решает задачи бизнеса.',
-  },
-  {
-    num: '03',
-    icon: Code,
-    title: 'Разработка',
-    desc: 'Воплощаем дизайн в код: адаптивная вёрстка, анимации, интеграции и тестирование.',
-  },
-  {
-    num: '04',
-    icon: RocketLaunch,
-    title: 'Запуск',
-    desc: 'Деплоим сайт, настраиваем аналитику и обеспечиваем техническую поддержку.',
-  },
-]
+import { useT } from '../i18n'
 
 export function Process() {
+  const { t } = useT()
+
+  const steps = [
+    { num: '01', icon: ChatDots, title: t.step1Title, desc: t.step1Desc },
+    { num: '02', icon: PenNib, title: t.step2Title, desc: t.step2Desc },
+    { num: '03', icon: Code, title: t.step3Title, desc: t.step3Desc },
+    { num: '04', icon: RocketLaunch, title: t.step4Title, desc: t.step4Desc },
+  ]
+
   return (
     <section id="process" className="py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
@@ -40,12 +23,12 @@ export function Process() {
           <ScrollReveal>
             <div className="relative z-10 mb-12 md:mb-16">
               <span className="inline-flex items-center px-4 py-2 bg-mint/15 rounded-pill text-mint text-sm font-medium mb-6">
-                Как мы работаем
+                {t.processBadge}
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-800 tracking-tighter text-white">
-                Прозрачный процесс.
+                {t.processTitle1}
                 <br />
-                <span className="text-mint">Предсказуемый результат.</span>
+                <span className="text-mint">{t.processTitle2}</span>
               </h2>
             </div>
           </ScrollReveal>

@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { ScrollReveal } from './ScrollReveal'
 import { PaperPlaneTilt, Phone, CheckCircle, CircleNotch } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useT } from '../i18n'
 
 const BOT_TOKEN = '8324034030:AAGRPx6LQxINwGPnWXrz9tlJx78G9JAAWjc'
 const CHAT_ID = '531955649'
 
 export function Contact() {
+  const { t, locale } = useT()
   const [contact, setContact] = useState('')
   const [description, setDescription] = useState('')
   const [callTime, setCallTime] = useState('')
@@ -19,15 +21,16 @@ export function Contact() {
     setStatus('sending')
 
     const lines = [
-      '📩 Новая заявка с сайта imbim.online',
+      t.tgNewLead,
       '',
-      `📱 Контакт: ${contact}`,
+      `🌐 ${locale.toUpperCase()}`,
+      `${t.tgContact}: ${contact}`,
     ]
     if (description.trim()) {
-      lines.push('', `📝 Описание проекта:`, description)
+      lines.push('', `${t.tgDescription}:`, description)
     }
     if (callTime.trim()) {
-      lines.push('', `🕐 Удобное время: ${callTime}`)
+      lines.push('', `${t.tgTime}: ${callTime}`)
     }
 
     try {
@@ -70,15 +73,15 @@ export function Contact() {
             <ScrollReveal>
               <div>
                 <span className="inline-flex items-center px-4 py-2 bg-mint/15 rounded-pill text-mint text-sm font-medium mb-8">
-                  Оставьте заявку
+                  {t.contactBadge}
                 </span>
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-800 tracking-tighter text-white mb-6">
-                  Давайте создадим
+                  {t.contactTitle1}
                   <br />
-                  <span className="text-mint">что-то крутое</span>
+                  <span className="text-mint">{t.contactTitle2}</span>
                 </h2>
                 <p className="text-white/50 text-lg leading-relaxed max-w-[480px] mb-8">
-                  Оставьте контакт — мы свяжемся, обсудим проект и предложим решение.
+                  {t.contactLead}
                 </p>
 
                 <a
@@ -105,8 +108,8 @@ export function Contact() {
                     <div className="w-16 h-16 bg-mint/15 rounded-full flex items-center justify-center mb-6">
                       <CheckCircle size={32} weight="fill" className="text-mint" />
                     </div>
-                    <h3 className="text-white font-bold text-xl mb-2">Заявка отправлена!</h3>
-                    <p className="text-white/40 text-sm">Мы свяжемся с вами в ближайшее время</p>
+                    <h3 className="text-white font-bold text-xl mb-2">{t.contactSuccessTitle}</h3>
+                    <p className="text-white/40 text-sm">{t.contactSuccessSub}</p>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -120,13 +123,13 @@ export function Contact() {
                     {/* Contact — required */}
                     <div>
                       <label className="text-white/60 text-sm mb-2 block">
-                        Телефон или Telegram *
+                        {t.contactLabel}
                       </label>
                       <input
                         type="text"
                         value={contact}
                         onChange={e => setContact(e.target.value)}
-                        placeholder="+998... или @username"
+                        placeholder={t.contactPlaceholder}
                         required
                         className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
                       />
@@ -135,12 +138,12 @@ export function Contact() {
                     {/* Description — optional */}
                     <div>
                       <label className="text-white/60 text-sm mb-2 block">
-                        Описание проекта <span className="text-white/25">— необязательно</span>
+                        {t.contactDescLabel} <span className="text-white/25">{t.contactDescOptional}</span>
                       </label>
                       <textarea
                         value={description}
                         onChange={e => setDescription(e.target.value)}
-                        placeholder="Расскажите коротко о вашем проекте..."
+                        placeholder={t.contactDescPlaceholder}
                         rows={3}
                         className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base resize-none"
                       />
@@ -149,13 +152,13 @@ export function Contact() {
                     {/* Call time — optional */}
                     <div>
                       <label className="text-white/60 text-sm mb-2 block">
-                        Когда удобно позвонить <span className="text-white/25">— необязательно</span>
+                        {t.contactTimeLabel} <span className="text-white/25">{t.contactTimeOptional}</span>
                       </label>
                       <input
                         type="text"
                         value={callTime}
                         onChange={e => setCallTime(e.target.value)}
-                        placeholder="Например: после 15:00"
+                        placeholder={t.contactTimePlaceholder}
                         className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
                       />
                     </div>
@@ -169,19 +172,19 @@ export function Contact() {
                       {status === 'sending' ? (
                         <>
                           <CircleNotch size={22} className="animate-spin" />
-                          Отправляем...
+                          {t.contactSending}
                         </>
                       ) : (
                         <>
                           <PaperPlaneTilt size={22} weight="fill" />
-                          Отправить заявку
+                          {t.contactSubmit}
                         </>
                       )}
                     </button>
 
                     {status === 'error' && (
                       <p className="text-red-400 text-sm text-center">
-                        Ошибка отправки. Попробуйте позже или позвоните нам.
+                        {t.contactErrorMsg}
                       </p>
                     )}
                   </motion.form>

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { ScrollReveal } from './ScrollReveal'
+import { useT } from '../i18n'
 
 function AnimatedNumber({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [value, setValue] = useState(0)
@@ -40,13 +41,15 @@ function AnimatedNumber({ target, suffix = '' }: { target: number; suffix?: stri
   )
 }
 
-const stats = [
-  { value: 50, suffix: '+', label: 'Заказов выполнено' },
-  { value: 50, suffix: '+', label: 'Довольных клиентов' },
-  { value: 2, suffix: '', label: 'Года на рынке' },
-]
-
 export function Stats() {
+  const { t } = useT()
+
+  const stats = [
+    { value: 50, suffix: '+', label: t.statsOrders },
+    { value: 50, suffix: '+', label: t.statsClients },
+    { value: 2, suffix: '', label: t.statsYears },
+  ]
+
   return (
     <section id="stats" className="py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
@@ -59,9 +62,9 @@ export function Stats() {
           <ScrollReveal>
             <div className="relative z-10 text-center mb-12 md:mb-16">
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-800 tracking-tighter text-forest">
-                Цифры говорят
+                {t.statsTitle1}
                 <br />
-                сами за себя
+                {t.statsTitle2}
               </h2>
             </div>
           </ScrollReveal>
@@ -71,9 +74,7 @@ export function Stats() {
               <ScrollReveal key={s.label} delay={i * 0.1}>
                 <div className="bg-forest rounded-[2rem] p-6 md:p-8 text-center">
                   <p className="text-4xl md:text-5xl font-800 text-mint font-display tracking-tight mb-2">
-                    {'isDecimal' in s && s.isDecimal
-                      ? <span>{s.value}{s.suffix}</span>
-                      : <AnimatedNumber target={s.value} suffix={s.suffix} />}
+                    <AnimatedNumber target={s.value} suffix={s.suffix} />
                   </p>
                   <p className="text-white/60 text-sm md:text-base">{s.label}</p>
                 </div>

@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from '@phosphor-icons/react'
+import { useT } from '../i18n'
 
 const ease = [0.16, 1, 0.3, 1] as const
 const d = 0.15 // base delay
 
 export function Hero() {
+  const { t } = useT()
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Background — no animation, static */}
@@ -33,19 +35,19 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-mint/15 rounded-pill mb-8"
             >
               <span className="w-2 h-2 bg-mint rounded-full" />
-              <span className="text-mint/90 text-sm font-medium">Веб-студия полного цикла</span>
+              <span className="text-mint/90 text-sm font-medium">{t.heroBadge}</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]">
-              Создаём сайты
+              {t.heroTitle1}
               <br />
-              <span className="text-mint">любой</span>
+              <span className="text-mint">{t.heroTitle2}</span>
               <br />
-              сложности
+              {t.heroTitle3}
             </h1>
 
             <p className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed">
-              От лендингов до сложных веб-приложений. Превращаем идеи в цифровые продукты, которые работают на ваш бизнес.
+              {t.heroLead}
             </p>
 
             <motion.div
@@ -58,13 +60,13 @@ export function Hero() {
                 href="#contact"
                 className="inline-flex items-center px-8 py-4 bg-mint text-forest rounded-pill text-[15px] font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]"
               >
-                Обсудить проект
+                {t.ctaDiscuss}
               </a>
               <a
-                href="#portfolio"
+                href="#services"
                 className="inline-flex items-center px-8 py-4 border border-white/20 text-white rounded-pill text-[15px] font-medium hover:bg-white/5 transition-colors duration-200"
               >
-                Смотреть работы
+                {t.heroCtaSecondary}
               </a>
             </motion.div>
           </div>
@@ -112,8 +114,8 @@ export function Hero() {
                   <span className="text-mint font-bold text-sm">+</span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">Новая заявка</p>
-                  <p className="text-white/50 text-xs">с вашего сайта</p>
+                  <p className="text-white text-sm font-semibold">{t.heroNewLead}</p>
+                  <p className="text-white/50 text-xs">{t.heroNewLeadSub}</p>
                 </div>
               </motion.div>
 
@@ -136,7 +138,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: d + 0.8, duration: 0.5 }}
-        aria-label="Прокрутить вниз"
+        aria-label={t.heroScrollAria}
         className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-200"
       >
         <ArrowDown size={18} className="text-forest/60" />
