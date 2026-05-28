@@ -4,6 +4,7 @@ import { Hero } from './components/Hero'
 
 const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
 const Process = lazy(() => import('./components/Process').then(m => ({ default: m.Process })))
+const Portfolio = lazy(() => import('./components/Portfolio').then(m => ({ default: m.Portfolio })))
 const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })))
 const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })))
 const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
@@ -40,6 +41,7 @@ export default function App() {
         <Suspense>
           <Services />
           <Process />
+          <Portfolio />
           <Stats />
           <Contact />
         </Suspense>

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { ScrollReveal } from './ScrollReveal'
-import { PaperPlaneTilt, Phone, CheckCircle, CircleNotch } from '@phosphor-icons/react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { PaperPlaneTilt, Phone, CircleNotch } from '@phosphor-icons/react'
 import { useT } from '../i18n'
 
 const BOT_TOKEN = '8324034030:AAGRPx6LQxINwGPnWXrz9tlJx78G9JAAWjc'
@@ -12,7 +11,7 @@ export function Contact() {
   const [contact, setContact] = useState('')
   const [description, setDescription] = useState('')
   const [callTime, setCallTime] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,12 +43,8 @@ export function Contact() {
       })
 
       if (res.ok) {
-        setStatus('sent')
-        setContact('')
-        setDescription('')
-        setCallTime('')
         window.fbq?.('track', 'Lead')
-        setTimeout(() => setStatus('idle'), 5000)
+        window.location.href = '/thank-you/'
       } else {
         setStatus('error')
         setTimeout(() => setStatus('idle'), 3000)
@@ -96,100 +91,74 @@ export function Contact() {
 
             {/* Right: Form */}
             <ScrollReveal delay={0.15}>
-              <AnimatePresence mode="wait">
-                {status === 'sent' ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center min-h-[380px] text-center"
-                  >
-                    <div className="w-16 h-16 bg-mint/15 rounded-full flex items-center justify-center mb-6">
-                      <CheckCircle size={32} weight="fill" className="text-mint" />
-                    </div>
-                    <h3 className="text-white font-bold text-xl mb-2">{t.contactSuccessTitle}</h3>
-                    <p className="text-white/40 text-sm">{t.contactSuccessSub}</p>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    onSubmit={handleSubmit}
-                    className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-5"
-                  >
-                    {/* Contact — required */}
-                    <div>
-                      <label className="text-white/60 text-sm mb-2 block">
-                        {t.contactLabel}
-                      </label>
-                      <input
-                        type="text"
-                        value={contact}
-                        onChange={e => setContact(e.target.value)}
-                        placeholder={t.contactPlaceholder}
-                        required
-                        className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
-                      />
-                    </div>
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 flex flex-col gap-5"
+              >
+                <div>
+                  <label className="text-white/60 text-sm mb-2 block">
+                    {t.contactLabel}
+                  </label>
+                  <input
+                    type="text"
+                    value={contact}
+                    onChange={e => setContact(e.target.value)}
+                    placeholder={t.contactPlaceholder}
+                    required
+                    className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
+                  />
+                </div>
 
-                    {/* Description — optional */}
-                    <div>
-                      <label className="text-white/60 text-sm mb-2 block">
-                        {t.contactDescLabel} <span className="text-white/25">{t.contactDescOptional}</span>
-                      </label>
-                      <textarea
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
-                        placeholder={t.contactDescPlaceholder}
-                        rows={3}
-                        className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base resize-none"
-                      />
-                    </div>
+                <div>
+                  <label className="text-white/60 text-sm mb-2 block">
+                    {t.contactDescLabel} <span className="text-white/25">{t.contactDescOptional}</span>
+                  </label>
+                  <textarea
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                    placeholder={t.contactDescPlaceholder}
+                    rows={3}
+                    className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base resize-none"
+                  />
+                </div>
 
-                    {/* Call time — optional */}
-                    <div>
-                      <label className="text-white/60 text-sm mb-2 block">
-                        {t.contactTimeLabel} <span className="text-white/25">{t.contactTimeOptional}</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={callTime}
-                        onChange={e => setCallTime(e.target.value)}
-                        placeholder={t.contactTimePlaceholder}
-                        className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
-                      />
-                    </div>
+                <div>
+                  <label className="text-white/60 text-sm mb-2 block">
+                    {t.contactTimeLabel} <span className="text-white/25">{t.contactTimeOptional}</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={callTime}
+                    onChange={e => setCallTime(e.target.value)}
+                    placeholder={t.contactTimePlaceholder}
+                    className="w-full bg-white/8 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/25 outline-none focus:border-mint/50 focus:ring-1 focus:ring-mint/25 transition-colors text-base"
+                  />
+                </div>
 
-                    {/* Submit */}
-                    <button
-                      type="submit"
-                      disabled={status === 'sending' || !contact.trim()}
-                      className="mt-2 w-full bg-mint text-forest font-bold text-lg rounded-xl px-5 py-4 flex items-center justify-center gap-3 hover:brightness-110 active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                    >
-                      {status === 'sending' ? (
-                        <>
-                          <CircleNotch size={22} className="animate-spin" />
-                          {t.contactSending}
-                        </>
-                      ) : (
-                        <>
-                          <PaperPlaneTilt size={22} weight="fill" />
-                          {t.contactSubmit}
-                        </>
-                      )}
-                    </button>
+                <button
+                  type="submit"
+                  disabled={status === 'sending' || !contact.trim()}
+                  className="mt-2 w-full bg-mint text-forest font-bold text-lg rounded-xl px-5 py-4 flex items-center justify-center gap-3 hover:brightness-110 active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  {status === 'sending' ? (
+                    <>
+                      <CircleNotch size={22} className="animate-spin" />
+                      {t.contactSending}
+                    </>
+                  ) : (
+                    <>
+                      <PaperPlaneTilt size={22} weight="fill" />
+                      {t.contactSubmit}
+                    </>
+                  )}
+                </button>
 
-                    {status === 'error' && (
-                      <p className="text-red-400 text-sm text-center">
-                        {t.contactErrorMsg}
-                      </p>
-                    )}
-                  </motion.form>
+                {status === 'error' && (
+                  <p className="text-red-400 text-sm text-center">
+                    {t.contactErrorMsg}
+                  </p>
                 )}
-              </AnimatePresence>
+              </form>
             </ScrollReveal>
           </div>
         </div>

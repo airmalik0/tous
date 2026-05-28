@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поток — личные финансы без боли · Москва</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { background: #FAFAF8; color: #18181B; font-family: 'Geist', -apple-system, sans-serif; }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .tile { background: #FFFFFF; border-radius: 24px; padding: 1.5rem; border: 1px solid #E4E4E7;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s; position: relative; overflow: hidden; }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -16px rgba(0,0,0,0.08); }
+  .tile-dark { background: linear-gradient(135deg, #18181B 0%, #27272A 100%); color: white; border-color: #18181B; }
+  .tile-indigo { background: #EEF2FF; border-color: #C7D2FE; }
+  .tile-amber { background: #FEF3C7; border-color: #FDE68A; }
+  .tile-emerald { background: #ECFDF5; border-color: #A7F3D0; }
+  .tile-rose { background: #FFE4E6; border-color: #FECACA; }
+  .accent { color: #4F46E5; }
+  .accent-bg { background: #4F46E5; }
+  .bar { transform: scaleY(0); transform-origin: bottom; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .bar.shown { transform: scaleY(1); }
+  .ring-progress { transform: rotate(-90deg); }
+  .phone {
+    background: #18181B; border-radius: 32px; padding: 12px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .phone-inner { background: #FAFAF8; border-radius: 22px; padding: 16px; min-height: 280px; }
+  .pulse { animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .bar { transform: scaleY(1); }
+    .pulse, .blink { animation: none; }
+  }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+  <a href="#" class="font-bold text-xl flex items-center gap-2">
+    <span class="w-7 h-7 rounded-lg accent-bg flex items-center justify-center text-white font-bold text-sm">П</span>
+    Поток
+  </a>
+  <ul class="hidden md:flex gap-8 text-sm text-zinc-700">
+    <li><a href="#features" class="hover:text-indigo-600 transition">Возможности</a></li>
+    <li><a href="#stats" class="hover:text-indigo-600 transition">Цифры</a></li>
+    <li><a href="#pricing" class="hover:text-indigo-600 transition">Тарифы</a></li>
+    <li><a href="#about" class="hover:text-indigo-600 transition">О сервисе</a></li>
+  </ul>
+  <a href="#" class="text-sm bg-zinc-900 text-white px-5 py-2.5 rounded-full hover:bg-indigo-600 transition">Скачать →</a>
+</nav>
+
+<section class="max-w-7xl mx-auto px-6 pt-8 md:pt-16 pb-12 text-center">
+  <span class="mono text-xs uppercase tracking-widest text-indigo-600">МОСКВА · iOS · ANDROID · WEB</span>
+  <h1 id="hero-h" class="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.92] mt-6 tracking-tight max-w-4xl mx-auto">
+    Личные финансы<br/>без боли.
+  </h1>
+  <p class="text-xl mt-8 text-zinc-600 max-w-xl mx-auto">Один счёт — все банки. Автокатегоризация, бюджеты, цели, спокойный сон. 28&nbsp;400 пользователей в Москве и&nbsp;Петербурге.</p>
+  <div class="flex flex-wrap justify-center gap-3 mt-10">
+    <a href="#" class="bg-zinc-900 text-white px-7 py-3.5 rounded-full text-sm font-medium hover:bg-indigo-600 transition">App Store</a>
+    <a href="#" class="bg-zinc-100 text-zinc-900 px-7 py-3.5 rounded-full text-sm font-medium hover:bg-zinc-200 transition">Google Play</a>
+    <a href="#features" class="px-7 py-3.5 text-sm font-medium text-zinc-700 hover:text-indigo-600 transition self-center">или посмотрите →</a>
+  </div>
+</section>
+
+<!-- BENTO GRID -->
+<section id="features" class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div id="bento" class="grid grid-cols-12 grid-rows-[auto] md:grid-rows-[auto_auto_auto] gap-4 md:gap-5 auto-rows-min">
+
+    <!-- T1: Balance (large) -->
+    <div class="tile tile-dark col-span-12 md:col-span-7 md:row-span-2 flex flex-col justify-between min-h-[280px] md:min-h-[420px]">
+      <div>
+        <p class="mono text-xs uppercase tracking-widest text-zinc-400">Общий баланс · все счета</p>
+        <p class="text-5xl md:text-7xl font-bold mt-3 tracking-tight" data-counter="384720" data-suffix=" ₽">0 ₽</p>
+        <p class="mono text-xs mt-3 text-emerald-400 flex items-center gap-2"><span class="inline-block w-2 h-2 bg-emerald-400 rounded-full pulse"></span>+47 240 ₽ за май · +14,2%</p>
+      </div>
+      <div>
+        <div class="flex items-end gap-1.5 mt-8 h-24 md:h-32" id="chart">
+          <div class="bar bg-indigo-500 rounded-t flex-1" style="height: 38%"></div>
+          <div class="bar bg-indigo-500 rounded-t flex-1" style="height: 62%"></div>
+          <div class="bar bg-indigo-500 rounded-t flex-1" style="height: 30%"></div>
+          <div class="bar bg-indigo-500 rounded-t flex-1" style="height: 71%"></div>
+          <div class="bar bg-indigo-500 rounded-t flex-1" style="height: 55%"></div>
+          <div class="bar bg-indigo-400 rounded-t flex-1" style="height: 82%"></div>
+          <div class="bar bg-indigo-400 rounded-t flex-1" style="height: 47%"></div>
+          <div class="bar bg-indigo-400 rounded-t flex-1" style="height: 91%"></div>
+          <div class="bar bg-indigo-400 rounded-t flex-1" style="height: 68%"></div>
+          <div class="bar bg-indigo-300 rounded-t flex-1" style="height: 45%"></div>
+          <div class="bar bg-indigo-300 rounded-t flex-1" style="height: 79%"></div>
+          <div class="bar bg-indigo-300 rounded-t flex-1" style="height: 100%"></div>
+        </div>
+        <div class="flex justify-between mono text-[10px] uppercase text-zinc-500 mt-3">
+          <span>1 мая</span><span>14 мая</span><span>сегодня</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- T2: Sent today -->
+    <div class="tile tile-indigo col-span-12 md:col-span-5 min-h-[200px]">
+      <p class="mono text-xs uppercase tracking-widest text-indigo-700">Потрачено сегодня</p>
+      <p class="text-4xl md:text-5xl font-bold mt-3 tracking-tight text-zinc-900" data-counter="3840" data-suffix=" ₽">0 ₽</p>
+      <ul class="mt-5 space-y-2.5 text-sm">
+        <li class="flex justify-between"><span class="text-zinc-700">Перекрёсток</span><span class="mono">−1 247 ₽</span></li>
+        <li class="flex justify-between"><span class="text-zinc-700">Яндекс Go</span><span class="mono">−489 ₽</span></li>
+        <li class="flex justify-between"><span class="text-zinc-700">Surf Coffee</span><span class="mono">−380 ₽</span></li>
+        <li class="flex justify-between"><span class="text-zinc-700">Озон</span><span class="mono">−1 724 ₽</span></li>
+      </ul>
+    </div>
+
+    <!-- T3: Goal -->
+    <div class="tile tile-amber col-span-12 md:col-span-3">
+      <p class="mono text-xs uppercase tracking-widest text-amber-700">Цель · Грузия 2026</p>
+      <div class="relative mt-4 mx-auto w-24 h-24">
+        <svg class="ring-progress w-full h-full" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#FDE68A" stroke-width="10"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" stroke-width="10"
+            stroke-dasharray="263.9" stroke-dashoffset="63.4" stroke-linecap="round"
+            id="goal-ring" style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1)"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span class="text-2xl font-bold" data-counter="76" data-suffix="%">0%</span>
+        </div>
+      </div>
+      <p class="text-sm mt-3 text-zinc-700 text-center">152&nbsp;000 из 200&nbsp;000</p>
+    </div>
+
+    <!-- T4: Categories -->
+    <div class="tile col-span-12 md:col-span-2 flex flex-col justify-between">
+      <p class="mono text-xs uppercase tracking-widest text-zinc-500">Категорий<br/>в этом месяце</p>
+      <p class="text-6xl font-bold accent" data-counter="14">0</p>
+    </div>
+
+    <!-- T5: Quick transfer -->
+    <div class="tile col-span-12 md:col-span-5">
+      <p class="mono text-xs uppercase tracking-widest text-zinc-500">Быстрый перевод</p>
+      <div class="flex gap-2 mt-4">
+        <div class="flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-zinc-50 cursor-pointer transition">
+          <div class="w-10 h-10 rounded-full bg-rose-200 flex items-center justify-center text-rose-700 font-bold">М</div>
+          <span class="text-xs text-zinc-700">Мама</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-zinc-50 cursor-pointer transition">
+          <div class="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-700 font-bold">Л</div>
+          <span class="text-xs text-zinc-700">Лена</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-zinc-50 cursor-pointer transition">
+          <div class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-bold">К</div>
+          <span class="text-xs text-zinc-700">Костя</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-zinc-50 cursor-pointer transition">
+          <div class="w-10 h-10 rounded-full bg-amber-200 flex items-center justify-center text-amber-700 font-bold">+</div>
+          <span class="text-xs text-zinc-700">ещё</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- T6: Bills -->
+    <div class="tile tile-rose col-span-12 md:col-span-4">
+      <p class="mono text-xs uppercase tracking-widest text-rose-700">Завтра спишется</p>
+      <ul class="mt-4 space-y-3 text-sm">
+        <li class="flex justify-between items-center">
+          <span class="text-zinc-800">Мобильный · МТС</span>
+          <span class="mono font-bold text-zinc-900">680 ₽</span>
+        </li>
+        <li class="flex justify-between items-center">
+          <span class="text-zinc-800">Spotify Premium</span>
+          <span class="mono font-bold text-zinc-900">169 ₽</span>
+        </li>
+        <li class="flex justify-between items-center">
+          <span class="text-zinc-800">ЖКХ · ГБУ Жилищник</span>
+          <span class="mono font-bold text-zinc-900">7 240 ₽</span>
+        </li>
+      </ul>
+      <p class="mono text-xs mt-4 text-rose-700">всего <span class="font-bold">8 089 ₽</span> · на счёте есть</p>
+    </div>
+
+    <!-- T7: Round-up -->
+    <div class="tile tile-emerald col-span-12 md:col-span-3 flex flex-col justify-between">
+      <div>
+        <p class="mono text-xs uppercase tracking-widest text-emerald-700">Округление сдачи</p>
+        <p class="text-4xl font-bold mt-3 tracking-tight text-zinc-900" data-counter="2486" data-suffix=" ₽">0 ₽</p>
+        <p class="text-xs text-zinc-600 mt-2">накопилось в мае автоматически</p>
+      </div>
+      <a href="#" class="mono text-xs uppercase tracking-widest text-emerald-700 hover:underline">включить →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-2 md:grid-cols-4 gap-8">
+  <div><p class="text-5xl md:text-6xl font-bold tracking-tight" data-counter="28400">0</p><p class="mono text-xs uppercase tracking-widest text-zinc-500 mt-2">пользователей</p></div>
+  <div><p class="text-5xl md:text-6xl font-bold tracking-tight" data-counter="14"><span data-suffix=" банков">0 банков</span></p><p class="mono text-xs uppercase tracking-widest text-zinc-500 mt-2">подключаются</p></div>
+  <div><p class="text-5xl md:text-6xl font-bold tracking-tight">4,8<span class="text-2xl text-zinc-500">/5</span></p><p class="mono text-xs uppercase tracking-widest text-zinc-500 mt-2">в App Store</p></div>
+  <div><p class="text-5xl md:text-6xl font-bold tracking-tight">3 ₽</p><p class="mono text-xs uppercase tracking-widest text-zinc-500 mt-2">в месяц · базовый</p></div>
+</section>
+
+<!-- CTA -->
+<section id="pricing" class="max-w-5xl mx-auto px-6 py-24 text-center">
+  <h2 class="text-4xl md:text-6xl font-bold tracking-tight">Попробуйте 30 дней<br/>бесплатно.</h2>
+  <p class="text-xl text-zinc-600 mt-6 max-w-xl mx-auto">Без карты, без обязательств. Если не зайдёт — просто удалите приложение.</p>
+  <div class="flex flex-wrap justify-center gap-3 mt-10">
+    <a href="#" class="bg-zinc-900 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-indigo-600 transition">Скачать для iOS</a>
+    <a href="#" class="bg-zinc-100 text-zinc-900 px-8 py-4 rounded-full text-base font-medium hover:bg-zinc-200 transition">Скачать для Android</a>
+  </div>
+  <p class="mono text-xs uppercase tracking-widest text-zinc-400 mt-12">потокfintech ООО · Москва, ул. Большая Никитская, 24 · поддержка пн-вс 8-22</p>
+</section>
+
+<footer class="max-w-7xl mx-auto px-6 py-10 border-t border-zinc-200 flex flex-col md:flex-row justify-between gap-4 text-sm text-zinc-500">
+  <span>© Поток · 2024–2026</span>
+  <span class="mono text-xs uppercase tracking-widest">made in moscow · v 2.14.0</span>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.from('#hero-h', { y: 80, opacity: 0, duration: 1.1, ease: 'expo.out' });
+    gsap.from('section:first-of-type p', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.25 });
+    gsap.from('section:first-of-type .flex.flex-wrap > *', { y: 20, opacity: 0, duration: 0.5, stagger: 0.07, ease: 'power3.out', delay: 0.5 });
+
+    // Bento tiles stagger from below with slight scale
+    gsap.from('#bento > .tile', {
+      y: 60, opacity: 0, scale: 0.96,
+      duration: 0.85, stagger: 0.06, ease: 'expo.out',
+      scrollTrigger: { trigger: '#bento', start: 'top 85%' }
+    });
+
+    // Bars chart
+    var chartTriggered = false;
+    ScrollTrigger.create({
+      trigger: '#chart', start: 'top 80%',
+      onEnter: function(){
+        if (chartTriggered) return; chartTriggered = true;
+        document.querySelectorAll('#chart .bar').forEach(function(b, i){
+          setTimeout(function(){ b.classList.add('shown'); }, 60 + i * 50);
+        });
+      }
+    });
+
+    // Counters
+    document.querySelectorAll('[data-counter]').forEach(function(el){
+      var target = parseFloat(el.dataset.counter);
+      var suffix = el.dataset.suffix || '';
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%',
+        onEnter: function(){
+          gsap.fromTo({ v: 0 }, { v: 0 }, {
+            v: target, duration: 1.6, ease: 'power3.out',
+            onUpdate: function(){
+              var v = this.targets()[0].v;
+              var formatted = Math.round(v).toLocaleString('ru-RU');
+              el.textContent = formatted + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    // Stats section reveal
+    gsap.from('#stats > div', {
+      y: 40, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'expo.out',
+      scrollTrigger: { trigger: '#stats', start: 'top 80%' }
+    });
+
+    // CTA reveal
+    gsap.from('#pricing h2, #pricing p, #pricing .flex', {
+      y: 40, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'expo.out',
+      scrollTrigger: { trigger: '#pricing', start: 'top 75%' }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -21,6 +21,7 @@ bot/.env
 .DS_Store
 *.png
 !public/og.png
+!public/portfolio/**/*.png
 .claude/
 .playwright-mcp/
 instagram-content/

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIXEL ALMATY — ретро-аркада и бар</title>
+<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Press Start 2P', cursive; }
+  body { background:#212529; color:#FCFCFC; padding: 0; margin: 0; }
+  .vt323 { font-family: 'VT323', monospace; }
+  img, .pixel { image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
+  /* CRT scanlines */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0, rgba(0,0,0,0.18) 1px, transparent 1px, transparent 3px);
+  }
+  .grid-bg {
+    background-image: linear-gradient(rgba(56,184,248,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(56,184,248,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .neon-y { color: #FCBC00; text-shadow: 0 0 0 #FCBC00, 4px 4px 0 #E40058; }
+  .neon-c { color: #38B8F8; text-shadow: 4px 4px 0 #E40058; }
+  .neon-r { color: #E40058; text-shadow: 4px 4px 0 #FCBC00; }
+  .container-block { background: #FCFCFC; color: #1A1A1A; padding: 1.5rem; border: 4px solid #1A1A1A; box-shadow: 8px 8px 0 0 #38B8F8; }
+  .hero-h { font-size: clamp(2.2rem, 7vw, 5.5rem); line-height: 1.1; letter-spacing: -2px; }
+  h2 { font-size: clamp(1.4rem, 3.5vw, 2.4rem); }
+  h3 { font-size: 0.95rem; line-height: 1.5; }
+  p, li { font-size: 0.7rem; line-height: 1.9; }
+  .vt323 p, .vt323 li, .vt323 { font-size: 1.4rem; line-height: 1.5; letter-spacing: 0.5px; }
+  section { padding: 4rem 1.5rem; }
+  .max-w-6xl { max-width: 72rem; margin-left: auto; margin-right: auto; }
+  .max-w-5xl { max-width: 64rem; margin-left: auto; margin-right: auto; }
+  .max-w-4xl { max-width: 56rem; margin-left: auto; margin-right: auto; }
+  .max-w-3xl { max-width: 48rem; margin-left: auto; margin-right: auto; }
+  .grid-3 { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 768px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+  .grid-2 { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+  @media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .scroll-marquee { overflow: hidden; white-space: nowrap; }
+  .scroll-marquee > span { display: inline-block; padding-right: 3rem; animation: marquee 30s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  nav { background: #000; padding: 1rem 1.5rem; border-bottom: 4px solid #FCBC00; }
+  nav .inner { max-width: 72rem; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  nav a { color: #FCFCFC; font-size: 0.65rem; text-decoration: none; }
+  nav a:hover { color: #FCBC00; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; padding: 0; margin: 0; flex-wrap: wrap; }
+  .price-tag { display: inline-block; background: #FCBC00; color: #1A1A1A; padding: 4px 8px; font-size: 0.7rem; }
+  table { width: 100%; border-collapse: collapse; }
+  table td { padding: 8px 4px; border-bottom: 2px dashed #444; font-family: 'VT323', monospace; font-size: 1.3rem; }
+  table td:last-child { text-align: right; color: #FCBC00; }
+  footer { background: #000; color: #888; padding: 2rem 1.5rem; border-top: 4px solid #FCBC00; }
+  footer .inner { max-width: 72rem; margin: 0 auto; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.6rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pixel-bob { animation: pixelBob 1.6s steps(2) infinite; }
+    @keyframes pixelBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .pixel-in { opacity: 0; transform: translateX(-40px); }
+    .pixel-in.shown { opacity: 1; transform: translateX(0); transition: opacity 0.4s steps(4), transform 0.4s steps(4); }
+    .pixel-pop { opacity: 0; transform: scale(0.6); }
+    .pixel-pop.shown { opacity: 1; transform: scale(1); transition: opacity 0.3s steps(3), transform 0.3s steps(3); }
+    .pixel-glitch { animation: pixelGlitch 4s steps(1) infinite; }
+    @keyframes pixelGlitch { 0%, 96%, 100% { transform: translateX(0); } 97% { transform: translateX(-2px); } 98% { transform: translateX(3px); } 99% { transform: translateX(-1px); } }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="neon-y" style="font-size:1.1rem;">PIXEL<span class="neon-r">▲</span>ALMATY</a>
+    <ul>
+      <li><a href="#games">GAMES</a></li>
+      <li><a href="#tournaments">TOURNEYS</a></li>
+      <li><a href="#bar">BAR</a></li>
+      <li><a href="#visit">VISIT</a></li>
+    </ul>
+    <a href="#tournaments" class="nes-btn is-warning" style="font-size:0.6rem;">JOIN ↗</a>
+  </div>
+</nav>
+
+<section class="grid-bg" style="padding-top: 5rem; padding-bottom: 5rem;">
+  <div class="max-w-6xl">
+    <div class="grid-2">
+      <div>
+        <p class="vt323" style="color:#38B8F8; font-size:1.4rem; margin: 0;">▶ PRESS START</p>
+        <h1 class="hero-h neon-y" style="margin: 1.5rem 0;">PIXEL<br/>ALMATY</h1>
+        <p class="neon-c" style="font-size: 0.9rem;">80 АВТОМАТОВ · NES · SEGA · PS1</p>
+        <p class="vt323" style="margin-top: 2rem; max-width: 480px; color:#DDD;">Ретро-аркада и бар в Алмалинском районе. Те самые автоматы из вашего детства плюс бар с алмаатинским пивом и крафтом из Караганды. Турниры по вторникам.</p>
+        <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#tournaments" class="nes-btn is-warning">INSERT COIN ↗</a>
+          <a href="#bar" class="nes-btn">MENU</a>
+        </div>
+        <p class="vt323 blink" style="margin-top: 2rem; color:#FCBC00;">_</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="arcade.png" alt="arcade cabinet" class="pixel" style="width: 100%; max-width: 480px; image-rendering: pixelated;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scroll-marquee" style="background: #FCBC00; color: #1A1A1A; padding: 0.8rem 0; font-size: 0.7rem; border-top: 4px solid #1A1A1A; border-bottom: 4px solid #1A1A1A;">
+  <span>★ HAPPY HOUR ВТ-ЧТ 18:00-20:00 ★ ТУРНИР PAC-MAN КАЖДЫЙ ВТ ★ ВХОД 2000₸ С КАРТОЧКОЙ ★ HAPPY HOUR ВТ-ЧТ 18:00-20:00 ★ ТУРНИР PAC-MAN КАЖДЫЙ ВТ ★ ВХОД 2000₸ С КАРТОЧКОЙ ★ </span>
+</div>
+
+<section id="games" style="background: #000;">
+  <div class="max-w-6xl">
+    <h2 class="neon-c" style="margin-bottom: 0.5rem;">► ИГРЫ</h2>
+    <p class="vt323" style="color: #888;">80+ автоматов и консолей · все работают, мы починили</p>
+    <div class="grid-3" style="margin-top: 3rem;">
+      <div class="nes-container is-rounded is-dark with-title">
+        <p class="title neon-y">ARCADES</p>
+        <table>
+          <tr><td>PAC-MAN</td><td>1980</td></tr>
+          <tr><td>DONKEY KONG</td><td>1981</td></tr>
+          <tr><td>STREET FIGHTER II</td><td>1991</td></tr>
+          <tr><td>METAL SLUG</td><td>1996</td></tr>
+          <tr><td>TIME CRISIS</td><td>1995</td></tr>
+        </table>
+      </div>
+      <div class="nes-container is-rounded is-dark with-title">
+        <p class="title neon-c">CONSOLES</p>
+        <table>
+          <tr><td>NES (DENDY)</td><td>x4</td></tr>
+          <tr><td>SEGA MEGA DRIVE</td><td>x4</td></tr>
+          <tr><td>SUPER NINTENDO</td><td>x2</td></tr>
+          <tr><td>SONY PS ONE</td><td>x6</td></tr>
+          <tr><td>NINTENDO 64</td><td>x2</td></tr>
+        </table>
+      </div>
+      <div class="nes-container is-rounded is-dark with-title">
+        <p class="title neon-r">PINBALLS</p>
+        <table>
+          <tr><td>ADDAMS FAMILY</td><td>1992</td></tr>
+          <tr><td>MEDIEVAL MADNESS</td><td>1997</td></tr>
+          <tr><td>TWILIGHT ZONE</td><td>1993</td></tr>
+          <tr><td>TERMINATOR 2</td><td>1991</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="nes-balloon from-left" style="margin-top: 3rem; max-width: 700px;">
+      <p class="vt323" style="margin: 0; color: #1A1A1A;">Игра по карточке: ₸ 2000 — 1 час безлимит. Покупаем на ресепшене у Жанибека.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tournaments" class="grid-bg">
+  <div class="max-w-5xl">
+    <h2 class="neon-y" style="margin-bottom: 3rem;">► ТУРНИРЫ</h2>
+    <div class="container-block" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: start; gap: 2rem; flex-wrap: wrap;">
+        <div>
+          <p style="color:#E40058; font-size: 0.7rem;">ВТ · 19:00 · ЕЖЕНЕДЕЛЬНО</p>
+          <h3 style="margin-top: 1rem;">PAC-MAN CLASSIC CUP</h3>
+          <p class="vt323" style="margin-top: 1rem; max-width: 400px;">Сетка 16 человек, на вылет. Лучший счёт за 5 минут. Победитель — ₸ 80 000 + футболка.</p>
+        </div>
+        <div style="text-align: center;">
+          <span class="price-tag">VHOD ₸ 5000</span>
+          <p class="vt323" style="font-size: 1rem; margin-top: 1rem;">записаться<br/>на ресепшене</p>
+        </div>
+      </div>
+    </div>
+    <div class="container-block" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: start; gap: 2rem; flex-wrap: wrap;">
+        <div>
+          <p style="color:#E40058; font-size: 0.7rem;">ЧТ · 20:00 · ЕЖЕНЕДЕЛЬНО</p>
+          <h3 style="margin-top: 1rem;">STREET FIGHTER II SHOWDOWN</h3>
+          <p class="vt323" style="margin-top: 1rem; max-width: 400px;">2 на 2, best-of-3. Призовой фонд растёт за счёт взносов, минимум ₸ 60 000.</p>
+        </div>
+        <div style="text-align: center;">
+          <span class="price-tag">VHOD ₸ 4000</span>
+          <p class="vt323" style="font-size: 1rem; margin-top: 1rem;">в паре,<br/>обоим за столом</p>
+        </div>
+      </div>
+    </div>
+    <div class="container-block">
+      <div style="display: flex; justify-content: space-between; align-items: start; gap: 2rem; flex-wrap: wrap;">
+        <div>
+          <p style="color:#E40058; font-size: 0.7rem;">14.06 · СБ · 18:00 · ОСОБОЕ</p>
+          <h3 style="margin-top: 1rem;">METAL SLUG SUMMER OPEN</h3>
+          <p class="vt323" style="margin-top: 1rem; max-width: 400px;">Большой турнир на 32 человека, в три эшелона. Призовой фонд ₸ 300 000.</p>
+        </div>
+        <div style="text-align: center;">
+          <span class="price-tag">VHOD ₸ 12000</span>
+          <p class="vt323" style="font-size: 1rem; margin-top: 1rem;">регистрация<br/>до 10 июня</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bar" style="background:#000;">
+  <div class="max-w-6xl">
+    <div class="grid-2">
+      <div>
+        <h2 class="neon-r" style="margin-bottom: 0.5rem;">► БАР</h2>
+        <p class="vt323" style="color: #888; margin-bottom: 2rem;">алмаатинское пиво, караганда-крафт, японский виски</p>
+        <table style="width: 100%;">
+          <tr><td>ТЯНЬ-ШАНЬ ИЗ КРАНА · 0.5</td><td>₸ 900</td></tr>
+          <tr><td>ALA-TOO ИПА · 0.5</td><td>₸ 1700</td></tr>
+          <tr><td>КАРАГАНДА ПОРТЕР · 0.5</td><td>₸ 1900</td></tr>
+          <tr><td>СОЮЗ-АПОЛЛОН СТАУТ · 0.5</td><td>₸ 2100</td></tr>
+          <tr><td>HAKUSHU 12 · 50ml</td><td>₸ 5400</td></tr>
+          <tr><td>МАК-АЛЛАН 12 · 50ml</td><td>₸ 4200</td></tr>
+          <tr><td>BLOODY MARY (наш рецепт)</td><td>₸ 2500</td></tr>
+          <tr><td>NEGRONI</td><td>₸ 2800</td></tr>
+        </table>
+        <p class="vt323" style="margin-top: 2rem; color: #888;">+ КУХНЯ: ХОТ-ДОГ, НАЧОС, ПЛОВ ОТ ОРАЗА</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="mascot.png" alt="" class="pixel" style="width: 100%; max-width: 360px;">
+        <p class="vt323" style="color:#FCBC00; margin-top: 1.5rem;">▲ это БУБА, наш бариста-пришелец</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="grid-bg">
+  <div class="max-w-4xl">
+    <h2 class="neon-c" style="margin-bottom: 3rem;">► АДРЕС</h2>
+    <div class="grid-3" style="grid-template-columns: 1fr;">
+      <div class="nes-container is-rounded">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <div>
+            <p class="vt323" style="color:#888; font-size: 1rem;">ГДЕ</p>
+            <p class="vt323">ул. Кабанбай батыра, 87<br/>2 этаж, вход с Сейфуллина<br/>Алматы 050000</p>
+          </div>
+          <div>
+            <p class="vt323" style="color:#888; font-size: 1rem;">КОГДА</p>
+            <p class="vt323">пн-чт · 17:00-02:00<br/>пт · 17:00-04:00<br/>сб-вс · 14:00-04:00</p>
+          </div>
+          <div>
+            <p class="vt323" style="color:#888; font-size: 1rem;">ТЕЛ</p>
+            <p class="vt323">+7 (727) 244 16 18</p>
+          </div>
+          <div>
+            <p class="vt323" style="color:#888; font-size: 1rem;">INSTAGRAM</p>
+            <p class="vt323">@pixel.almaty</p>
+          </div>
+        </div>
+        <div style="margin-top: 2rem; text-align: center;">
+          <a href="#" class="nes-btn is-success">2GIS НАВИГАЦИЯ ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <span>© PIXEL ALMATY · EST 2021</span>
+    <span class="vt323" style="font-size:1rem;">made with 80% caffeine, 20% nostalgia</span>
+    <span>GAME OVER? <span class="blink" style="color:#FCBC00;">[CONTINUE]</span></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('img.pixel').forEach(function(el){ el.classList.add('pixel-bob'); });
+    document.querySelectorAll('.nes-container').forEach(function(el){ el.classList.add('pixel-in'); });
+    document.querySelectorAll('.container-block').forEach(function(el){ el.classList.add('pixel-pop'); });
+    document.querySelectorAll('.nes-balloon').forEach(function(el){ el.classList.add('pixel-pop'); });
+    var heroH1 = document.querySelector('section .hero-h');
+    if (heroH1) heroH1.classList.add('pixel-glitch');
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('shown');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.pixel-in, .pixel-pop').forEach(function(el){ io.observe(el); });
+  });
+})();
+</script>
+</body>
+</html>

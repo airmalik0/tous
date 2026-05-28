@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Семечки — семейный трекер привычек · Минск</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { background: #FAFAFA; color: #2D2A2E; font-family: 'Nunito', sans-serif; }
+  .display { font-family: 'Nunito', sans-serif; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; }
+  .quick { font-family: 'Quicksand', sans-serif; }
+  .icon { color: #4A4448; }
+
+  /* BIG BLOCKS — raised, tight outer shadow */
+  .clay-card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    box-shadow:
+      -4px -4px 10px rgba(255,255,255,1),
+      6px 6px 16px rgba(165,155,145,0.16);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+  }
+  .clay-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      -6px -6px 14px rgba(255,255,255,1),
+      9px 9px 22px rgba(165,155,145,0.22);
+  }
+
+  /* SMALL ELEMENTS — inset (pressed-in pocket) */
+  .clay-pill {
+    background: #FAFAFA;
+    border-radius: 9999px;
+    color: #2D2A2E;
+    box-shadow:
+      inset -3px -3px 6px rgba(255,255,255,1),
+      inset 3px 3px 7px rgba(165,155,145,0.22);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .clay-pill:hover {
+    box-shadow:
+      inset -4px -4px 8px rgba(255,255,255,1),
+      inset 4px 4px 9px rgba(165,155,145,0.28);
+  }
+  .clay-pill:active {
+    box-shadow:
+      inset -1px -1px 3px rgba(255,255,255,0.7),
+      inset 5px 5px 12px rgba(165,155,145,0.35);
+  }
+
+  /* ACCENT — the ONLY saturated element */
+  .clay-pill-accent {
+    background: linear-gradient(135deg, #FFB6A6 0%, #FF9D8A 100%);
+    color: #4D2E26;
+    border-radius: 9999px;
+    box-shadow:
+      -3px -3px 7px rgba(255,255,255,0.5),
+      5px 5px 14px rgba(190,110,100,0.32),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .clay-pill-accent:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      -4px -4px 8px rgba(255,255,255,0.55),
+      7px 7px 18px rgba(190,110,100,0.38),
+      inset 0 1px 0 rgba(255,255,255,0.45);
+  }
+
+  /* ICON TILES — small inset pockets (white) */
+  .clay-tile {
+    background: #FAFAFA;
+    border-radius: 16px;
+    box-shadow:
+      inset -2px -2px 4px rgba(255,255,255,1),
+      inset 2px 2px 5px rgba(165,155,145,0.20);
+    color: #4A4448;
+  }
+
+  /* IMAGES — pressed-in pocket with hard tight inset shadow */
+  .img-pocket {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  .img-pocket::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+      inset -3px -3px 6px rgba(255,255,255,0.4),
+      inset 6px 6px 10px rgba(120,108,98,0.45);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .img-pocket img { display: block; width: 100%; height: auto; }
+
+  /* CHECK CIRCLE — inset */
+  .check-circle {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #FAFAFA;
+    box-shadow:
+      inset -2px -2px 4px rgba(255,255,255,1),
+      inset 3px 3px 6px rgba(165,155,145,0.24);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-circle.done {
+    background: #2D2A2E;
+    box-shadow:
+      -1px -1px 3px rgba(255,255,255,0.8),
+      2px 2px 6px rgba(165,155,145,0.30);
+  }
+  .check-circle.done svg { opacity: 1; transform: scale(1); }
+  .check-circle svg { opacity: 0; transform: scale(0.4); transition: all 0.3s; }
+
+  .float-hero { animation: floatHero 5s ease-in-out infinite; }
+  @keyframes floatHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float-hero { animation: none; }
+    .clay-card, .clay-pill, .clay-pill-accent, .check-circle { transition: none; }
+  }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sprout" viewBox="0 0 24 24">
+      <path d="M12 21V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path d="M12 14C7 12 4 8 6 4C11 4 14 8 12 14Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M12 12C17 10 20 6 18 2C13 2 10 6 12 12Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-sapling" viewBox="0 0 24 24">
+      <path d="M12 21V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path d="M12 13C7 11 5 7 7 3C12 3 15 8 12 13Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M12 10C17 9 20 5 18 1C13 1 10 5 12 10Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M12 17C9 15 7 12 8.5 9C11 9 13 13 12 17Z" fill="currentColor" opacity="0.1" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24">
+      <rect x="10.5" y="15" width="3" height="6" fill="currentColor" opacity="0.4" rx="0.5"/>
+      <circle cx="12" cy="11" r="7.5" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="9" cy="9.5" r="1.6" fill="currentColor" opacity="0.4"/>
+      <circle cx="15" cy="11" r="1.6" fill="currentColor" opacity="0.4"/>
+      <circle cx="12" cy="13.5" r="1.6" fill="currentColor" opacity="0.4"/>
+    </symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24">
+      <path d="M12 21V14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <circle cx="7" cy="10" r="3.4" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="17" cy="10" r="3.4" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="12" cy="5" r="3.4" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="12" cy="14.5" r="3.4" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="12" cy="10" r="2" fill="#FF9D8A"/>
+    </symbol>
+    <symbol id="i-clover" viewBox="0 0 24 24">
+      <path d="M12 21V12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <path d="M8 10C4 10 4 5 8 5C8 8 11 8 8 10Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.1"/>
+      <path d="M16 10C20 10 20 5 16 5C16 8 13 8 16 10Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.1"/>
+      <path d="M12 7C8 7 8 2 12 2C16 2 16 7 12 7Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.1"/>
+      <path d="M12 14C8 14 8 9 12 9C16 9 16 14 12 14Z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 2L14.5 8.5L21.5 9.2L16.3 13.9L17.8 20.5L12 17L6.2 20.5L7.7 13.9L2.5 9.2L9.5 8.5Z" fill="#F5A623"/>
+    </symbol>
+    <symbol id="i-tooth" viewBox="0 0 24 24">
+      <path d="M8 3C5 3 4 5 4 8C4 10 5 11 5 14C5 18 6 21 8 21C9.5 21 10 19 10.5 17C11 15 11.5 14 12 14C12.5 14 13 15 13.5 17C14 19 14.5 21 16 21C18 21 19 18 19 14C19 11 20 10 20 8C20 5 19 3 16 3C14 3 13 4 12 4C11 4 10 3 8 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20V17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="9" cy="10" r="1" fill="currentColor"/>
+      <circle cx="15" cy="10" r="1" fill="currentColor"/>
+      <path d="M9 14.5Q12 17 15 14.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24">
+      <path d="M12 3C8 9 6 13 6 16A6 6 0 0 0 18 16C18 13 16 9 12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24">
+      <circle cx="14" cy="4.5" r="1.8" fill="currentColor"/>
+      <path d="M14 21L11 14L15 10L11 7L8.5 10.5L5 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15 14L18 11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <path d="M12 5V19M5 12H19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+  <a href="#" class="display text-2xl flex items-center gap-3">
+    <span class="w-10 h-10 clay-tile flex items-center justify-center" style="color:#5A8A50;">
+      <svg width="22" height="22"><use href="#i-sprout"/></svg>
+    </span>
+    <span>Семечки</span>
+  </a>
+  <ul class="hidden md:flex gap-8 quick text-base text-stone-700 font-medium">
+    <li><a href="#how" class="hover:text-stone-900 transition">Как работает</a></li>
+    <li><a href="#today" class="hover:text-stone-900 transition">Привычки</a></li>
+    <li><a href="#family" class="hover:text-stone-900 transition">Для семьи</a></li>
+    <li><a href="#pricing" class="hover:text-stone-900 transition">Тарифы</a></li>
+  </ul>
+  <a href="#" class="clay-pill-accent px-6 py-3 font-bold">Скачать →</a>
+</nav>
+
+<!-- HERO -->
+<section class="max-w-7xl mx-auto px-6 pt-8 md:pt-16 pb-16">
+  <div class="grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span class="quick text-sm uppercase tracking-widest text-stone-500 font-bold">МИНСК · IOS · ANDROID · СЕМЬИ ОТ 2 ЧЕЛОВЕК</span>
+      <h1 id="hero-h" class="display text-6xl md:text-7xl lg:text-8xl mt-6">
+        Большие<br/>привычки<br/>растут из <span style="color:#FF7B5C;">маленьких</span>.
+      </h1>
+      <p class="text-xl md:text-2xl mt-8 text-stone-600 max-w-lg leading-relaxed">
+        Семейный трекер маленьких ежедневных дел. Дети учатся, родители подтверждают, все хвастаются streak'ами. 2 400 семей в Беларуси и России.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-10">
+        <a href="#" class="clay-pill-accent px-7 py-4 font-bold text-base">Скачать бесплатно →</a>
+        <a href="#how" class="clay-pill px-7 py-4 font-bold text-base">Как работает</a>
+      </div>
+      <div class="quick mt-6 flex items-center gap-4 text-sm text-stone-600">
+        <span class="flex items-center gap-1.5">
+          <svg width="16" height="16"><use href="#i-star"/></svg>
+          4,9 в App Store
+        </span>
+        <span class="opacity-50">·</span>
+        <span class="flex items-center gap-1.5">
+          <svg width="16" height="16"><use href="#i-star"/></svg>
+          4,8 в Google Play
+        </span>
+      </div>
+    </div>
+    <div class="relative flex justify-center">
+      <div class="img-pocket float-hero w-full max-w-md">
+        <img src="hero-sprout.png" alt="" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="max-w-7xl mx-auto px-6 py-20">
+  <div class="text-center mb-14">
+    <span class="quick text-sm uppercase tracking-widest text-stone-500 font-bold">— как это работает —</span>
+    <h2 class="display text-4xl md:text-6xl mt-3">Три шага.<br/>Шесть минут в день.</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="clay-card p-8">
+      <div class="w-14 h-14 clay-tile flex items-center justify-center display text-2xl font-black" style="color:#2D2A2E;">1</div>
+      <h3 class="display text-3xl mt-6">Посадили</h3>
+      <p class="text-stone-600 mt-3 leading-relaxed">Создаёте привычку, выбираете дни недели. «Почистить зубы вечером», «прочитать страницу», «убрать игрушки» — что угодно.</p>
+    </div>
+    <div class="clay-card p-8 md:translate-y-6">
+      <div class="w-14 h-14 clay-tile flex items-center justify-center display text-2xl font-black" style="color:#2D2A2E;">2</div>
+      <h3 class="display text-3xl mt-6">Полили</h3>
+      <p class="text-stone-600 mt-3 leading-relaxed">Каждый день ребёнок отмечает выполненное. Родитель видит и (опционально) подтверждает. Никаких баллов, очков, рангов — только цепочки.</p>
+    </div>
+    <div class="clay-card p-8">
+      <div class="w-14 h-14 clay-tile flex items-center justify-center display text-2xl font-black" style="color:#2D2A2E;">3</div>
+      <h3 class="display text-3xl mt-6">Выросло</h3>
+      <p class="text-stone-600 mt-3 leading-relaxed">Через 30 дней привычка расцветает в саду профиля. Через 90 — становится деревом. Сад растёт у всей семьи общий.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY'S HABITS -->
+<section id="today" class="max-w-5xl mx-auto px-6 py-20">
+  <div class="text-center mb-14">
+    <span class="quick text-sm uppercase tracking-widest text-stone-500 font-bold">— вторник, 26 мая —</span>
+    <h2 class="display text-4xl md:text-6xl mt-3">Сегодня у семьи Петровых.</h2>
+  </div>
+  <div class="clay-card p-6 md:p-8">
+    <div class="space-y-3">
+      <div class="flex items-center gap-4 p-3 rounded-2xl">
+        <div class="check-circle done"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M1 5L5 9L13 1"/></svg></div>
+        <div class="w-12 h-12 clay-tile flex items-center justify-center">
+          <svg width="24" height="24"><use href="#i-tooth"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold text-stone-800">Почистить зубы утром</p>
+          <p class="quick text-sm text-stone-500">Маша · цепочка 14 дней</p>
+        </div>
+        <svg width="26" height="26" style="color:#5A8A50;"><use href="#i-sprout"/></svg>
+      </div>
+      <div class="flex items-center gap-4 p-3 rounded-2xl">
+        <div class="check-circle done"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M1 5L5 9L13 1"/></svg></div>
+        <div class="w-12 h-12 clay-tile flex items-center justify-center">
+          <svg width="24" height="24"><use href="#i-book"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold text-stone-800">Прочитать 1 страницу</p>
+          <p class="quick text-sm text-stone-500">Маша · цепочка 23 дня</p>
+        </div>
+        <svg width="26" height="26" style="color:#5A8A50;"><use href="#i-sapling"/></svg>
+      </div>
+      <div class="flex items-center gap-4 p-3 rounded-2xl">
+        <div class="check-circle"></div>
+        <div class="w-12 h-12 clay-tile flex items-center justify-center">
+          <svg width="24" height="24"><use href="#i-smile"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold text-stone-800">Убрать игрушки</p>
+          <p class="quick text-sm text-stone-500">Маша · цепочка 8 дней</p>
+        </div>
+        <svg width="26" height="26" style="color:#5A8A50;"><use href="#i-sprout"/></svg>
+      </div>
+      <div class="flex items-center gap-4 p-3 rounded-2xl">
+        <div class="check-circle done"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M1 5L5 9L13 1"/></svg></div>
+        <div class="w-12 h-12 clay-tile flex items-center justify-center">
+          <svg width="24" height="24"><use href="#i-drop"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold text-stone-800">Выпить стакан воды</p>
+          <p class="quick text-sm text-stone-500">Папа · цепочка 41 день</p>
+        </div>
+        <svg width="26" height="26" style="color:#5A8A50;"><use href="#i-tree"/></svg>
+      </div>
+      <div class="flex items-center gap-4 p-3 rounded-2xl">
+        <div class="check-circle"></div>
+        <div class="w-12 h-12 clay-tile flex items-center justify-center">
+          <svg width="24" height="24"><use href="#i-walk"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold text-stone-800">10 000 шагов</p>
+          <p class="quick text-sm text-stone-500">Мама · цепочка 7 дней</p>
+        </div>
+        <svg width="26" height="26" style="color:#5A8A50;"><use href="#i-sprout"/></svg>
+      </div>
+    </div>
+    <div class="mt-6 pt-6 border-t border-stone-200/60 flex items-center justify-between">
+      <p class="quick text-stone-600"><span class="font-bold text-stone-800">3 из 5</span> · к вечеру осталось 2</p>
+      <button class="clay-pill quick px-4 py-2 text-sm font-bold flex items-center gap-2">
+        <svg width="14" height="14" style="color:#2D2A2E;"><use href="#i-plus"/></svg>
+        привычка
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FAMILY GARDEN -->
+<section id="family" class="max-w-7xl mx-auto px-6 py-20">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="quick text-sm uppercase tracking-widest text-stone-500 font-bold">— ОБЩИЙ САД СЕМЬИ —</span>
+      <h2 class="display text-4xl md:text-6xl mt-3">Все растения<br/>в одном саду.</h2>
+      <p class="text-xl mt-8 text-stone-600 leading-relaxed">Не индивидуальный счёт. Дети, мама, папа, бабушка — все привычки приходят в один общий сад. Видно, кто на streak'е, кому помочь, что у кого расцветает.</p>
+      <ul class="mt-8 space-y-4 quick text-base text-stone-700">
+        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-stone-700"></span>До 8 членов семьи в одном аккаунте</li>
+        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-stone-700"></span>Детский режим: крупные кнопки, минимум текста</li>
+        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-stone-700"></span>Родитель видит, но не контролирует</li>
+        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-stone-700"></span>Семейные «вместе-привычки»: один на всех счётчик</li>
+      </ul>
+    </div>
+    <div class="clay-card p-8 md:p-10">
+      <div class="text-center">
+        <p class="quick text-sm uppercase tracking-widest font-bold text-stone-500">сад семьи Петровых</p>
+        <p class="display text-7xl md:text-8xl mt-4 text-stone-800">14</p>
+        <p class="quick font-bold mt-1 text-stone-500">растений</p>
+      </div>
+      <div class="grid grid-cols-4 gap-3 mt-8">
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-sprout"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-sapling"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-tree"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-sprout"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-flower"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-sapling"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-tree"/></svg></div>
+        <div class="aspect-square clay-tile flex items-center justify-center" style="color:#5A8A50;"><svg width="40" height="40"><use href="#i-clover"/></svg></div>
+      </div>
+      <p class="text-center quick text-sm text-stone-500 mt-6">самое старое растение — 184 дня (папа · «стакан воды»)</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="max-w-5xl mx-auto px-6 py-24">
+  <div class="text-center mb-14">
+    <span class="quick text-sm uppercase tracking-widest text-stone-500 font-bold">— тарифы —</span>
+    <h2 class="display text-4xl md:text-6xl mt-3">Бесплатно для всех<br/>или 79 ₽ за семью.</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="clay-card p-8">
+      <h3 class="display text-3xl">Свободно</h3>
+      <p class="quick text-stone-500 mt-1">для одного человека</p>
+      <p class="display text-5xl mt-6">0 ₽</p>
+      <p class="quick text-stone-500 mt-2">навсегда</p>
+      <ul class="mt-6 space-y-3 quick text-stone-700">
+        <li>✓ до 5 привычек</li>
+        <li>✓ цепочки и сад</li>
+        <li>✓ напоминания</li>
+        <li class="opacity-40">— только один аккаунт</li>
+        <li class="opacity-40">— нет семейного сада</li>
+      </ul>
+      <a href="#" class="clay-pill block text-center mt-8 py-3 font-bold text-stone-800">Скачать бесплатно</a>
+    </div>
+    <div class="clay-card p-8 relative" style="background: linear-gradient(135deg, #FFC4B6 0%, #FF9D8A 100%); color: white; box-shadow: -4px -4px 10px rgba(255,255,255,0.5), 8px 8px 22px rgba(190,110,100,0.30);">
+      <span class="clay-pill absolute -top-3 left-8 px-3 py-1 text-xs font-bold text-stone-800" style="background:#FFFFFF;">для семей</span>
+      <h3 class="display text-3xl">Семья</h3>
+      <p class="quick text-white/90 mt-1">до 8 человек</p>
+      <p class="display text-5xl mt-6">79 ₽<span class="text-2xl">/мес</span></p>
+      <p class="quick text-white/90 mt-2">или 690 ₽/год — экономия 27%</p>
+      <ul class="mt-6 space-y-3 quick">
+        <li>✓ безлимит привычек</li>
+        <li>✓ до 8 аккаунтов</li>
+        <li>✓ общий семейный сад</li>
+        <li>✓ детский режим</li>
+        <li>✓ «вместе-привычки»</li>
+      </ul>
+      <a href="#" class="block text-center mt-8 py-3 font-bold text-stone-800" style="background: #FFFFFF; border-radius: 9999px; box-shadow: -3px -3px 6px rgba(255,255,255,0.4), 5px 5px 12px rgba(180,100,90,0.25), inset 0 1px 0 rgba(255,255,255,0.5);">Попробовать 14 дней →</a>
+    </div>
+  </div>
+  <p class="text-center quick text-sm text-stone-500 mt-8">Без рекламы. Без передачи данных третьим. Без манипуляций. Минск, ООО «Семечки Студио».</p>
+</section>
+
+<!-- CTA -->
+<section class="max-w-4xl mx-auto px-6 py-32 text-center">
+  <h2 class="display text-5xl md:text-7xl leading-[0.95]">Посадите<br/>первую привычку<br/><span style="color:#FF7B5C;">сегодня</span>.</h2>
+  <p class="text-xl text-stone-600 mt-8 max-w-xl mx-auto">Через 30 дней зацветёт. Через 90 — станет деревом. Через год — забудете, что когда-то этого не было.</p>
+  <div class="flex flex-wrap justify-center gap-3 mt-12">
+    <a href="#" class="clay-pill-accent px-8 py-4 font-bold text-base">App Store</a>
+    <a href="#" class="clay-pill px-8 py-4 font-bold text-base">Google Play</a>
+  </div>
+</section>
+
+<footer class="max-w-7xl mx-auto px-6 py-10 border-t border-stone-200/60 flex flex-col md:flex-row justify-between gap-4 text-sm text-stone-500 quick">
+  <span>© Семечки · Минск · 2024–2026</span>
+  <span>hello@semechki.app · @semechki_app</span>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('#hero-h', { y: 60, opacity: 0, scale: 0.92, duration: 1.0, ease: 'back.out(1.5)' });
+    gsap.from('section:first-of-type p', { y: 20, opacity: 0, duration: 0.6, ease: 'back.out(1.4)', delay: 0.35 });
+    gsap.from('section:first-of-type .flex.flex-wrap > *', { y: 20, opacity: 0, scale: 0.85, duration: 0.5, stagger: 0.08, ease: 'back.out(1.7)', delay: 0.55 });
+    gsap.from('.float-hero', { scale: 0.5, opacity: 0, duration: 1.2, ease: 'back.out(1.7)', delay: 0.2 });
+
+    gsap.utils.toArray('#how .clay-card').forEach(function(card, i){
+      gsap.from(card, {
+        y: 80, opacity: 0, scale: 0.85,
+        duration: 0.9, ease: 'back.out(1.6)', delay: i * 0.12,
+        scrollTrigger: { trigger: '#how', start: 'top 75%' }
+      });
+    });
+
+    gsap.utils.toArray('#today .clay-card > div.space-y-3 > .flex').forEach(function(row, i){
+      gsap.from(row, {
+        x: -40, opacity: 0,
+        duration: 0.6, ease: 'back.out(1.5)', delay: 0.1 + i * 0.08,
+        scrollTrigger: { trigger: '#today', start: 'top 78%' }
+      });
+    });
+    gsap.from('#today > .clay-card', {
+      scale: 0.95, opacity: 0, duration: 0.8, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#today', start: 'top 80%' }
+    });
+
+    gsap.from('#family > .grid > div:first-child > *', {
+      y: 30, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#family', start: 'top 75%' }
+    });
+    gsap.from('#family .clay-card', {
+      scale: 0.9, opacity: 0, duration: 1.0, ease: 'back.out(1.6)',
+      scrollTrigger: { trigger: '#family', start: 'top 75%' }
+    });
+    gsap.utils.toArray('#family .grid.grid-cols-4 > div').forEach(function(plant, i){
+      gsap.from(plant, {
+        scale: 0, opacity: 0, duration: 0.5, ease: 'back.out(1.8)', delay: 0.3 + i * 0.05,
+        scrollTrigger: { trigger: '#family', start: 'top 75%' }
+      });
+    });
+
+    gsap.utils.toArray('#pricing > div:last-child > div').forEach(function(card, i){
+      gsap.from(card, {
+        y: 60, opacity: 0, scale: 0.9, duration: 0.9, ease: 'back.out(1.5)', delay: i * 0.12,
+        scrollTrigger: { trigger: '#pricing', start: 'top 75%' }
+      });
+    });
+
+    document.querySelectorAll('.check-circle').forEach(function(c){
+      c.addEventListener('click', function(){ c.classList.toggle('done'); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

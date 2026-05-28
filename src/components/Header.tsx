@@ -11,6 +11,7 @@ export function Header() {
   const links = [
     { label: t.navServices, href: '#services' },
     { label: t.navProcess, href: '#process' },
+    { label: t.navPortfolio, href: '#portfolio' },
     { label: t.navAbout, href: '#stats' },
   ]
 

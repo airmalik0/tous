@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Спасибо за заявку — imbim</title>
+    <meta name="description" content="Заявка принята. Мы свяжемся с вами в ближайшее время." />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --forest: #0a3a2a;
+        --forest-light: #0e4a36;
+        --mint: #3dffa2;
+        --cream: #faf8f4;
+        --dark: #111111;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        min-height: 100%;
+        font-family: 'Satoshi', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        color: var(--cream);
+        background: var(--forest);
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 20% 10%, rgba(61,255,162,0.10) 0%, transparent 55%),
+          radial-gradient(circle at 90% 90%, rgba(61,255,162,0.06) 0%, transparent 60%),
+          var(--forest);
+      }
+      .card {
+        max-width: 560px;
+        width: 100%;
+        text-align: center;
+        padding: 56px 32px 40px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 32px;
+      }
+      .check {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background: rgba(61,255,162,0.15);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 28px;
+      }
+      .check svg { width: 44px; height: 44px; color: var(--mint); }
+      h1 {
+        font-family: 'Cabinet Grotesk', sans-serif;
+        font-weight: 800;
+        font-size: clamp(32px, 5vw, 48px);
+        letter-spacing: -0.02em;
+        color: #fff;
+        margin-bottom: 16px;
+        line-height: 1.05;
+      }
+      h1 .accent { color: var(--mint); }
+      p.lead {
+        color: rgba(255,255,255,0.65);
+        font-size: 17px;
+        line-height: 1.5;
+        max-width: 420px;
+        margin: 0 auto 32px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 24px;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+      }
+      a.btn:active { transform: scale(0.98); }
+      a.btn.primary { background: var(--mint); color: var(--forest); }
+      a.btn.primary:hover { filter: brightness(1.08); }
+      a.btn.ghost { background: rgba(255,255,255,0.06); color: #fff; }
+      a.btn.ghost:hover { background: rgba(255,255,255,0.12); }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 36px;
+        color: var(--mint);
+        font-family: 'Cabinet Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <a href="/" class="logo" aria-label="imbim">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="10" fill="#0a3a2a" />
+          <rect x="7" y="7" width="8" height="8" rx="2.5" fill="#3dffa2" />
+          <rect x="17" y="7" width="8" height="8" rx="2.5" fill="#3dffa2" opacity="0.6" />
+          <rect x="7" y="17" width="8" height="8" rx="2.5" fill="#3dffa2" opacity="0.6" />
+          <rect x="17" y="17" width="8" height="8" rx="2.5" fill="#3dffa2" opacity="0.3" />
+        </svg>
+        imbim
+      </a>
+
+      <div class="check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h1>
+        <span data-i18n="title1">Заявка</span>
+        <span class="accent" data-i18n="title2">принята</span>
+      </h1>
+      <p class="lead" data-i18n="lead">
+        Спасибо! Мы свяжемся с вами в ближайшее время, чтобы обсудить проект.
+      </p>
+
+      <div class="actions">
+        <a href="https://t.me/imbim2004" class="btn primary" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="ctaTelegram">Написать в Telegram</span>
+        </a>
+        <a href="/" class="btn ghost">
+          <span data-i18n="ctaHome">На главную</span>
+        </a>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        var dict = {
+          ru: {
+            title1: 'Заявка',
+            title2: 'принята',
+            lead: 'Спасибо! Мы свяжемся с вами в ближайшее время, чтобы обсудить проект.',
+            ctaTelegram: 'Написать в Telegram',
+            ctaHome: 'На главную',
+            pageTitle: 'Спасибо за заявку — imbim',
+          },
+          uz: {
+            title1: 'Ariza',
+            title2: 'qabul qilindi',
+            lead: "Rahmat! Loyihani muhokama qilish uchun yaqin orada siz bilan bog'lanamiz.",
+            ctaTelegram: 'Telegramda yozish',
+            ctaHome: 'Bosh sahifaga',
+            pageTitle: 'Ariza qabul qilindi — imbim',
+          },
+        };
+        var locale = 'ru';
+        try {
+          var stored = localStorage.getItem('imbim.locale');
+          if (stored === 'uz' || stored === 'ru') locale = stored;
+        } catch (e) {}
+        document.documentElement.lang = locale;
+        var t = dict[locale];
+        document.title = t.pageTitle;
+        var nodes = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < nodes.length; i++) {
+          var key = nodes[i].getAttribute('data-i18n');
+          if (t[key]) nodes[i].textContent = t[key];
+        }
+      })();
+    </script>
+  </body>
+</html>

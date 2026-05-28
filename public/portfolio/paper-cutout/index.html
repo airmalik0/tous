@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Слова на ветер — независимый книжный · Москва</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500;1,600&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<style>
+  body { background:#FBF7EE; color:#1A1A1A; font-family:'Cormorant Garamond',serif; }
+  .display { font-family:'Cormorant Garamond',serif; }
+  .hand { font-family:'Caveat',cursive; }
+  .typewriter { font-family:'Special Elite',monospace; }
+  .paper { filter: url(#torn) drop-shadow(3px 5px 4px rgba(0,0,0,0.22)); }
+  .paper-2 { filter: url(#torn-2) drop-shadow(2px 4px 3px rgba(0,0,0,0.18)); }
+  .cut-1 { clip-path: polygon(2% 1%, 100% 4%, 97% 100%, 0 96%); }
+  .cut-2 { clip-path: polygon(0 5%, 98% 0, 100% 96%, 4% 100%); }
+  .cut-3 { clip-path: polygon(4% 0, 100% 6%, 96% 98%, 0 92%); }
+  .cut-4 { clip-path: polygon(0 3%, 95% 0, 100% 100%, 6% 97%); }
+  .tape { position:absolute; width:90px; height:28px; background:rgba(255,225,90,0.6); transform:rotate(-8deg); box-shadow:0 1px 2px rgba(0,0,0,0.12); }
+  .tape-2 { transform:rotate(12deg); background:rgba(180,120,80,0.45); }
+  .accent { color:#C73E3A; }
+  .pin::after { content:''; position:absolute; top:-8px; left:50%; width:14px; height:14px; border-radius:50%; background:#C73E3A; transform:translateX(-50%); box-shadow:0 2px 4px rgba(0,0,0,0.25); }
+  body::before { content:''; position:fixed; inset:0; pointer-events:none; opacity:0.08; z-index:1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+  .stamp { display:inline-block; border:2px solid #C73E3A; color:#C73E3A; padding:4px 10px; transform:rotate(-4deg); font-family:'Special Elite',monospace; text-transform:uppercase; letter-spacing:0.1em; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="torn"><feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="8"/></filter>
+  <filter id="torn-2"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="12"/><feDisplacementMap in="SourceGraphic" scale="10"/></filter>
+</svg>
+
+<nav class="relative z-10 max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+  <a href="#" class="hand text-3xl font-bold leading-none">слова <span class="accent">на</span> ветер</a>
+  <ul class="hidden md:flex gap-8 typewriter text-xs uppercase tracking-widest">
+    <li><a href="#zines" class="hover:accent">каталог</a></li>
+    <li><a href="#events" class="hover:accent">вечера</a></li>
+    <li><a href="#about" class="hover:accent">о магазине</a></li>
+    <li><a href="#visit" class="hover:accent">адрес</a></li>
+  </ul>
+</nav>
+
+<section class="relative z-10 max-w-6xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
+  <div>
+    <span class="typewriter text-xs uppercase tracking-widest text-stone-600">независимый книжный · Москва · Покровка 18</span>
+    <h1 class="display text-6xl md:text-8xl leading-[0.92] mt-6 italic font-medium">
+      Слова<br/>
+      <span class="hand not-italic text-7xl md:text-9xl accent font-bold">на ветер</span>
+    </h1>
+    <p class="text-xl md:text-2xl mt-8 max-w-md leading-relaxed text-stone-800">
+      Поэтические зины, переводы малотиражек и странные книги, которые больше нигде не найти. По субботам — чтения вслух.
+    </p>
+    <div class="flex flex-wrap gap-4 mt-10 typewriter text-xs uppercase tracking-widest">
+      <a href="#zines" class="border-2 border-stone-900 px-6 py-3 hover:bg-stone-900 hover:text-amber-50 transition">смотреть каталог →</a>
+      <a href="#events" class="px-6 py-3 underline underline-offset-4">ближайший вечер</a>
+    </div>
+  </div>
+  <div class="relative h-[480px] md:h-[560px]">
+    <img src="bookstack.png" class="paper cut-1 absolute top-2 right-0 w-3/5 -rotate-3" alt="стопка книг">
+    <span class="tape" style="top:-6px; right:32%;"></span>
+    <img src="typewriter.png" class="paper-2 cut-2 absolute bottom-16 left-0 w-3/5 rotate-2" alt="пишущая машинка">
+    <span class="tape tape-2" style="bottom:42%; left:8%;"></span>
+    <img src="zine.png" class="paper cut-3 absolute bottom-0 right-8 w-2/5 -rotate-6" alt="зин">
+    <span class="stamp absolute top-1/2 right-2 text-xs">tirage 50 экз.</span>
+  </div>
+</section>
+
+<section id="about" class="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
+  <div class="hand text-3xl accent mb-4">— о магазине —</div>
+  <p class="text-3xl md:text-4xl display italic leading-relaxed">
+    «Мы открылись зимой 2022-го в подвале на Покровке, потому что нам некуда было нести стихи. Теперь сюда приходят те, кто пишет, переводит и читает — а не для того, чтобы сфотографировать обложку.»
+  </p>
+  <p class="hand text-2xl accent mt-8">— Аня, Костя, Лев</p>
+</section>
+
+<section id="zines" class="relative z-10 max-w-6xl mx-auto px-6 py-20">
+  <div class="flex items-end justify-between mb-12">
+    <h2 class="display italic text-5xl md:text-7xl">Каталог зинов</h2>
+    <span class="typewriter text-xs uppercase tracking-widest text-stone-600 hidden md:block">обновлено 24 мая</span>
+  </div>
+  <div class="grid md:grid-cols-3 gap-12">
+    <article class="relative">
+      <div class="cut-1 bg-rose-100 p-6 paper-2 border-stone-900">
+        <span class="stamp text-xs">№ 01</span>
+        <h3 class="display italic text-3xl mt-4 leading-tight">Птицы, которых я не видела</h3>
+        <p class="typewriter text-xs uppercase tracking-wider text-stone-700 mt-3">М. Громова · 32 стр · ручная сшивка</p>
+        <p class="mt-4 leading-relaxed">Сборник из 14 коротких стихотворений о московских балконах и азиатских степях.</p>
+        <div class="flex items-center justify-between mt-6 typewriter text-sm">
+          <span class="accent text-xl">420 ₽</span>
+          <a href="#" class="underline underline-offset-4 text-xs uppercase">в корзину</a>
+        </div>
+      </div>
+    </article>
+    <article class="relative md:translate-y-8">
+      <div class="cut-2 bg-amber-100 p-6 paper border-stone-900">
+        <span class="stamp text-xs">№ 02</span>
+        <h3 class="display italic text-3xl mt-4 leading-tight">Антология полевых записей</h3>
+        <p class="typewriter text-xs uppercase tracking-wider text-stone-700 mt-3">сборник · 56 стр · риcограф</p>
+        <p class="mt-4 leading-relaxed">Семь авторов — от Минска до Ташкента — пишут о городах, где они выросли и которые покинули.</p>
+        <div class="flex items-center justify-between mt-6 typewriter text-sm">
+          <span class="accent text-xl">680 ₽</span>
+          <a href="#" class="underline underline-offset-4 text-xs uppercase">в корзину</a>
+        </div>
+      </div>
+    </article>
+    <article class="relative">
+      <div class="cut-3 bg-emerald-100 p-6 paper-2 border-stone-900">
+        <span class="stamp text-xs">№ 03</span>
+        <h3 class="display italic text-3xl mt-4 leading-tight">Безымянные переводы</h3>
+        <p class="typewriter text-xs uppercase tracking-wider text-stone-700 mt-3">К. Соловьёв · 88 стр · мягкая обложка</p>
+        <p class="mt-4 leading-relaxed">Польские поэты 60–70-х, до сих пор не выходившие по-русски. Тираж 80 экземпляров.</p>
+        <div class="flex items-center justify-between mt-6 typewriter text-sm">
+          <span class="accent text-xl">540 ₽</span>
+          <a href="#" class="underline underline-offset-4 text-xs uppercase">в корзину</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="events" class="relative z-10 max-w-5xl mx-auto px-6 py-24">
+  <h2 class="display italic text-5xl md:text-7xl mb-12">Ближайшие<br/><span class="hand accent">вечера</span></h2>
+  <ul class="space-y-10">
+    <li class="grid md:grid-cols-[180px_1fr_140px] gap-6 md:gap-10 items-baseline border-b border-dashed border-stone-400 pb-8">
+      <div class="typewriter">
+        <div class="text-3xl accent">31.05</div>
+        <div class="text-xs uppercase tracking-widest text-stone-600 mt-1">сб · 19:00</div>
+      </div>
+      <div>
+        <h3 class="display italic text-3xl">Чтения «Полевые записи»</h3>
+        <p class="mt-2 text-stone-700">Семь авторов сборника читают новые тексты. Вход свободный, мест немного.</p>
+      </div>
+      <a href="#" class="typewriter text-xs uppercase underline underline-offset-4 justify-self-start md:justify-self-end">записаться</a>
+    </li>
+    <li class="grid md:grid-cols-[180px_1fr_140px] gap-6 md:gap-10 items-baseline border-b border-dashed border-stone-400 pb-8">
+      <div class="typewriter">
+        <div class="text-3xl accent">07.06</div>
+        <div class="text-xs uppercase tracking-widest text-stone-600 mt-1">сб · 18:00</div>
+      </div>
+      <div>
+        <h3 class="display italic text-3xl">Мастерская перевода с польского</h3>
+        <p class="mt-2 text-stone-700">К. Соловьёв проведёт двухчасовой воркшоп. 8 мест, нужна заявка.</p>
+      </div>
+      <a href="#" class="typewriter text-xs uppercase underline underline-offset-4 justify-self-start md:justify-self-end">записаться</a>
+    </li>
+    <li class="grid md:grid-cols-[180px_1fr_140px] gap-6 md:gap-10 items-baseline">
+      <div class="typewriter">
+        <div class="text-3xl accent">14.06</div>
+        <div class="text-xs uppercase tracking-widest text-stone-600 mt-1">сб · 20:00</div>
+      </div>
+      <div>
+        <h3 class="display italic text-3xl">Открытый микрофон</h3>
+        <p class="mt-2 text-stone-700">Приходи со своим текстом. 5 минут, без отбора, по записи на месте.</p>
+      </div>
+      <a href="#" class="typewriter text-xs uppercase underline underline-offset-4 justify-self-start md:justify-self-end">записаться</a>
+    </li>
+  </ul>
+</section>
+
+<section id="visit" class="relative z-10 max-w-5xl mx-auto px-6 py-24">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="display italic text-5xl md:text-6xl">Как нас найти</h2>
+      <p class="hand text-3xl accent mt-2">— и когда мы открыты —</p>
+      <div class="mt-8 typewriter text-sm space-y-3 leading-relaxed">
+        <p><span class="uppercase tracking-widest text-stone-600">адрес:</span><br/>Москва, ул. Покровка, 18, в арку, дверь со львом</p>
+        <p><span class="uppercase tracking-widest text-stone-600">часы:</span><br/>вт–вс · 12:00–22:00 · пн закрыто</p>
+        <p><span class="uppercase tracking-widest text-stone-600">телеграм:</span><br/>@slovanaveter</p>
+        <p><span class="uppercase tracking-widest text-stone-600">почта:</span><br/>hello@slovanaveter.ru</p>
+      </div>
+    </div>
+    <div class="relative h-[360px]">
+      <div class="paper cut-4 absolute inset-0 bg-stone-200">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center">
+            <div class="hand text-7xl accent">↓</div>
+            <div class="typewriter text-xs uppercase tracking-widest mt-2">здесь дверь со львом</div>
+          </div>
+        </div>
+      </div>
+      <span class="tape" style="top:-8px; left:40%;"></span>
+    </div>
+  </div>
+</section>
+
+<footer class="relative z-10 max-w-6xl mx-auto px-6 py-12 mt-12 border-t border-dashed border-stone-400">
+  <div class="flex flex-col md:flex-row justify-between gap-6 typewriter text-xs uppercase tracking-widest text-stone-600">
+    <span>© слова на ветер · 2022–2026</span>
+    <span>сшито вручную в Москве</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    if (window.Lenis) {
+      var lenis = new Lenis({ duration: 1.4 });
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    var h1 = document.querySelector('h1.display');
+    if (h1 && window.SplitText) {
+      var split = new SplitText(h1, { type: 'words' });
+      gsap.from(split.words, { y: 80, opacity: 0, rotation: 5, duration: 1.2, stagger: 0.07, ease: 'expo.out' });
+    }
+
+    var heroSection = document.querySelector('section');
+    if (heroSection) {
+      heroSection.querySelectorAll('img.paper, img.paper-2').forEach(function(img, i){
+        gsap.to(img, {
+          y: -30 * (i + 1), ease: 'none',
+          scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 1 }
+        });
+      });
+    }
+
+    gsap.from('#about p', {
+      y: 40, opacity: 0, duration: 1.4, ease: 'power3.out',
+      scrollTrigger: { trigger: '#about', start: 'top 75%' }
+    });
+
+    gsap.utils.toArray('#zines article').forEach(function(card, i){
+      gsap.from(card, {
+        y: 100, opacity: 0, rotation: i % 2 === 0 ? -4 : 4,
+        duration: 1.0, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 85%' }
+      });
+    });
+
+    gsap.utils.toArray('#events li').forEach(function(li){
+      gsap.from(li, {
+        x: -40, opacity: 0, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: li, start: 'top 88%' }
+      });
+    });
+
+    gsap.from('#visit > div > *', {
+      y: 30, opacity: 0, duration: 1.0, ease: 'power3.out', stagger: 0.12,
+      scrollTrigger: { trigger: '#visit', start: 'top 75%' }
+    });
+  });
+})();
+</script>
+</body>
+</html>

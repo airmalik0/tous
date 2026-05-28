@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Флёрель — флористическая мастерская · Санкт-Петербург</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<style>
+  body { background:linear-gradient(180deg,#FFF5F0 0%, #FAF0E8 40%, #F4EDE2 100%); color:#3D2A20; font-family:'Cormorant Garamond',serif; }
+  .display { font-family:'Italiana', serif; }
+  .serif { font-family:'Playfair Display', serif; }
+  .italic-serif { font-family:'Cormorant Garamond', serif; font-style: italic; }
+  /* grain */
+  body::before { content:''; position:fixed; inset:0; pointer-events:none; opacity:0.04; z-index:1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .vine { stroke: currentColor; stroke-width: 1; fill: none; opacity: 0.35; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<nav class="relative z-10 max-w-7xl mx-auto px-8 py-8 flex justify-between items-center">
+  <a href="#" class="display text-3xl tracking-[0.3em]">FLEUREL</a>
+  <ul class="hidden md:flex gap-10 italic-serif text-base text-stone-700">
+    <li><a href="#about" class="hover:text-rose-700">о мастерской</a></li>
+    <li><a href="#bouquets" class="hover:text-rose-700">букеты</a></li>
+    <li><a href="#wedding" class="hover:text-rose-700">свадьбы</a></li>
+    <li><a href="#workshop" class="hover:text-rose-700">мастер-классы</a></li>
+    <li><a href="#visit" class="hover:text-rose-700">контакт</a></li>
+  </ul>
+  <a href="#bouquets" class="hidden md:inline-block italic-serif text-base border border-stone-400 px-5 py-2 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">заказать</a>
+</nav>
+
+<section class="relative z-10 max-w-7xl mx-auto px-8 pt-12 md:pt-24 pb-20 grid md:grid-cols-2 gap-16 items-center">
+  <div>
+    <div class="italic-serif text-sm tracking-[0.3em] uppercase text-rose-700">est. 2019 · санкт-петербург</div>
+    <h1 class="display text-6xl md:text-8xl leading-[0.95] mt-8 tracking-tight">
+      Цветы<br/>
+      <span class="italic-serif font-light">для тех, кто умеет</span><br/>
+      читать тишину
+    </h1>
+    <p class="text-xl md:text-2xl mt-10 max-w-lg leading-relaxed text-stone-700">
+      Флористическая мастерская на Фонтанке. Свежие букеты из европейских и подмосковных садов, свадебная флористика, мастер-классы по субботам.
+    </p>
+    <div class="flex flex-wrap gap-6 mt-12 italic-serif">
+      <a href="#bouquets" class="text-base border border-stone-900 px-8 py-4 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">выбрать букет</a>
+      <a href="#visit" class="text-base self-center underline underline-offset-4">приехать в мастерскую →</a>
+    </div>
+  </div>
+  <div class="relative">
+    <img src="hero-bouquet.png" alt="" class="w-full rounded-[180px_180px_40px_40px] shadow-2xl shadow-rose-200/50">
+    <svg class="vine absolute -top-8 -left-10 w-32 h-32 text-emerald-700" viewBox="0 0 100 100">
+      <path d="M10,90 Q30,70 25,40 Q22,18 50,10"/>
+      <ellipse cx="28" cy="50" rx="6" ry="3" transform="rotate(-30 28 50)" fill="currentColor" opacity="0.3"/>
+      <ellipse cx="33" cy="30" rx="6" ry="3" transform="rotate(-60 33 30)" fill="currentColor" opacity="0.3"/>
+    </svg>
+    <svg class="vine absolute -bottom-8 -right-6 w-40 h-40 text-rose-700" viewBox="0 0 100 100">
+      <path d="M10,10 Q40,30 60,50 Q80,70 90,90"/>
+      <circle cx="35" cy="32" r="4" fill="currentColor" opacity="0.4"/>
+      <circle cx="55" cy="50" r="3" fill="currentColor" opacity="0.4"/>
+      <circle cx="75" cy="70" r="4" fill="currentColor" opacity="0.4"/>
+    </svg>
+  </div>
+</section>
+
+<section id="about" class="relative z-10 max-w-4xl mx-auto px-8 py-32 text-center">
+  <div class="italic-serif text-rose-700 tracking-[0.3em] uppercase text-sm">— о мастерской —</div>
+  <p class="display text-4xl md:text-5xl mt-10 leading-relaxed tracking-tight">
+    Мы собираем букеты так, как пишут письма — с одного черновика, с запахом сада, без декоративной сухой пены и пластика. Каждое утро Маша едет на цветочную базу на Софийской и привозит то, что распустилось этой ночью.
+  </p>
+</section>
+
+<section id="bouquets" class="relative z-10 max-w-7xl mx-auto px-8 py-24">
+  <div class="flex items-end justify-between mb-16">
+    <h2 class="display text-5xl md:text-7xl tracking-tight">Готовые букеты</h2>
+    <span class="hidden md:block italic-serif text-stone-600">доставка по СПб от 2 часов</span>
+  </div>
+  <div class="grid md:grid-cols-3 gap-12">
+    <article class="group">
+      <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-rose-100/60">
+        <img src="detail-rose.png" alt="" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
+      </div>
+      <div class="mt-6">
+        <h3 class="serif text-3xl">Утро на Фонтанке</h3>
+        <p class="italic-serif text-stone-600 mt-2">пионы · ранункулюс · эвкалипт</p>
+        <div class="flex items-center justify-between mt-6">
+          <span class="serif text-2xl">4 500 ₽</span>
+          <a href="#" class="italic-serif text-sm border border-stone-700 px-5 py-2 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">заказать</a>
+        </div>
+      </div>
+    </article>
+    <article class="group md:translate-y-12">
+      <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-amber-100/60">
+        <img src="hero-bouquet.png" alt="" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
+      </div>
+      <div class="mt-6">
+        <h3 class="serif text-3xl">Линия Третьей Невской</h3>
+        <p class="italic-serif text-stone-600 mt-2">сад. розы · лизиантус · мята</p>
+        <div class="flex items-center justify-between mt-6">
+          <span class="serif text-2xl">6 800 ₽</span>
+          <a href="#" class="italic-serif text-sm border border-stone-700 px-5 py-2 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">заказать</a>
+        </div>
+      </div>
+    </article>
+    <article class="group">
+      <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-emerald-100/60">
+        <img src="bouquet-hands.png" alt="" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
+      </div>
+      <div class="mt-6">
+        <h3 class="serif text-3xl">Тёплый вечер</h3>
+        <p class="italic-serif text-stone-600 mt-2">астры · скабиоза · пшеница</p>
+        <div class="flex items-center justify-between mt-6">
+          <span class="serif text-2xl">5 400 ₽</span>
+          <a href="#" class="italic-serif text-sm border border-stone-700 px-5 py-2 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">заказать</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="wedding" class="relative z-10 max-w-7xl mx-auto px-8 py-32 grid md:grid-cols-2 gap-16 items-center">
+  <div class="relative">
+    <img src="bouquet-hands.png" alt="" class="w-full rounded-[40px_180px_40px_180px] shadow-2xl shadow-rose-200/40">
+    <svg class="vine absolute -top-10 right-0 w-24 h-24 text-emerald-700" viewBox="0 0 100 100">
+      <path d="M50,90 Q60,60 40,40 Q20,20 50,10"/>
+      <ellipse cx="48" cy="55" rx="7" ry="3" transform="rotate(45 48 55)" fill="currentColor" opacity="0.3"/>
+    </svg>
+  </div>
+  <div>
+    <div class="italic-serif text-rose-700 tracking-[0.3em] uppercase text-sm">свадебная флористика</div>
+    <h2 class="display text-5xl md:text-6xl mt-6 tracking-tight">День, который<br/>пахнет садом</h2>
+    <p class="italic-serif text-xl md:text-2xl mt-8 leading-relaxed text-stone-700">
+      Мы делаем не «оформление зала», а живой сад вокруг свадьбы — арки, столы, аксессуары, бутоньерки. Берём 12 свадеб в год, чтобы каждая получала недели работы, а не часы.
+    </p>
+    <a href="#" class="inline-block mt-10 italic-serif border border-stone-900 px-8 py-4 rounded-full hover:bg-stone-900 hover:text-amber-50 transition">забронировать встречу</a>
+  </div>
+</section>
+
+<section id="workshop" class="relative z-10 max-w-7xl mx-auto px-8 py-24">
+  <div class="grid md:grid-cols-[1fr_400px] gap-16 items-center">
+    <div>
+      <div class="italic-serif text-rose-700 tracking-[0.3em] uppercase text-sm">мастер-классы</div>
+      <h2 class="display text-5xl md:text-6xl mt-6 tracking-tight">Субботние<br/>встречи у воды</h2>
+      <ul class="mt-10 space-y-6 italic-serif text-lg">
+        <li class="grid grid-cols-[80px_1fr_120px] gap-6 items-baseline border-b border-stone-300 pb-6">
+          <div>
+            <div class="serif text-3xl text-rose-700 not-italic">07.06</div>
+            <div class="text-xs uppercase tracking-widest text-stone-600">сб · 11:00</div>
+          </div>
+          <div>
+            <h3 class="serif text-2xl not-italic">Букет из садовых роз</h3>
+            <p class="text-stone-600 mt-1">3 часа, 8 мест, все материалы включены</p>
+          </div>
+          <div class="serif text-xl text-right not-italic">7 500 ₽</div>
+        </li>
+        <li class="grid grid-cols-[80px_1fr_120px] gap-6 items-baseline border-b border-stone-300 pb-6">
+          <div>
+            <div class="serif text-3xl text-rose-700 not-italic">14.06</div>
+            <div class="text-xs uppercase tracking-widest text-stone-600">сб · 11:00</div>
+          </div>
+          <div>
+            <h3 class="serif text-2xl not-italic">Венок на дверь</h3>
+            <p class="text-stone-600 mt-1">2 часа, 10 мест, на основе из ивы</p>
+          </div>
+          <div class="serif text-xl text-right not-italic">5 200 ₽</div>
+        </li>
+        <li class="grid grid-cols-[80px_1fr_120px] gap-6 items-baseline">
+          <div>
+            <div class="serif text-3xl text-rose-700 not-italic">21.06</div>
+            <div class="text-xs uppercase tracking-widest text-stone-600">сб · 11:00</div>
+          </div>
+          <div>
+            <h3 class="serif text-2xl not-italic">Композиция в кашпо</h3>
+            <p class="text-stone-600 mt-1">3 часа, 6 мест, керамика от М. Тарасовой</p>
+          </div>
+          <div class="serif text-xl text-right not-italic">9 800 ₽</div>
+        </li>
+      </ul>
+    </div>
+    <img src="detail-rose.png" alt="" class="w-full rounded-3xl shadow-xl shadow-rose-200/50 aspect-square object-cover">
+  </div>
+</section>
+
+<section id="visit" class="relative z-10 max-w-5xl mx-auto px-8 py-32 text-center">
+  <h2 class="display text-5xl md:text-7xl tracking-tight">Приезжайте<br/><span class="italic-serif font-light">в мастерскую</span></h2>
+  <div class="grid md:grid-cols-3 gap-12 mt-16 italic-serif text-lg">
+    <div>
+      <div class="text-sm uppercase tracking-[0.3em] text-rose-700 mb-3">адрес</div>
+      <p>наб. реки Фонтанки, 28<br/>2-й этаж, во двор</p>
+    </div>
+    <div>
+      <div class="text-sm uppercase tracking-[0.3em] text-rose-700 mb-3">часы</div>
+      <p>вт–вс · 10:00–21:00<br/>пн закрыто</p>
+    </div>
+    <div>
+      <div class="text-sm uppercase tracking-[0.3em] text-rose-700 mb-3">связаться</div>
+      <p>+7 (812) 904-12-08<br/>hello@fleurel.spb</p>
+    </div>
+  </div>
+</section>
+
+<footer class="relative z-10 max-w-7xl mx-auto px-8 py-12 mt-12 border-t border-stone-300">
+  <div class="flex flex-col md:flex-row justify-between gap-6 italic-serif text-sm text-stone-500">
+    <span>© Fleurel · Санкт-Петербург · 2019–2026</span>
+    <span>сделано руками у Фонтанки</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    if (window.Lenis) {
+      var lenis = new Lenis({ duration: 1.8 });
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    var h1 = document.querySelector('h1.display');
+    if (h1 && window.SplitText) {
+      var split = new SplitText(h1, { type: 'words' });
+      gsap.from(split.words, { y: 60, opacity: 0, duration: 1.6, stagger: 0.1, ease: 'expo.out' });
+    }
+
+    var heroSection = document.querySelector('section');
+    var heroImg = heroSection ? heroSection.querySelector('img') : null;
+    if (heroImg) {
+      gsap.from(heroImg, { scale: 1.06, opacity: 0, duration: 2.0, ease: 'power3.out' });
+      gsap.to(heroImg, {
+        y: -60, ease: 'none',
+        scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 1.2 }
+      });
+    }
+
+    document.querySelectorAll('.vine path').forEach(function(p){
+      try {
+        var len = p.getTotalLength();
+        if (!isFinite(len) || len <= 0) return;
+        gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+        gsap.to(p, {
+          strokeDashoffset: 0, duration: 2.4, ease: 'power2.out',
+          scrollTrigger: { trigger: p.closest('section'), start: 'top 80%' }
+        });
+      } catch(e){}
+    });
+
+    var aboutP = document.querySelector('#about p');
+    if (aboutP && window.SplitText) {
+      var lineSplit = new SplitText(aboutP, { type: 'lines' });
+      gsap.from(lineSplit.lines, {
+        y: 30, opacity: 0, duration: 1.4, stagger: 0.1, ease: 'expo.out',
+        scrollTrigger: { trigger: '#about', start: 'top 70%' }
+      });
+    }
+
+    gsap.utils.toArray('#bouquets article').forEach(function(card, i){
+      gsap.from(card, {
+        y: 80, opacity: 0, scale: 0.96, duration: 1.2, ease: 'expo.out', delay: i * 0.1,
+        scrollTrigger: { trigger: card, start: 'top 85%' }
+      });
+    });
+
+    var wedSection = document.querySelector('#wedding');
+    if (wedSection) {
+      var wedImg = wedSection.querySelector('img');
+      if (wedImg) {
+        gsap.from(wedImg, {
+          x: -40, opacity: 0, duration: 1.4, ease: 'expo.out',
+          scrollTrigger: { trigger: '#wedding', start: 'top 75%' }
+        });
+      }
+      gsap.from('#wedding > div:last-child > *', {
+        x: 30, opacity: 0, duration: 1.0, stagger: 0.12, ease: 'expo.out',
+        scrollTrigger: { trigger: '#wedding', start: 'top 75%' }
+      });
+    }
+
+    gsap.utils.toArray('#workshop li').forEach(function(li){
+      gsap.from(li, {
+        y: 24, opacity: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: li, start: 'top 88%' }
+      });
+    });
+
+    gsap.from('#visit > div', {
+      y: 30, opacity: 0, duration: 1.1, stagger: 0.12, ease: 'expo.out',
+      scrollTrigger: { trigger: '#visit', start: 'top 75%' }
+    });
+  });
+})();
+</script>
+</body>
+</html>

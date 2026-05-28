@@ -6,6 +6,7 @@ type Dict = {
   // Header
   navServices: string
   navProcess: string
+  navPortfolio: string
   navAbout: string
   navContact: string
   ctaDiscuss: string
@@ -52,6 +53,18 @@ type Dict = {
   step4Title: string
   step4Desc: string
 
+  // Portfolio
+  portfolioBadge: string
+  portfolioTitle1: string
+  portfolioTitle2: string
+  portfolioTagFintech: string
+  portfolioTagDesign: string
+  portfolioTagFamily: string
+  portfolioTagCafe: string
+  portfolioTagArcade: string
+  portfolioTagBooks: string
+  portfolioTagFlorist: string
+
   // Stats
   statsTitle1: string
   statsTitle2: string
@@ -75,8 +88,6 @@ type Dict = {
   contactSubmit: string
   contactSending: string
   contactErrorMsg: string
-  contactSuccessTitle: string
-  contactSuccessSub: string
   tgNewLead: string
   tgContact: string
   tgDescription: string
@@ -93,6 +104,7 @@ type Dict = {
 const ru: Dict = {
   navServices: 'Услуги',
   navProcess: 'Процесс',
+  navPortfolio: 'Портфолио',
   navAbout: 'О нас',
   navContact: 'Контакты',
   ctaDiscuss: 'Обсудить проект',
@@ -136,6 +148,17 @@ const ru: Dict = {
   step4Title: 'Запуск',
   step4Desc: 'Деплоим сайт, настраиваем аналитику и обеспечиваем техническую поддержку.',
 
+  portfolioBadge: 'Портфолио',
+  portfolioTitle1: 'Проекты, которыми',
+  portfolioTitle2: 'мы гордимся',
+  portfolioTagFintech: 'Финтех-приложение',
+  portfolioTagDesign: 'Дизайн-студия',
+  portfolioTagFamily: 'Семейное приложение',
+  portfolioTagCafe: 'Кофейня и скетч-клуб',
+  portfolioTagArcade: 'Ретро-аркада',
+  portfolioTagBooks: 'Независимый книжный',
+  portfolioTagFlorist: 'Флористическая мастерская',
+
   statsTitle1: 'Цифры говорят',
   statsTitle2: 'сами за себя',
   statsOrders: 'Заказов выполнено',
@@ -157,8 +180,6 @@ const ru: Dict = {
   contactSubmit: 'Отправить заявку',
   contactSending: 'Отправляем...',
   contactErrorMsg: 'Ошибка отправки. Попробуйте позже или позвоните нам.',
-  contactSuccessTitle: 'Заявка отправлена!',
-  contactSuccessSub: 'Мы свяжемся с вами в ближайшее время',
   tgNewLead: '📩 Новая заявка с сайта imbim.online',
   tgContact: '📱 Контакт',
   tgDescription: '📝 Описание проекта',
@@ -174,6 +195,7 @@ const ru: Dict = {
 const uz: Dict = {
   navServices: 'Xizmatlar',
   navProcess: 'Jarayon',
+  navPortfolio: 'Portfolio',
   navAbout: 'Biz haqimizda',
   navContact: 'Aloqa',
   ctaDiscuss: 'Loyihani muhokama qilish',
@@ -217,6 +239,17 @@ const uz: Dict = {
   step4Title: 'Ishga tushirish',
   step4Desc: "Saytni deploy qilamiz, analitikani sozlaymiz va texnik yordam ko‘rsatamiz.",
 
+  portfolioBadge: 'Portfolio',
+  portfolioTitle1: "Biz faxrlanadigan",
+  portfolioTitle2: 'loyihalar',
+  portfolioTagFintech: 'Fintech ilova',
+  portfolioTagDesign: 'Dizayn studiyasi',
+  portfolioTagFamily: 'Oilaviy ilova',
+  portfolioTagCafe: "Kofeyna va sketch-klub",
+  portfolioTagArcade: 'Retro arkada',
+  portfolioTagBooks: "Mustaqil kitob do‘koni",
+  portfolioTagFlorist: 'Florist ustaxonasi',
+
   statsTitle1: 'Raqamlar o‘zi',
   statsTitle2: 'gapiradi',
   statsOrders: 'Bajarilgan loyihalar',
@@ -238,8 +271,6 @@ const uz: Dict = {
   contactSubmit: 'Arizani yuborish',
   contactSending: 'Yuborilmoqda...',
   contactErrorMsg: "Yuborishda xatolik. Keyinroq urinib ko‘ring yoki bizga qo‘ng‘iroq qiling.",
-  contactSuccessTitle: 'Ariza yuborildi!',
-  contactSuccessSub: "Tez orada siz bilan bog‘lanamiz",
   tgNewLead: '📩 imbim.online saytidan yangi ariza',
   tgContact: '📱 Aloqa',
   tgDescription: '📝 Loyiha tavsifi',
