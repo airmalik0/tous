@@ -1,148 +1,91 @@
-import { motion } from 'framer-motion'
-import { ArrowDown } from '@phosphor-icons/react'
+import { useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion'
+import { ArrowUpRight } from '@phosphor-icons/react'
 import { useT } from '../i18n'
 
 const ease = [0.16, 1, 0.3, 1] as const
-const d = 0.15 // base delay
+
+const orbitTiles = [
+  { img: 'savushka', cls: 'top-[14%] left-[6%] w-24 md:w-32', factor: 28, dur: 5.6 },
+  { img: 'spring-blooms', cls: 'top-[12%] right-[10%] w-20 md:w-28', factor: -36, dur: 6.4 },
+  { img: 'detailing-lab', cls: 'bottom-[16%] left-[12%] w-20 md:w-28', factor: -22, dur: 7.1 },
+  { img: 'mosaic-pixel', cls: 'bottom-[10%] right-[6%] w-24 md:w-32', factor: 32, dur: 5.2 },
+  { img: 'pillo', cls: 'top-[44%] left-[1%] w-16 md:w-24', factor: 44, dur: 6.8 },
+  { img: 'bron-mebel', cls: 'top-[40%] right-[2%] w-16 md:w-24', factor: -48, dur: 5.9 },
+]
+
+function OrbitTile({ tile, mx, my }: { tile: (typeof orbitTiles)[number]; mx: MotionValue<number>; my: MotionValue<number> }) {
+  const x = useTransform(mx, v => v * tile.factor)
+  const y = useTransform(my, v => v * tile.factor)
+  return (
+    <motion.div style={{ x, y }} className={`absolute ${tile.cls} hidden sm:block`}>
+      <motion.div
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: tile.dur, repeat: Infinity, ease: 'easeInOut' }}
+        className="rounded-3xl overflow-hidden shadow-xl shadow-black/20 border border-white/10"
+      >
+        <img src={`/portfolio-illust/${tile.img}.jpg`} alt="" className="w-full aspect-square object-cover" decoding="async" />
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export function Hero() {
   const { t } = useT()
+  const ref = useRef<HTMLElement>(null)
+  const rawX = useMotionValue(0)
+  const rawY = useMotionValue(0)
+  const mx = useSpring(rawX, { stiffness: 50, damping: 16 })
+  const my = useSpring(rawY, { stiffness: 50, damping: 16 })
+
+  const onMove = (e: React.MouseEvent) => {
+    const r = ref.current?.getBoundingClientRect()
+    if (!r) return
+    rawX.set((e.clientX - r.left) / r.width - 0.5)
+    rawY.set((e.clientY - r.top) / r.height - 0.5)
+  }
+
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
-      {/* Background — no animation, static */}
-      <div className="absolute inset-x-4 md:inset-x-8 top-24 bottom-8 bg-forest rounded-[2.5rem] md:rounded-[3rem] overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.1) 0%, transparent 70%)' }} />
-        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.05) 0%, transparent 70%)' }} />
+    <section ref={ref} onMouseMove={onMove} className="relative bg-forest overflow-hidden min-h-[100svh] flex items-center">
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(61,255,162,0.12) 0%, transparent 70%)' }} />
+
+      {orbitTiles.map(tile => (
+        <OrbitTile key={tile.img} tile={tile} mx={mx} my={my} />
+      ))}
+
+      <div className="relative z-10 max-w-[820px] mx-auto px-6 text-center pt-32 pb-24">
+        {/* Бейдж, заголовок и лид — без entry-анимации: LCP-элементы рендерятся мгновенно */}
+        <span className="inline-flex items-center gap-2 px-4 py-2 bg-mint/15 rounded-pill mb-8">
+          <span className="w-2 h-2 bg-mint rounded-full" />
+          <span className="text-mint/90 text-sm font-medium">{t.heroBadge}</span>
+        </span>
+
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.98]">
+          {t.heroTitle1}
+          <br />
+          {t.heroTitle2 && `${t.heroTitle2} `}
+          <span className="text-mint">{t.heroTitleAccent}</span>
+          {t.heroTitleAfter && ` ${t.heroTitleAfter}`}
+        </h1>
+
+        <p className="mt-7 text-white/55 text-lg md:text-xl max-w-[480px] mx-auto leading-relaxed">
+          {t.heroLead}
+        </p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25, ease }}
+          className="mt-10 flex justify-center gap-4 flex-wrap"
+        >
+          <a href="#contact" className="inline-flex items-center px-9 py-4 bg-mint text-forest rounded-pill text-base font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]">
+            {t.ctaDiscuss}
+          </a>
+          <a href="#portfolio" className="inline-flex items-center gap-2 px-9 py-4 border border-white/20 text-white rounded-pill text-base font-medium hover:bg-white/5 transition-colors duration-200">
+            {t.heroCtaSecondary} <ArrowUpRight size={16} weight="bold" />
+          </a>
+        </motion.div>
       </div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-8 md:px-16 pt-32 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Left: Text */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: d, ease }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-mint/15 rounded-pill mb-8"
-            >
-              <span className="w-2 h-2 bg-mint rounded-full" />
-              <span className="text-mint/90 text-sm font-medium">{t.heroBadge}</span>
-            </motion.div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-800 text-white tracking-tighter leading-[0.95]">
-              {t.heroTitle1}
-              <br />
-              <span className="text-mint">{t.heroTitle2}</span>
-              <br />
-              {t.heroTitle3}
-            </h1>
-
-            <p className="mt-6 text-white/60 text-lg md:text-xl max-w-[480px] leading-relaxed">
-              {t.heroLead}
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: d + 0.24, ease }}
-              className="mt-10 flex flex-wrap gap-4"
-            >
-              <a
-                href="#contact"
-                className="inline-flex items-center px-8 py-4 bg-mint text-forest rounded-pill text-[15px] font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]"
-              >
-                {t.ctaDiscuss}
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center px-8 py-4 border border-white/20 text-white rounded-pill text-[15px] font-medium hover:bg-white/5 transition-colors duration-200"
-              >
-                {t.heroCtaSecondary}
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right: Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: d + 0.1, ease }}
-            className="relative hidden lg:block"
-          >
-            <div className="relative w-full max-w-[500px] mx-auto">
-              <div className="bg-white/10 rounded-[2rem] p-6 border border-white/10">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <div className="ml-4 h-7 flex-1 bg-white/5 rounded-pill px-3 flex items-center">
-                    <span className="text-white/30 text-xs font-mono">yoursite.uz</span>
-                  </div>
-                </div>
-                <div className="bg-forest-light rounded-[1.5rem] p-6 space-y-4">
-                  <div className="h-8 w-1/3 bg-mint/20 rounded-xl" />
-                  <div className="h-4 w-full bg-white/10 rounded-lg" />
-                  <div className="h-4 w-4/5 bg-white/10 rounded-lg" />
-                  <div className="grid grid-cols-3 gap-3 mt-4">
-                    <div className="h-20 bg-mint/10 rounded-xl" />
-                    <div className="h-20 bg-mint/10 rounded-xl" />
-                    <div className="h-20 bg-mint/10 rounded-xl" />
-                  </div>
-                  <div className="flex gap-3 mt-4">
-                    <div className="h-10 flex-1 bg-mint rounded-xl" />
-                    <div className="h-10 w-10 bg-white/10 rounded-xl" />
-                  </div>
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: d + 0.5, ease }}
-                className="absolute -bottom-6 -left-8 bg-forest-light border border-white/10 rounded-[1.5rem] p-4 pr-6 shadow-lg shadow-black/15 flex items-center gap-3"
-              >
-                <div className="w-10 h-10 bg-mint/15 rounded-xl flex items-center justify-center">
-                  <span className="text-mint font-bold text-sm">+</span>
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold">{t.heroNewLead}</p>
-                  <p className="text-white/50 text-xs">{t.heroNewLeadSub}</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: -12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: d + 0.65, ease }}
-                className="absolute -top-4 -right-6 bg-forest-light border border-white/10 rounded-[1.25rem] p-3 px-4 shadow-lg shadow-black/15"
-              >
-                <p className="text-xs text-white/50 font-medium">PageSpeed</p>
-                <p className="text-white font-bold text-xl tracking-[0.5px]">98<span className="text-mint ml-[2px]">/100</span></p>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      <motion.a
-        href="#services"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: d + 0.8, duration: 0.5 }}
-        aria-label={t.heroScrollAria}
-        className="absolute bottom-12 right-8 md:right-12 z-20 w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors duration-200"
-      >
-        <ArrowDown size={18} className="text-forest/60" />
-      </motion.a>
     </section>
   )
 }

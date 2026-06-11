@@ -9,10 +9,9 @@ export function Header() {
   const { t, locale, setLocale } = useT()
 
   const links = [
-    { label: t.navServices, href: '#services' },
-    { label: t.navProcess, href: '#process' },
+    { label: t.navPricing, href: '#pricing' },
+    { label: t.navTeam, href: '#team' },
     { label: t.navPortfolio, href: '#portfolio' },
-    { label: t.navAbout, href: '#stats' },
   ]
 
   useEffect(() => {
@@ -41,10 +40,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300 ${
-        scrolled
-          ? 'bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]'
-          : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
+        scrolled ? 'shadow-[0_1px_0_rgba(0,0,0,0.06)]' : ''
       }`}
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-10 h-18 md:h-20">

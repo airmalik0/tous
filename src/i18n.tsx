@@ -4,10 +4,9 @@ export type Locale = 'ru' | 'uz'
 
 type Dict = {
   // Header
-  navServices: string
-  navProcess: string
+  navPricing: string
+  navTeam: string
   navPortfolio: string
-  navAbout: string
   navContact: string
   ctaDiscuss: string
   menuAria: string
@@ -16,61 +15,38 @@ type Dict = {
   heroBadge: string
   heroTitle1: string
   heroTitle2: string
-  heroTitle3: string
+  heroTitleAccent: string
+  heroTitleAfter: string
   heroLead: string
   heroCtaSecondary: string
-  heroNewLead: string
-  heroNewLeadSub: string
-  heroScrollAria: string
 
-  // Services
-  servicesBadge: string
-  servicesTitle1: string
-  servicesTitle2: string
-  serviceCorpTitle: string
-  serviceCorpDesc: string
-  serviceShopTitle: string
-  serviceShopDesc: string
-  serviceLandingTitle: string
-  serviceLandingDesc: string
-  serviceAppTitle: string
-  serviceAppDesc: string
-  serviceDesignTitle: string
-  serviceDesignDesc: string
-  serviceSeoTitle: string
-  serviceSeoDesc: string
+  // Pricing
+  pricingBadge: string
+  pricingTitle1: string
+  pricingTitle2: string
+  pricingPopular: string
 
-  // Process
-  processBadge: string
-  processTitle1: string
-  processTitle2: string
-  step1Title: string
-  step1Desc: string
-  step2Title: string
-  step2Desc: string
-  step3Title: string
-  step3Desc: string
-  step4Title: string
-  step4Desc: string
+  // Team
+  teamBadge: string
+  teamTitle1: string
+  teamTitle2: string
+  roleDesigner: string
+  roleProject: string
+  roleDeveloper: string
+  roleSmm: string
+  roleFinance: string
 
   // Portfolio
   portfolioBadge: string
   portfolioTitle1: string
   portfolioTitle2: string
-  portfolioTagFintech: string
-  portfolioTagDesign: string
-  portfolioTagFamily: string
-  portfolioTagCafe: string
-  portfolioTagArcade: string
+  portfolioTagKidsShoes: string
+  portfolioTagDetailing: string
+  portfolioTagPillows: string
+  portfolioTagFurniture: string
   portfolioTagBooks: string
+  portfolioTagArcade: string
   portfolioTagFlorist: string
-
-  // Stats
-  statsTitle1: string
-  statsTitle2: string
-  statsOrders: string
-  statsClients: string
-  statsYears: string
 
   // Contact
   contactBadge: string
@@ -102,68 +78,45 @@ type Dict = {
 }
 
 const ru: Dict = {
-  navServices: 'Услуги',
-  navProcess: 'Процесс',
+  navPricing: 'Цены',
+  navTeam: 'Команда',
   navPortfolio: 'Портфолио',
-  navAbout: 'О нас',
   navContact: 'Контакты',
   ctaDiscuss: 'Обсудить проект',
   menuAria: 'Меню',
 
-  heroBadge: 'Веб-студия полного цикла',
-  heroTitle1: 'Создаём сайты',
-  heroTitle2: 'любой',
-  heroTitle3: 'сложности',
-  heroLead: 'От лендингов до сложных веб-приложений. Превращаем идеи в цифровые продукты, которые работают на ваш бизнес.',
-  heroCtaSecondary: 'Наши услуги',
-  heroNewLead: 'Новая заявка',
-  heroNewLeadSub: 'с вашего сайта',
-  heroScrollAria: 'Прокрутить вниз',
+  heroBadge: '50+ запущенных проектов',
+  heroTitle1: 'Создаём сайты,',
+  heroTitle2: '',
+  heroTitleAccent: 'которые продают',
+  heroTitleAfter: '',
+  heroLead: 'Сайты от 2.5 млн сум. Сроки — от 3 дней.',
+  heroCtaSecondary: 'Все работы',
 
-  servicesBadge: 'Наши услуги',
-  servicesTitle1: 'Всё, что нужно для',
-  servicesTitle2: 'вашего проекта',
-  serviceCorpTitle: 'Корпоративные сайты',
-  serviceCorpDesc: 'Представительство вашей компании в интернете с продуманной структурой и контентом.',
-  serviceShopTitle: 'Интернет-магазины',
-  serviceShopDesc: 'E-commerce решения с каталогом, корзиной, оплатой и интеграцией с CRM.',
-  serviceLandingTitle: 'Лендинги',
-  serviceLandingDesc: 'Продающие страницы с высокой конверсией для ваших рекламных кампаний.',
-  serviceAppTitle: 'Веб-приложения',
-  serviceAppDesc: 'SPA и PWA любой сложности: от личных кабинетов до внутренних сервисов.',
-  serviceDesignTitle: 'UI/UX Дизайн',
-  serviceDesignDesc: 'Проектирование интерфейсов, которые красивы и удобны для ваших пользователей.',
-  serviceSeoTitle: 'SEO и аналитика',
-  serviceSeoDesc: 'Оптимизация сайта для поисковых систем и настройка инструментов аналитики.',
+  pricingBadge: 'Цены',
+  pricingTitle1: 'Сколько стоит',
+  pricingTitle2: 'ваш сайт',
+  pricingPopular: 'Популярный',
 
-  processBadge: 'Как мы работаем',
-  processTitle1: 'Прозрачный процесс.',
-  processTitle2: 'Предсказуемый результат.',
-  step1Title: 'Обсуждение',
-  step1Desc: 'Узнаём ваши цели, аудиторию и задачи. Формируем бриф и определяем объём работ.',
-  step2Title: 'Дизайн',
-  step2Desc: 'Проектируем структуру и создаём визуальный дизайн, который решает задачи бизнеса.',
-  step3Title: 'Разработка',
-  step3Desc: 'Воплощаем дизайн в код: адаптивная вёрстка, анимации, интеграции и тестирование.',
-  step4Title: 'Запуск',
-  step4Desc: 'Деплоим сайт, настраиваем аналитику и обеспечиваем техническую поддержку.',
+  teamBadge: 'Команда',
+  teamTitle1: 'Люди, которые',
+  teamTitle2: 'создают imbim',
+  roleDesigner: 'Дизайнер',
+  roleProject: 'Project Manager',
+  roleDeveloper: 'Разработчик',
+  roleSmm: 'SMM',
+  roleFinance: 'Финансы',
 
   portfolioBadge: 'Портфолио',
   portfolioTitle1: 'Проекты, которыми',
   portfolioTitle2: 'мы гордимся',
-  portfolioTagFintech: 'Финтех-приложение',
-  portfolioTagDesign: 'Дизайн-студия',
-  portfolioTagFamily: 'Семейное приложение',
-  portfolioTagCafe: 'Кофейня и скетч-клуб',
+  portfolioTagKidsShoes: 'Детская обувь',
+  portfolioTagDetailing: 'Автодетейлинг',
+  portfolioTagPillows: 'Шёлковый текстиль',
+  portfolioTagFurniture: 'Мебель',
+  portfolioTagBooks: 'Книжный',
   portfolioTagArcade: 'Ретро-аркада',
-  portfolioTagBooks: 'Независимый книжный',
-  portfolioTagFlorist: 'Флористическая мастерская',
-
-  statsTitle1: 'Цифры говорят',
-  statsTitle2: 'сами за себя',
-  statsOrders: 'Заказов выполнено',
-  statsClients: 'Довольных клиентов',
-  statsYears: 'Года на рынке',
+  portfolioTagFlorist: 'Флористика',
 
   contactBadge: 'Оставьте заявку',
   contactTitle1: 'Давайте создадим',
@@ -193,68 +146,45 @@ const ru: Dict = {
 }
 
 const uz: Dict = {
-  navServices: 'Xizmatlar',
-  navProcess: 'Jarayon',
+  navPricing: 'Narxlar',
+  navTeam: 'Jamoa',
   navPortfolio: 'Portfolio',
-  navAbout: 'Biz haqimizda',
   navContact: 'Aloqa',
   ctaDiscuss: 'Loyihani muhokama qilish',
   menuAria: 'Menyu',
 
-  heroBadge: "To'liq tsikl veb-studiya",
-  heroTitle1: 'Har qanday',
-  heroTitle2: 'murakkablikdagi',
-  heroTitle3: 'saytlarni yaratamiz',
-  heroLead: "Lendinglardan murakkab veb-ilovalargacha. G'oyalarni biznesingiz uchun ishlaydigan raqamli mahsulotlarga aylantiramiz.",
-  heroCtaSecondary: 'Xizmatlarimiz',
-  heroNewLead: "Yangi ariza",
-  heroNewLeadSub: "saytingizdan",
-  heroScrollAria: "Pastga aylantirish",
+  heroBadge: '50+ ishga tushirilgan loyihalar',
+  heroTitle1: 'Biznesingiz uchun',
+  heroTitle2: '',
+  heroTitleAccent: 'sotadigan saytlar',
+  heroTitleAfter: 'yaratamiz',
+  heroLead: "Saytlar 2.5 mln so'mdan. Muddat — 3 kundan.",
+  heroCtaSecondary: 'Barcha ishlar',
 
-  servicesBadge: 'Xizmatlarimiz',
-  servicesTitle1: 'Loyihangiz uchun',
-  servicesTitle2: 'kerak bo‘lgan hamma narsa',
-  serviceCorpTitle: 'Korporativ saytlar',
-  serviceCorpDesc: "Kompaniyangizning internetdagi vakolatxonasi: o‘ylangan tuzilma va kontent bilan.",
-  serviceShopTitle: 'Internet-do‘konlar',
-  serviceShopDesc: "Katalog, savat, to‘lov va CRM integratsiyasi bilan e-commerce yechimlari.",
-  serviceLandingTitle: 'Lendinglar',
-  serviceLandingDesc: "Reklama kampaniyalaringiz uchun yuqori konversiyali sotuvchi sahifalar.",
-  serviceAppTitle: 'Veb-ilovalar',
-  serviceAppDesc: "Har qanday murakkablikdagi SPA va PWA: shaxsiy kabinetlardan ichki servislargacha.",
-  serviceDesignTitle: 'UI/UX dizayn',
-  serviceDesignDesc: "Foydalanuvchilaringiz uchun chiroyli va qulay interfeys dizayni.",
-  serviceSeoTitle: 'SEO va analitika',
-  serviceSeoDesc: "Saytni qidiruv tizimlari uchun optimallashtirish va analitika sozlash.",
+  pricingBadge: 'Narxlar',
+  pricingTitle1: 'Saytingiz',
+  pricingTitle2: 'qancha turadi',
+  pricingPopular: 'Ommabop',
 
-  processBadge: 'Qanday ishlaymiz',
-  processTitle1: 'Shaffof jarayon.',
-  processTitle2: "Bashorat qilinadigan natija.",
-  step1Title: 'Muhokama',
-  step1Desc: "Maqsadlaringiz, auditoriyangiz va vazifalaringizni o‘rganamiz. Brif tuzamiz va ish hajmini belgilaymiz.",
-  step2Title: 'Dizayn',
-  step2Desc: "Biznes vazifalarini hal qiluvchi tuzilma va vizual dizayn yaratamiz.",
-  step3Title: 'Dasturlash',
-  step3Desc: "Dizaynni kodga aylantiramiz: moslashuvchan tuzilma, animatsiyalar, integratsiyalar va testlash.",
-  step4Title: 'Ishga tushirish',
-  step4Desc: "Saytni deploy qilamiz, analitikani sozlaymiz va texnik yordam ko‘rsatamiz.",
+  teamBadge: 'Jamoa',
+  teamTitle1: 'imbim ortidagi',
+  teamTitle2: 'odamlar',
+  roleDesigner: 'Dizayner',
+  roleProject: 'Project Manager',
+  roleDeveloper: 'Dasturchi',
+  roleSmm: 'SMM',
+  roleFinance: 'Moliya',
 
   portfolioBadge: 'Portfolio',
   portfolioTitle1: "Biz faxrlanadigan",
   portfolioTitle2: 'loyihalar',
-  portfolioTagFintech: 'Fintech ilova',
-  portfolioTagDesign: 'Dizayn studiyasi',
-  portfolioTagFamily: 'Oilaviy ilova',
-  portfolioTagCafe: "Kofeyna va sketch-klub",
+  portfolioTagKidsShoes: "Bolalar poyabzali",
+  portfolioTagDetailing: 'Avto-deteyling',
+  portfolioTagPillows: "Ipak to'shak buyumlari",
+  portfolioTagFurniture: 'Mebel',
+  portfolioTagBooks: "Kitob do'koni",
   portfolioTagArcade: 'Retro arkada',
-  portfolioTagBooks: "Mustaqil kitob do‘koni",
-  portfolioTagFlorist: 'Florist ustaxonasi',
-
-  statsTitle1: 'Raqamlar o‘zi',
-  statsTitle2: 'gapiradi',
-  statsOrders: 'Bajarilgan loyihalar',
-  statsClients: 'Mamnun mijozlar',
-  statsYears: 'Yil bozorda',
+  portfolioTagFlorist: 'Floristika',
 
   contactBadge: "Ariza qoldiring",
   contactTitle1: "Birgalikda yaratamiz",

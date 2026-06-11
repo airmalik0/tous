@@ -28,9 +28,9 @@ export function Footer() {
             <div>
               <p className="text-dark font-semibold mb-4">{t.footerNav}</p>
               <div className="flex flex-col gap-2.5">
-                <a href="#services" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navServices}</a>
-                <a href="#process" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navProcess}</a>
-                <a href="#stats" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navAbout}</a>
+                <a href="#pricing" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navPricing}</a>
+                <a href="#team" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navTeam}</a>
+                <a href="#portfolio" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navPortfolio}</a>
                 <a href="#contact" className="text-muted hover:text-forest text-sm transition-colors duration-200">{t.navContact}</a>
               </div>
             </div>

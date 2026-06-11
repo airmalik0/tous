@@ -5,30 +5,31 @@ import { useT } from '../i18n'
 type Project = {
   slug: string
   brand: string
-  tagKey: 'fintech' | 'design' | 'family' | 'cafe' | 'arcade' | 'books' | 'florist'
+  tagKey: 'kidsShoes' | 'detailing' | 'pillows' | 'furniture' | 'books' | 'arcade' | 'florist'
+  url: string
   span?: string
 }
 
 const projects: Project[] = [
-  { slug: 'bento', brand: 'Поток', tagKey: 'fintech', span: 'lg:col-span-2' },
-  { slug: 'bold-typography', brand: 'КРИК', tagKey: 'design' },
-  { slug: 'claymorphism', brand: 'Семечки', tagKey: 'family' },
-  { slug: 'hand-drawn', brand: 'Эскиз', tagKey: 'cafe' },
-  { slug: 'paper-cutout', brand: 'Слова на ветер', tagKey: 'books' },
-  { slug: 'mosaic-pixel', brand: 'PIXEL ALMATY', tagKey: 'arcade', span: 'lg:col-span-2' },
-  { slug: 'spring-blooms', brand: 'FLEUREL', tagKey: 'florist' },
+  { slug: 'savushka', brand: 'Savushka', tagKey: 'kidsShoes', url: 'https://savushka.com/', span: 'lg:col-span-2' },
+  { slug: 'detailing-lab', brand: 'Detailing Lab', tagKey: 'detailing', url: 'https://detailinglab.uz/' },
+  { slug: 'pillo', brand: 'Pillo', tagKey: 'pillows', url: 'https://pillo-86t.pages.dev/' },
+  { slug: 'bron-mebel', brand: 'Bron Mebel', tagKey: 'furniture', url: 'https://bron-mebel.pages.dev/' },
+  { slug: 'paper-cutout', brand: 'Слова на ветер', tagKey: 'books', url: '/portfolio/paper-cutout/index.html' },
+  { slug: 'mosaic-pixel', brand: 'PIXEL ALMATY', tagKey: 'arcade', url: '/portfolio/mosaic-pixel/index.html', span: 'lg:col-span-2' },
+  { slug: 'spring-blooms', brand: 'FLEUREL', tagKey: 'florist', url: '/portfolio/spring-blooms/index.html' },
 ]
 
 export function Portfolio() {
   const { t } = useT()
 
   const tags: Record<Project['tagKey'], string> = {
-    fintech: t.portfolioTagFintech,
-    design: t.portfolioTagDesign,
-    family: t.portfolioTagFamily,
-    cafe: t.portfolioTagCafe,
-    arcade: t.portfolioTagArcade,
+    kidsShoes: t.portfolioTagKidsShoes,
+    detailing: t.portfolioTagDetailing,
+    pillows: t.portfolioTagPillows,
+    furniture: t.portfolioTagFurniture,
     books: t.portfolioTagBooks,
+    arcade: t.portfolioTagArcade,
     florist: t.portfolioTagFlorist,
   }
 
@@ -52,35 +53,33 @@ export function Portfolio() {
           {projects.map((p, i) => (
             <ScrollReveal key={p.slug} delay={i * 0.08} className={p.span ?? ''}>
               <a
-                href={`/portfolio/${p.slug}/index.html`}
+                href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-dark rounded-[2rem] h-full min-h-[320px] flex flex-col overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.01] active:scale-[0.99] no-underline"
+                className="group relative block h-full min-h-[260px] md:min-h-[300px] bg-forest rounded-[2rem] overflow-hidden no-underline"
               >
-                <div className="relative flex-1 overflow-hidden">
+                <div className="absolute right-0 top-0 bottom-0 aspect-square overflow-hidden">
                   <img
-                    src={`/portfolio-previews/${p.slug}.jpg`}
+                    src={`/portfolio-illust/${p.slug}.jpg`}
                     alt={p.brand}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/0 to-dark/0" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-forest from-0% via-forest/40 via-35% to-transparent to-95%" />
                 </div>
 
-                <div className="absolute top-5 left-5 right-5 flex items-start justify-between gap-3 pointer-events-none">
-                  <span className="inline-flex px-3 py-1.5 rounded-pill text-xs font-medium bg-white/85 text-dark backdrop-blur-sm">
+                <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between gap-8" style={{ paddingRight: 'calc(min(50%, 320px) - 1rem)' }}>
+                  <span className="inline-flex w-fit px-3 py-1.5 rounded-pill text-xs font-medium bg-mint/15 text-mint">
                     {tags[p.tagKey]}
                   </span>
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/85 group-hover:scale-110 transition-transform duration-300">
-                    <ArrowUpRight size={18} weight="bold" className="text-forest" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <h3 className="text-2xl md:text-3xl font-800 tracking-tight text-white">
+                  <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-800 tracking-tight leading-[1.05]">
                     {p.brand}
                   </h3>
+                </div>
+
+                <div className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center bg-white/90 group-hover:scale-110 transition-transform duration-300 z-20">
+                  <ArrowUpRight size={18} weight="bold" className="text-forest" />
                 </div>
               </a>
             </ScrollReveal>
