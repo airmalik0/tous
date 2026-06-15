@@ -53,6 +53,7 @@ type Dict = {
   contactTitle1: string
   contactTitle2: string
   contactLead: string
+  contactOrCall: string
   contactLabel: string
   contactPlaceholder: string
   contactDescLabel: string
@@ -108,8 +109,8 @@ const ru: Dict = {
   roleFinance: 'Финансы',
 
   portfolioBadge: 'Портфолио',
-  portfolioTitle1: 'Проекты, которыми',
-  portfolioTitle2: 'мы гордимся',
+  portfolioTitle1: 'Наши',
+  portfolioTitle2: 'работы',
   portfolioTagKidsShoes: 'Детская обувь',
   portfolioTagDetailing: 'Автодетейлинг',
   portfolioTagPillows: 'Шёлковый текстиль',
@@ -118,10 +119,11 @@ const ru: Dict = {
   portfolioTagArcade: 'Ретро-аркада',
   portfolioTagFlorist: 'Флористика',
 
-  contactBadge: 'Оставьте заявку',
-  contactTitle1: 'Давайте создадим',
-  contactTitle2: 'что-то крутое',
-  contactLead: 'Оставьте контакт — мы свяжемся, обсудим проект и предложим решение.',
+  contactBadge: 'Бесплатная консультация',
+  contactTitle1: 'Узнайте стоимость',
+  contactTitle2: 'вашего сайта',
+  contactLead: 'Оставьте контакт — перезвоним в течение часа, покажем похожие кейсы и назовём точную цену. Бесплатно и ни к чему не обязывает.',
+  contactOrCall: 'Или позвоните прямо сейчас',
   contactLabel: 'Телефон или Telegram *',
   contactPlaceholder: '+998... или @username',
   contactDescLabel: 'Описание проекта',
@@ -130,7 +132,7 @@ const ru: Dict = {
   contactTimeLabel: 'Когда удобно позвонить',
   contactTimeOptional: '— необязательно',
   contactTimePlaceholder: 'Например: после 15:00',
-  contactSubmit: 'Отправить заявку',
+  contactSubmit: 'Получить расчёт',
   contactSending: 'Отправляем...',
   contactErrorMsg: 'Ошибка отправки. Попробуйте позже или позвоните нам.',
   tgNewLead: '📩 Новая заявка с сайта imbim.online',
@@ -176,8 +178,8 @@ const uz: Dict = {
   roleFinance: 'Moliya',
 
   portfolioBadge: 'Portfolio',
-  portfolioTitle1: "Biz faxrlanadigan",
-  portfolioTitle2: 'loyihalar',
+  portfolioTitle1: 'Bizning',
+  portfolioTitle2: 'ishlarimiz',
   portfolioTagKidsShoes: "Bolalar poyabzali",
   portfolioTagDetailing: 'Avto-deteyling',
   portfolioTagPillows: "Ipak to'shak buyumlari",
@@ -186,10 +188,11 @@ const uz: Dict = {
   portfolioTagArcade: 'Retro arkada',
   portfolioTagFlorist: 'Floristika',
 
-  contactBadge: "Ariza qoldiring",
-  contactTitle1: "Birgalikda yaratamiz",
-  contactTitle2: "ajoyib narsani",
-  contactLead: "Aloqa qoldiring — biz bog‘lanamiz, loyihani muhokama qilamiz va yechim taklif qilamiz.",
+  contactBadge: 'Bepul konsultatsiya',
+  contactTitle1: 'Saytingiz narxini',
+  contactTitle2: 'bilib oling',
+  contactLead: "Aloqa qoldiring — bir soat ichida qo'ng'iroq qilamiz, o'xshash keyslarni ko'rsatamiz va aniq narxni aytamiz. Bepul.",
+  contactOrCall: "Yoki hoziroq qo'ng'iroq qiling",
   contactLabel: 'Telefon yoki Telegram *',
   contactPlaceholder: '+998... yoki @username',
   contactDescLabel: 'Loyiha tavsifi',
@@ -198,7 +201,7 @@ const uz: Dict = {
   contactTimeLabel: "Qachon qo‘ng‘iroq qilish qulay",
   contactTimeOptional: '— ixtiyoriy',
   contactTimePlaceholder: 'Masalan: 15:00 dan keyin',
-  contactSubmit: 'Arizani yuborish',
+  contactSubmit: 'Hisob-kitob olish',
   contactSending: 'Yuborilmoqda...',
   contactErrorMsg: "Yuborishda xatolik. Keyinroq urinib ko‘ring yoki bizga qo‘ng‘iroq qiling.",
   tgNewLead: '📩 imbim.online saytidan yangi ariza',

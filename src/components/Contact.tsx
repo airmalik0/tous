@@ -79,13 +79,17 @@ export function Contact() {
                   {t.contactLead}
                 </p>
 
-                <a
-                  href="tel:+998901359666"
-                  className="inline-flex items-center gap-3 text-white/40 hover:text-white/60 transition-colors"
-                >
-                  <Phone size={20} weight="fill" />
-                  <span className="text-sm">+998 90 135 96 66</span>
-                </a>
+                <div>
+                  <p className="text-white/50 text-sm mb-3">{t.contactOrCall}</p>
+                  <a href="tel:+998901359666" className="group inline-flex items-center gap-4">
+                    <span className="w-12 h-12 bg-mint/15 rounded-full flex items-center justify-center group-hover:bg-mint/25 transition-colors duration-200">
+                      <Phone size={22} weight="fill" className="text-mint" />
+                    </span>
+                    <span className="text-white font-display font-800 text-2xl md:text-3xl tracking-tight group-hover:text-mint transition-colors duration-200">
+                      +998 90 135 96 66
+                    </span>
+                  </a>
+                </div>
               </div>
             </ScrollReveal>
 

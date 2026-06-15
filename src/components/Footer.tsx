@@ -40,7 +40,7 @@ export function Footer() {
               <p className="text-dark font-semibold mb-4">{t.footerContacts}</p>
               <div className="flex flex-col gap-2.5">
                 <a href="tel:+998901359666" className="text-muted hover:text-forest text-sm transition-colors duration-200 no-underline">+998 90 135 96 66</a>
-                <a href="https://t.me/imbim_bot" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-forest text-sm transition-colors duration-200 no-underline">Telegram: @imbim_bot</a>
+                <a href="https://t.me/imbim2004" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-forest text-sm transition-colors duration-200 no-underline">Telegram: @imbim2004</a>
               </div>
             </div>
           </div>

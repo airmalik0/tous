@@ -66,7 +66,7 @@ export function Portfolio() {
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-forest from-0% via-forest/40 via-35% to-transparent to-95%" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-forest from-22% via-forest/40 via-52% to-transparent to-96%" />
                 </div>
 
                 <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between gap-8" style={{ paddingRight: 'calc(min(50%, 320px) - 1rem)' }}>

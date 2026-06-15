@@ -6,12 +6,12 @@ import { useT } from '../i18n'
 const ease = [0.16, 1, 0.3, 1] as const
 
 const orbitTiles = [
-  { img: 'savushka', cls: 'top-[14%] left-[6%] w-24 md:w-32', factor: 28, dur: 5.6 },
-  { img: 'spring-blooms', cls: 'top-[12%] right-[10%] w-20 md:w-28', factor: -36, dur: 6.4 },
-  { img: 'detailing-lab', cls: 'bottom-[16%] left-[12%] w-20 md:w-28', factor: -22, dur: 7.1 },
-  { img: 'mosaic-pixel', cls: 'bottom-[10%] right-[6%] w-24 md:w-32', factor: 32, dur: 5.2 },
-  { img: 'pillo', cls: 'top-[44%] left-[1%] w-16 md:w-24', factor: 44, dur: 6.8 },
-  { img: 'bron-mebel', cls: 'top-[40%] right-[2%] w-16 md:w-24', factor: -48, dur: 5.9 },
+  { img: 'savushka', cls: 'top-[22%] left-[6%] w-24 md:w-32', factor: 28, dur: 5.6 },
+  { img: 'spring-blooms', cls: 'top-[20%] right-[10%] w-20 md:w-28', factor: -36, dur: 6.4 },
+  { img: 'detailing-lab', cls: 'bottom-[10%] left-[12%] w-20 md:w-28', factor: -22, dur: 7.1 },
+  { img: 'mosaic-pixel', cls: 'bottom-[6%] right-[6%] w-24 md:w-32', factor: 32, dur: 5.2 },
+  { img: 'pillo', cls: 'top-[50%] left-[1%] w-16 md:w-24', factor: 44, dur: 6.8 },
+  { img: 'bron-mebel', cls: 'top-[46%] right-[2%] w-16 md:w-24', factor: -48, dur: 5.9 },
 ]
 
 function OrbitTile({ tile, mx, my }: { tile: (typeof orbitTiles)[number]; mx: MotionValue<number>; my: MotionValue<number> }) {
