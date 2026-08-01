@@ -1,11 +1,73 @@
 import { ScrollReveal } from './ScrollReveal'
-import { Check } from '@phosphor-icons/react'
+import { Check, X } from '@phosphor-icons/react'
 import { useT, type Locale } from '../i18n'
+
+type FeatureKey =
+  | 'design'
+  | 'forms'
+  | 'seo'
+  | 'multilang'
+  | 'training'
+  | 'domain'
+  | 'support'
+  | 'admin'
+  | 'modules'
+  | 'registration'
+  | 'cabinet'
+  | 'payment'
+
+// Единый порядок фич для всех тарифов — образует «лесенку» галочек/крестиков.
+const featureOrder: FeatureKey[] = [
+  'design',
+  'forms',
+  'seo',
+  'multilang',
+  'training',
+  'domain',
+  'support',
+  'admin',
+  'modules',
+  'registration',
+  'cabinet',
+  'payment',
+]
+
+const featureLabels: Record<Locale, Record<FeatureKey, string>> = {
+  ru: {
+    design: 'Адаптивный уникальный дизайн',
+    forms: 'Формы заявок в Telegram',
+    seo: 'SEO-оптимизация',
+    multilang: 'Мультиязычность uz/ru/en',
+    training: 'Обучение персонала',
+    domain: 'Домен и хостинг',
+    support: 'Техподдержка в течение года',
+    admin: 'Админ-панель',
+    modules: 'Калькуляторы и квиз-формы',
+    registration: 'Регистрация в Google / Yandex',
+    cabinet: 'Личный кабинет',
+    payment: 'Оплата Click / Payme',
+  },
+  uz: {
+    design: 'Moslashuvchan unikal dizayn',
+    forms: 'Telegramga ariza formalari',
+    seo: 'SEO-optimallashtirish',
+    multilang: "Ko'p tillilik uz/ru/en",
+    training: "Xodimlarni o'qitish",
+    domain: 'Domen va hosting',
+    support: 'Bir yil davomida texnik yordam',
+    admin: 'Admin-panel',
+    modules: 'Kalkulyatorlar va kviz-formalar',
+    registration: "Google / Yandexda ro'yxatdan o'tkazish",
+    cabinet: 'Shaxsiy kabinet',
+    payment: "Click / Payme to'lovi",
+  },
+}
 
 type Plan = {
   name: string
   pages: string
-  features: string[]
+  included: FeatureKey[]
+  deadline: string
   price: string
   popular?: boolean
 }
@@ -15,69 +77,30 @@ const plansByLocale: Record<Locale, Plan[]> = {
     {
       name: 'Лендинг',
       pages: '1 страница',
-      features: [
-        'Домен и хостинг',
-        'Адаптивный уникальный дизайн',
-        'Формы заявок в Telegram',
-        'SEO-оптимизация',
-        'Обучение персонала',
-        'Техподдержка в течение года',
-        'Сроки от 3 дней',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training'],
+      deadline: 'Сроки от 3 дней',
       price: 'от 2.5 млн сум',
     },
     {
       name: 'Сайт-визитка',
       pages: '3–10 страниц',
-      features: [
-        'Домен и хостинг',
-        'Адаптивный уникальный дизайн',
-        'Формы заявок в Telegram',
-        'Админ-панель',
-        'SEO-оптимизация',
-        'Мультиязычность uz/ru/en',
-        'Обучение персонала',
-        'Техподдержка в течение года',
-        'Сроки от 7 дней',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin'],
+      deadline: 'Сроки от 7 дней',
       price: 'от 4 млн сум',
       popular: true,
     },
     {
       name: 'Корпоративный сайт',
       pages: '10–100 страниц',
-      features: [
-        'Домен и хостинг',
-        'Адаптивный уникальный дизайн',
-        'Формы заявок в Telegram',
-        'Админ-панель',
-        'SEO-оптимизация',
-        'Мультиязычность uz/ru/en',
-        'Модули, функционал, квиз',
-        'Регистрация в Google / Yandex',
-        'Обучение персонала',
-        'Техподдержка в течение года',
-        'Сроки от 14 дней',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin', 'modules', 'registration'],
+      deadline: 'Сроки от 14 дней',
       price: 'от 7 млн сум',
     },
     {
       name: 'Интернет-магазин',
       pages: '10–1000 страниц',
-      features: [
-        'Домен и хостинг',
-        'Адаптивный уникальный дизайн',
-        'Формы заявок в Telegram',
-        'Админ-панель',
-        'Личный кабинет',
-        'Оплата Click / Payme',
-        'SEO-оптимизация',
-        'Мультиязычность uz/ru/en',
-        'Регистрация в Google / Yandex',
-        'Обучение персонала',
-        'Техподдержка в течение года',
-        'Сроки от 20 дней',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin', 'modules', 'registration', 'cabinet', 'payment'],
+      deadline: 'Сроки от 20 дней',
       price: 'от 10 млн сум',
     },
   ],
@@ -85,69 +108,30 @@ const plansByLocale: Record<Locale, Plan[]> = {
     {
       name: 'Lending',
       pages: '1 sahifa',
-      features: [
-        'Domen va hosting',
-        'Moslashuvchan unikal dizayn',
-        'Telegramga ariza formalari',
-        'SEO-optimallashtirish',
-        "Xodimlarni o'qitish",
-        'Bir yil davomida texnik yordam',
-        'Muddat 3 kundan',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training'],
+      deadline: 'Muddat 3 kundan',
       price: "2.5 mln so'mdan",
     },
     {
       name: 'Sayt-vizitka',
       pages: '3–10 sahifa',
-      features: [
-        'Domen va hosting',
-        'Moslashuvchan unikal dizayn',
-        'Telegramga ariza formalari',
-        'Admin-panel',
-        'SEO-optimallashtirish',
-        "Ko'p tillilik uz/ru/en",
-        "Xodimlarni o'qitish",
-        'Bir yil davomida texnik yordam',
-        'Muddat 7 kundan',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin'],
+      deadline: 'Muddat 7 kundan',
       price: "4 mln so'mdan",
       popular: true,
     },
     {
       name: 'Korporativ sayt',
       pages: '10–100 sahifa',
-      features: [
-        'Domen va hosting',
-        'Moslashuvchan unikal dizayn',
-        'Telegramga ariza formalari',
-        'Admin-panel',
-        'SEO-optimallashtirish',
-        "Ko'p tillilik uz/ru/en",
-        'Modullar, funksional, kviz',
-        "Google / Yandexda ro'yxatdan o'tkazish",
-        "Xodimlarni o'qitish",
-        'Bir yil davomida texnik yordam',
-        'Muddat 14 kundan',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin', 'modules', 'registration'],
+      deadline: 'Muddat 14 kundan',
       price: "7 mln so'mdan",
     },
     {
       name: "Internet-do'kon",
       pages: '10–1000 sahifa',
-      features: [
-        'Domen va hosting',
-        'Moslashuvchan unikal dizayn',
-        'Telegramga ariza formalari',
-        'Admin-panel',
-        'Shaxsiy kabinet',
-        "Click / Payme to'lovi",
-        'SEO-optimallashtirish',
-        "Ko'p tillilik uz/ru/en",
-        "Google / Yandexda ro'yxatdan o'tkazish",
-        "Xodimlarni o'qitish",
-        'Bir yil davomida texnik yordam',
-        'Muddat 20 kundan',
-      ],
+      included: ['design', 'forms', 'seo', 'multilang', 'training', 'domain', 'support', 'admin', 'modules', 'registration', 'cabinet', 'payment'],
+      deadline: 'Muddat 20 kundan',
       price: "10 mln so'mdan",
     },
   ],
@@ -174,7 +158,15 @@ export function Pricing() {
         </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
-          {plans.map((plan, i) => (
+          {plans.map((plan, i) => {
+            const features = [
+              ...featureOrder.map(key => ({
+                label: featureLabels[locale][key],
+                absent: !plan.included.includes(key),
+              })),
+              { label: plan.deadline, absent: false },
+            ]
+            return (
             <ScrollReveal key={plan.name} delay={i * 0.08}>
               <div
                 className={`relative rounded-[2rem] p-7 flex flex-col h-full transition-transform duration-300 hover:-translate-y-1 ${
@@ -197,16 +189,43 @@ export function Pricing() {
                 </p>
 
                 <ul className="flex flex-col gap-3 mb-8">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-start gap-2.5">
-                      <span className={`mt-0.5 w-5 h-5 shrink-0 rounded-full flex items-center justify-center ${plan.popular ? 'bg-mint/15' : 'bg-mint-bg'}`}>
-                        <Check size={12} weight="bold" className={plan.popular ? 'text-mint' : 'text-forest'} />
-                      </span>
-                      <span className={`text-sm leading-snug ${plan.popular ? 'text-white/80' : 'text-dark/80'}`}>
-                        {f}
-                      </span>
-                    </li>
-                  ))}
+                  {features.map(f => {
+                    const iconWrap = f.absent
+                      ? plan.popular
+                        ? 'bg-white/10'
+                        : 'bg-dark/5'
+                      : plan.popular
+                        ? 'bg-mint/15'
+                        : 'bg-mint-bg'
+                    const iconColor = f.absent
+                      ? plan.popular
+                        ? 'text-white/40'
+                        : 'text-dark/30'
+                      : plan.popular
+                        ? 'text-mint'
+                        : 'text-forest'
+                    const textColor = f.absent
+                      ? plan.popular
+                        ? 'text-white/40'
+                        : 'text-dark/35'
+                      : plan.popular
+                        ? 'text-white/80'
+                        : 'text-dark/80'
+                    return (
+                      <li key={f.label} className="flex items-start gap-2.5">
+                        <span className={`mt-0.5 w-5 h-5 shrink-0 rounded-full flex items-center justify-center ${iconWrap}`}>
+                          {f.absent ? (
+                            <X size={12} weight="bold" className={iconColor} />
+                          ) : (
+                            <Check size={12} weight="bold" className={iconColor} />
+                          )}
+                        </span>
+                        <span className={`text-sm leading-snug ${textColor}`}>
+                          {f.label}
+                        </span>
+                      </li>
+                    )
+                  })}
                 </ul>
 
                 <div className="mt-auto">
@@ -226,7 +245,8 @@ export function Pricing() {
                 </div>
               </div>
             </ScrollReveal>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
