@@ -3,9 +3,6 @@ import { ScrollReveal } from './ScrollReveal'
 import { PaperPlaneTilt, Phone, CircleNotch } from '@phosphor-icons/react'
 import { useT } from '../i18n'
 
-const BOT_TOKEN = '8324034030:AAGRPx6LQxINwGPnWXrz9tlJx78G9JAAWjc'
-const CHAT_ID = '531955649'
-
 export function Contact() {
   const { t, locale } = useT()
   const [contact, setContact] = useState('')
@@ -19,26 +16,21 @@ export function Contact() {
 
     setStatus('sending')
 
-    const lines = [
-      t.tgNewLead,
-      '',
-      `🌐 ${locale.toUpperCase()}`,
-      `${t.tgContact}: ${contact}`,
-    ]
-    if (description.trim()) {
-      lines.push('', `${t.tgDescription}:`, description)
-    }
-    if (callTime.trim()) {
-      lines.push('', `${t.tgTime}: ${callTime}`)
-    }
-
     try {
-      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: lines.join('\n'),
+          contact,
+          description,
+          callTime,
+          locale,
+          labels: {
+            newLead: t.tgNewLead,
+            contact: t.tgContact,
+            description: t.tgDescription,
+            time: t.tgTime,
+          },
         }),
       })
 
