@@ -23,7 +23,8 @@ bot/.env
 .DS_Store
 *.png
 !public/og.png
-!public/portfolio/**/*.png
+# Картинки демо-страниц — часть сайта, а не мусор.
+!public/demo/**/*.png
 .claude/
 .playwright-mcp/
 instagram-content/

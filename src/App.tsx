@@ -1,12 +1,36 @@
-import { useEffect, lazy, Suspense } from 'react'
-import { Header } from './components/Header'
-import { Hero } from './components/Hero'
+import { useEffect, lazy } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { UZ_PREFIX } from './locales'
+import { Layout } from './components/Layout'
+import { Home } from './pages/Home'
 
-const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })))
-const Team = lazy(() => import('./components/Team').then(m => ({ default: m.Team })))
-const Portfolio = lazy(() => import('./components/Portfolio').then(m => ({ default: m.Portfolio })))
-const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })))
-const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
+// Главная грузится сразу — на ней LCP. Остальное подтягивается по требованию.
+const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })))
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail').then(m => ({ default: m.ServiceDetail })))
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })))
+const CasePage = lazy(() => import('./pages/CasePage').then(m => ({ default: m.CasePage })))
+const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })))
+const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })))
+const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })))
+const Legal = lazy(() => import('./pages/Legal').then(m => ({ default: m.Legal })))
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })))
+
+/** Одно дерево страниц, подключённое дважды: в корне (ru) и под /uz. */
+function pageRoutes() {
+  return [
+    <Route key="home" index element={<Home />} />,
+    <Route key="services" path="uslugi" element={<Services />} />,
+    <Route key="service" path="uslugi/:slug" element={<ServiceDetail />} />,
+    <Route key="portfolio" path="portfolio" element={<PortfolioPage />} />,
+    <Route key="case" path="portfolio/:slug" element={<CasePage />} />,
+    <Route key="pricing" path="tseny" element={<PricingPage />} />,
+    <Route key="about" path="o-nas" element={<About />} />,
+    <Route key="contacts" path="kontakty" element={<Contacts />} />,
+    <Route key="privacy" path="politika-konfidentsialnosti" element={<Legal doc="privacy" />} />,
+    <Route key="offer" path="oferta" element={<Legal doc="offer" />} />,
+    <Route key="notfound" path="*" element={<NotFound />} />,
+  ]
+}
 
 export default function App() {
   useEffect(() => {
@@ -33,20 +57,11 @@ export default function App() {
   }, [])
 
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Suspense>
-          <Pricing />
-          <Team />
-          <Portfolio />
-          <Contact />
-        </Suspense>
-      </main>
-      <Suspense>
-        <Footer />
-      </Suspense>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/">{pageRoutes()}</Route>
+        <Route path={UZ_PREFIX}>{pageRoutes()}</Route>
+      </Route>
+    </Routes>
   )
 }

@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { useT } from '../i18n'
@@ -31,7 +32,7 @@ function OrbitTile({ tile, mx, my }: { tile: (typeof orbitTiles)[number]; mx: Mo
 }
 
 export function Hero() {
-  const { t } = useT()
+  const { t, href } = useT()
   const ref = useRef<HTMLElement>(null)
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
@@ -78,12 +79,12 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.25, ease }}
           className="mt-10 flex justify-center gap-4 flex-wrap"
         >
-          <a href="#contact" className="inline-flex items-center px-9 py-4 bg-mint text-forest rounded-pill text-base font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]">
+          <Link to={href('/kontakty')} className="inline-flex items-center px-9 py-4 bg-mint text-forest rounded-pill text-base font-bold hover:brightness-110 transition-[filter] duration-200 active:scale-[0.98]">
             {t.ctaDiscuss}
-          </a>
-          <a href="#portfolio" className="inline-flex items-center gap-2 px-9 py-4 border border-white/20 text-white rounded-pill text-base font-medium hover:bg-white/5 transition-colors duration-200">
+          </Link>
+          <Link to={href('/portfolio')} className="inline-flex items-center gap-2 px-9 py-4 border border-white/20 text-white rounded-pill text-base font-medium hover:bg-white/5 transition-colors duration-200">
             {t.heroCtaSecondary} <ArrowUpRight size={16} weight="bold" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

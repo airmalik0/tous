@@ -1,7 +1,7 @@
 import { ScrollReveal } from './ScrollReveal'
 import { useT } from '../i18n'
 
-type RoleKey = 'designer' | 'project' | 'developer' | 'smm' | 'finance'
+type RoleKey = 'designer' | 'project' | 'developer' | 'marketing'
 
 type Member = {
   slug: string
@@ -15,8 +15,7 @@ const members: Member[] = [
   { slug: 'ilkhom', name: 'Ильхом', role: 'developer' },
   { slug: 'andrei', name: 'Андрей', role: 'developer' },
   { slug: 'samir', name: 'Самир', role: 'developer' },
-  { slug: 'madina', name: 'Мадина', role: 'smm' },
-  { slug: 'nastya', name: 'Настя', role: 'finance' },
+  { slug: 'madina', name: 'Мадина', role: 'marketing' },
 ]
 
 export function Team() {
@@ -26,8 +25,7 @@ export function Team() {
     designer: t.roleDesigner,
     project: t.roleProject,
     developer: t.roleDeveloper,
-    smm: t.roleSmm,
-    finance: t.roleFinance,
+    marketing: t.roleMarketing,
   }
 
   return (
@@ -54,7 +52,7 @@ export function Team() {
               <ScrollReveal
                 key={m.slug}
                 delay={i * 0.08}
-                className={`col-span-12 md:col-span-6 ${i < 4 ? 'lg:col-span-3' : 'lg:col-span-4'}`}
+                className="col-span-12 md:col-span-6 lg:col-span-4"
               >
                 <div className="group relative rounded-[1.75rem] overflow-hidden bg-white/5 border border-white/10 h-full transition-transform duration-300 hover:scale-[1.01]">
                   <div className="relative aspect-[3/4] overflow-hidden">
