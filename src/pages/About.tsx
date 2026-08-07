@@ -4,6 +4,7 @@ import { Team } from '../components/Team'
 import { CtaBand } from '../components/CtaBand'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { Seo } from '../components/Seo'
+import { seoFor } from '../content/seo'
 import { useT } from '../i18n'
 
 export function About() {
@@ -18,14 +19,7 @@ export function About() {
 
   return (
     <>
-      <Seo
-        title={locale === 'uz' ? 'imbim veb-studiyasi haqida — jamoa va yondashuv' : 'О веб-студии imbim — команда и подход к работе'}
-        description={
-          locale === 'uz'
-            ? "imbim — Toshkentdagi to'liq tsikl veb-studiya: dizayn, dasturlash, ishga tushirish va qo'llab-quvvatlash bitta jamoa ichida."
-            : 'imbim — веб-студия полного цикла из Ташкента: дизайн, разработка, запуск и поддержка внутри одной команды. Принципы работы и состав команды.'
-        }
-      />
+      <Seo {...seoFor('/o-nas', locale)} />
 
       <PageHero
         badge={t.aboutBadge}

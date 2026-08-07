@@ -1,5 +1,6 @@
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
+import { seoFor } from '../content/seo'
 import { useT } from '../i18n'
 import { offer, privacy } from '../content/legal'
 
@@ -14,7 +15,7 @@ export function Legal({ doc }: Props) {
 
   return (
     <>
-      <Seo title={`${title} | imbim`} description={data.intro.slice(0, 180)} />
+      <Seo {...seoFor(doc === 'privacy' ? '/politika-konfidentsialnosti' : '/oferta', locale)} />
 
       <PageHero badge={t.footerLegal} title1={title} crumbs={[{ label: title }]} />
 

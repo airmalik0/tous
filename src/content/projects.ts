@@ -182,7 +182,7 @@ export const projects: Project[] = [
     slug: 'paper-cutout',
     brand: 'Слова на ветер',
     tag: 'books',
-    url: '/demo/paper-cutout/',
+    url: '/demo/paper-cutout',
     copy: {
       ru: {
         format: 'Промо-страница',
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     slug: 'mosaic-pixel',
     brand: 'PIXEL ALMATY',
     tag: 'arcade',
-    url: '/demo/mosaic-pixel/',
+    url: '/demo/mosaic-pixel',
     span: 'lg:col-span-2',
     copy: {
       ru: {
@@ -255,7 +255,7 @@ export const projects: Project[] = [
     slug: 'spring-blooms',
     brand: 'FLEUREL',
     tag: 'florist',
-    url: '/demo/spring-blooms/',
+    url: '/demo/spring-blooms',
     copy: {
       ru: {
         format: 'Лендинг',

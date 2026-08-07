@@ -2,7 +2,8 @@ import { Clock, InstagramLogo, PaperPlaneTilt, Phone } from '@phosphor-icons/rea
 import { PageHero } from '../components/PageHero'
 import { Contact } from '../components/Contact'
 import { ScrollReveal } from '../components/ScrollReveal'
-import { Seo, SITE_URL } from '../components/Seo'
+import { Seo } from '../components/Seo'
+import { SITE_URL, seoFor } from '../content/seo'
 import { useT } from '../i18n'
 
 const contactLd = {
@@ -49,15 +50,7 @@ export function Contacts() {
 
   return (
     <>
-      <Seo
-        title={locale === 'uz' ? 'imbim veb-studiyasi aloqalari — Toshkent' : 'Контакты веб-студии imbim — Ташкент'}
-        description={
-          locale === 'uz'
-            ? "Telefon, Telegram va Instagram orqali bog'laning yoki saytda ariza qoldiring — ish vaqtida bir soat ichida javob beramiz."
-            : 'Свяжитесь по телефону, в Telegram или Instagram, либо оставьте заявку на сайте — ответим в течение часа в рабочее время.'
-        }
-        jsonLd={contactLd}
-      />
+      <Seo {...seoFor('/kontakty', locale)} jsonLd={contactLd} />
 
       <PageHero
         badge={t.contactsBadge}

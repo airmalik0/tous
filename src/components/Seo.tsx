@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useT } from '../i18n'
 import { LOCALES } from '../locales'
-
-export const SITE_URL = 'https://imbim.online'
+import { SITE_URL } from '../content/seo'
 
 type Props = {
   title: string

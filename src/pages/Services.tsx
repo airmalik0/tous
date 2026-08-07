@@ -3,6 +3,7 @@ import { ServicesGrid } from '../components/ServicesGrid'
 import { Process } from '../components/Process'
 import { CtaBand } from '../components/CtaBand'
 import { Seo } from '../components/Seo'
+import { seoFor } from '../content/seo'
 import { useT } from '../i18n'
 
 export function Services() {
@@ -10,18 +11,7 @@ export function Services() {
 
   return (
     <>
-      <Seo
-        title={
-          locale === 'uz'
-            ? "Sayt ishlab chiqish xizmatlari — narxlar va muddatlar | imbim"
-            : 'Услуги веб-студии imbim — разработка сайтов в Ташкенте'
-        }
-        description={
-          locale === 'uz'
-            ? "Lending, sayt-vizitka, korporativ sayt va internet-do'kon ishlab chiqish. Har bir format uchun tarkib, muddat va narx."
-            : 'Разработка лендингов, сайтов-визиток, корпоративных сайтов и интернет-магазинов. Состав работ, сроки и цены по каждому формату.'
-        }
-      />
+      <Seo {...seoFor('/uslugi', locale)} />
 
       <PageHero
         badge={t.servicesBadge}

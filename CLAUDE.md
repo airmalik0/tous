@@ -52,10 +52,16 @@ public/og.png   — OG-картинка для превью ссылок
 *                                 → NotFound (noindex)
 ```
 
-- Мета-теги страницы ставит компонент `Seo`: title, description, canonical,
-  hreflang ru/uz/x-default, Open Graph, JSON-LD.
-- `sitemap.xml` собирается на билде плагином в `vite.config.ts` из тех же
-  `content/*`, что рендерят страницы. Отдельно поддерживать список не нужно.
+- Мета-тексты страниц лежат в `src/content/seo.ts` — единственный список.
+  Оттуда их берут и компонент `Seo` в рантайме, и плагины сборки.
+- На билде `vite.config.ts` делает две вещи из этих же данных: `sitemap.xml`
+  и по HTML-файлу на каждый маршрут (`dist/uslugi/lending/index.html` и т.д.)
+  с готовыми title, description, OG, canonical и hreflang прямо в разметке.
+  Это нужно для превью ссылок: боты Telegram, Instagram и WhatsApp не выполняют
+  JS и без предрендера получали бы мета-теги главной на всех страницах.
+- `html_handling: "drop-trailing-slash"` в `wrangler.jsonc` — канонические
+  адреса без слэша на конце. По умолчанию Cloudflare редиректил бы `/uslugi`
+  на `/uslugi/`, и canonical указывал бы на редирект.
 - `public/demo/` называется так, чтобы не конфликтовать с маршрутом
   `/portfolio/:slug`: Cloudflare отдал бы `/portfolio/<slug>/index.html` вместо SPA.
 - Неизвестный путь отдаёт 200 с SPA-заглушкой (ограничение Static Assets),

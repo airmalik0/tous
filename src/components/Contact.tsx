@@ -37,7 +37,7 @@ export function Contact() {
       if (res.ok) {
         window.fbq?.('track', 'Lead')
         // Язык теперь живёт в адресе, поэтому передаём его статичной странице явно.
-        window.location.href = locale === 'ru' ? '/thank-you/' : `/thank-you/?lang=${locale}`
+        window.location.href = locale === 'ru' ? '/thank-you' : `/thank-you?lang=${locale}`
       } else {
         setStatus('error')
         setTimeout(() => setStatus('idle'), 3000)

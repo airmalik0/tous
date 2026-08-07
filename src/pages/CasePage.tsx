@@ -4,7 +4,8 @@ import { PageHero } from '../components/PageHero'
 import { CtaBand } from '../components/CtaBand'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { useProjectTags } from '../hooks/useProjectTags'
-import { Seo, SITE_URL } from '../components/Seo'
+import { Seo } from '../components/Seo'
+import { seoFor } from '../content/seo'
 import { NotFound } from './NotFound'
 import { useT } from '../i18n'
 import { nextProject, projectBySlug } from '../content/projects'
@@ -23,11 +24,7 @@ export function CasePage() {
 
   return (
     <>
-      <Seo
-        title={copy.seoTitle}
-        description={copy.seoDescription}
-        image={`${SITE_URL}/portfolio-illust/${project.slug}.jpg`}
-      />
+      <Seo {...seoFor(`/portfolio/${project.slug}`, locale)} />
 
       <PageHero
         badge={tags[project.tag]}

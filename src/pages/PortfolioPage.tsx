@@ -2,6 +2,7 @@ import { PageHero } from '../components/PageHero'
 import { Portfolio } from '../components/Portfolio'
 import { CtaBand } from '../components/CtaBand'
 import { Seo } from '../components/Seo'
+import { seoFor } from '../content/seo'
 import { useT } from '../i18n'
 
 export function PortfolioPage() {
@@ -9,14 +10,7 @@ export function PortfolioPage() {
 
   return (
     <>
-      <Seo
-        title={locale === 'uz' ? 'Portfolio — imbim veb-studiyasi ishlari' : 'Портфолио — работы веб-студии imbim'}
-        description={
-          locale === 'uz'
-            ? "imbim loyihalari: internet-do'konlar, xizmat saytlari va promo-sahifalar. Har bir keysda vazifa va yechim."
-            : 'Проекты imbim: интернет-магазины, сайты услуг и промо-страницы. В каждом кейсе — задача и что мы для неё сделали.'
-        }
-      />
+      <Seo {...seoFor('/portfolio', locale)} />
 
       <PageHero
         badge={t.portfolioBadge}

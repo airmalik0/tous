@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Hero } from '../components/Hero'
-import { Seo, SITE_URL } from '../components/Seo'
+import { Seo } from '../components/Seo'
+import { SITE_URL, seoFor } from '../content/seo'
 import { useT } from '../i18n'
 
 const ServicesGrid = lazy(() => import('../components/ServicesGrid').then(m => ({ default: m.ServicesGrid })))
@@ -30,19 +31,7 @@ export function Home() {
 
   return (
     <>
-      <Seo
-        title={
-          locale === 'uz'
-            ? 'imbim — Toshkentda sayt yaratish va ishlab chiqish'
-            : 'imbim — Создание сайтов в Ташкенте под ключ'
-        }
-        description={
-          locale === 'uz'
-            ? "To'liq tsikl veb-studiya: lendinglar, sayt-vizitkalar, korporativ saytlar va internet-do'konlar. 50+ loyiha, muddat 3 kundan, narx 2.5 mln so'mdan."
-            : 'Веб-студия полного цикла: лендинги, сайты-визитки, корпоративные сайты и интернет-магазины. 50+ проектов, срок от 3 дней, цена от 2.5 млн сум.'
-        }
-        jsonLd={organizationLd}
-      />
+      <Seo {...seoFor('/', locale)} jsonLd={organizationLd} />
 
       <Hero />
       <Suspense fallback={<div className="min-h-[50svh]" />}>

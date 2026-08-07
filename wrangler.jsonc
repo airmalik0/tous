@@ -11,9 +11,13 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    // Vite-приложение: неизвестные пути отдают index.html.
-    // /thank-you/ существует как файл и отдаётся напрямую, до фолбэка.
+    // Неизвестные пути отдают index.html — дальше маршрут разбирает React Router.
+    // Известные отдают предрендеренный HTML из dist/<путь>/index.html.
     "not_found_handling": "single-page-application",
+    // Канонические адреса без слэша на конце: /uslugi/lending, а не /uslugi/lending/.
+    // По умолчанию (auto-trailing-slash) Cloudflare редиректил бы на версию
+    // со слэшем, и canonical указывал бы на адрес, который сам себя редиректит.
+    "html_handling": "drop-trailing-slash",
     // Статику Worker не трогает — просыпается только на /api/*.
     "run_worker_first": ["/api/*"]
   },

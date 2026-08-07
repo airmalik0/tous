@@ -5,7 +5,8 @@ import { PageHero } from '../components/PageHero'
 import { Process } from '../components/Process'
 import { CtaBand } from '../components/CtaBand'
 import { ScrollReveal } from '../components/ScrollReveal'
-import { Seo, SITE_URL } from '../components/Seo'
+import { Seo } from '../components/Seo'
+import { SITE_URL, seoFor } from '../content/seo'
 import { NotFound } from './NotFound'
 import { useT } from '../i18n'
 import { featureLabels, planBySlug, plans } from '../content/plans'
@@ -47,7 +48,7 @@ export function ServiceDetail() {
 
   return (
     <>
-      <Seo title={copy.seoTitle} description={copy.seoDescription} jsonLd={jsonLd} />
+      <Seo {...seoFor(`/uslugi/${plan.slug}`, locale)} jsonLd={jsonLd} />
 
       <PageHero
         badge={t.servicesBadge}
