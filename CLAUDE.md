@@ -69,7 +69,11 @@ public/og.png   — OG-картинка для превью ссылок
 
 ## Интеграции
 - **Meta Pixel** (1286110490374446) — в index.html, отложен на window.load. Событие Lead при отправке формы.
-- **Google Ads** — два gtag-конфига в index.html и public/thank-you/index.html: AW-18143569795 и AW-18362284145.
+- **Google Ads** — AW-18376537023 в index.html и public/thank-you/index.html.
+  Конверсия «Отправка формы» (метка SK7ZCPfFrd8cEL_nzrpE) отправляется
+  событием со страницы благодарности — тип «Загрузка страницы».
+  Раньше стояли ещё два аккаунта (AW-18143569795, AW-18362284145) — убраны,
+  реклама крутится не в них.
 - **Telegram Bot API** — форма шлёт POST на `/api/lead`, Worker пересылает в Telegram. Токен и chat_id живут в секретах Worker, в клиентский бандл не попадают.
 - **Шрифты** — Cabinet Grotesk и Satoshi лежат в `public/fonts/` (woff2, 172 КБ),
   `@font-face` в `src/index.css`, `font-display: optional` (без layout shift).
