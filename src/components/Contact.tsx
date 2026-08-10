@@ -35,7 +35,8 @@ export function Contact() {
       })
 
       if (res.ok) {
-        window.fbq?.('track', 'Lead')
+        // Lead и конверсия Google отправляются со страницы /thank-you.
+        // Здесь они не успевали уйти: следом сразу шёл переход по адресу.
         // Язык теперь живёт в адресе, поэтому передаём его статичной странице явно.
         window.location.href = locale === 'ru' ? '/thank-you' : `/thank-you?lang=${locale}`
       } else {
