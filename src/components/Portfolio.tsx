@@ -46,12 +46,14 @@ export function Portfolio({ heading = true, limit, showAllLink = false, mosaic =
                 className="group relative block h-full min-h-[260px] md:min-h-[300px] bg-forest rounded-[2rem] overflow-hidden no-underline"
               >
                 <div className="absolute right-0 top-0 bottom-0 aspect-square overflow-hidden">
+                  {/* Сдвиг вправо уводит объект из-под плотной части градиента;
+                      освободившаяся полоса слева закрыта сплошным forest. */}
                   <img
                     src={`/portfolio-illust/${p.slug}.jpg`}
                     alt={p.brand}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="absolute inset-0 w-full h-full object-cover translate-x-[6%] transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-forest from-18% via-forest/40 via-46% to-transparent to-88%" />
                 </div>
