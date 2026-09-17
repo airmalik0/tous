@@ -80,6 +80,10 @@ export type Dict = {
   portfolioTagBooks: string
   portfolioTagArcade: string
   portfolioTagFlorist: string
+  portfolioTagCosmetics: string
+  portfolioTagAi: string
+  portfolioTagCrypto: string
+  portfolioTagSewing: string
   caseOpen: string
   caseTaskTitle: string
   caseSolutionTitle: string
@@ -239,6 +243,10 @@ const ru: Dict = {
   portfolioTagBooks: 'Книжный',
   portfolioTagArcade: 'Ретро-аркада',
   portfolioTagFlorist: 'Флористика',
+  portfolioTagCosmetics: 'Косметика',
+  portfolioTagAi: 'ИИ и автоматизация',
+  portfolioTagCrypto: 'Крипторасследования',
+  portfolioTagSewing: 'Швейное производство',
   caseOpen: 'Смотреть кейс',
   caseTaskTitle: 'Задача',
   caseSolutionTitle: 'Что сделали',
@@ -392,6 +400,10 @@ const uz: Dict = {
   portfolioTagBooks: "Kitob do'koni",
   portfolioTagArcade: 'Retro arkada',
   portfolioTagFlorist: 'Floristika',
+  portfolioTagCosmetics: 'Kosmetika',
+  portfolioTagAi: 'AI va avtomatlashtirish',
+  portfolioTagCrypto: 'Kripto-tekshiruv',
+  portfolioTagSewing: 'Tikuvchilik ishlab chiqarish',
   caseOpen: "Keysni ko'rish",
   caseTaskTitle: 'Vazifa',
   caseSolutionTitle: 'Nima qildik',

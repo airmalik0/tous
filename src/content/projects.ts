@@ -8,6 +8,10 @@ export type ProjectTag =
   | 'books'
   | 'arcade'
   | 'florist'
+  | 'cosmetics'
+  | 'ai'
+  | 'crypto'
+  | 'sewing'
 
 export type ProjectCopy = {
   /** Формат работы: магазин, сайт услуг, промо-страница. */
@@ -33,6 +37,152 @@ export type Project = {
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'velora',
+    brand: 'Velora',
+    tag: 'cosmetics',
+    url: 'https://velora.expert/',
+    span: 'lg:col-span-2',
+    copy: {
+      ru: {
+        format: 'Сайт бренда',
+        summary: 'Косметический бренд, который начинает с исследования, а не с баночки',
+        task: 'Velora делает уход, отталкиваясь от условий жизни женщин Узбекистана: жёсткая вода, сухой воздух, пыль, солнце. Обычный сайт-каталог это обесценивает — посетитель видит ряд баночек и не понимает, чем бренд отличается от любой полки в магазине.',
+        solution: 'Собрали сайт как рассказ: каждый продукт открывается не составом, а проблемой, которую нашли в исследовании, и только потом — формулой и результатом тестов. Цифры разработки вынесли отдельным блоком, а статусы «решение выпущено» и «проходит финальное тестирование» показывают, что линейка живая.',
+        features: [
+          'Каждый продукт подан через найденную проблему, а не через состав',
+          'Блок цифр разработки: версии формул, участницы тестирования',
+          'Статусы продуктов — выпущен или на финальном тестировании',
+          'Спокойная светлая типографика, рассчитанная на долгое чтение',
+        ],
+        seoTitle: 'Velora — сайт косметического бренда | Кейс imbim',
+        seoDescription: 'Кейс imbim: сайт косметического бренда Velora — продукты поданы через исследования и реальные проблемы, блок цифр разработки, статусы линейки.',
+      },
+      uz: {
+        format: 'Brend sayti',
+        summary: "Bankadan emas, tadqiqotdan boshlaydigan kosmetika brendi",
+        task: "Velora parvarish vositalarini O'zbekiston ayollarining yashash sharoitidan kelib chiqib yaratadi: qattiq suv, quruq havo, chang, quyosh. Oddiy katalog-sayt buni yo'qqa chiqaradi — tashrifchi bir qator bankani ko'radi va brend do'kon javonidan nimasi bilan farq qilishini tushunmaydi.",
+        solution: "Saytni hikoya sifatida yig'dik: har bir mahsulot tarkib bilan emas, tadqiqotda topilgan muammo bilan ochiladi, keyin esa formula va test natijalari keladi. Ishlab chiqish raqamlarini alohida blokka chiqardik, «yechim chiqarildi» va «yakuniy testdan o'tmoqda» statuslari esa liniya tirik ekanini ko'rsatadi.",
+        features: [
+          "Har bir mahsulot tarkib emas, topilgan muammo orqali ko'rsatilgan",
+          'Ishlab chiqish raqamlari: formula versiyalari, test ishtirokchilari',
+          "Mahsulot statuslari — chiqarilgan yoki yakuniy testda",
+          "Uzoq o'qishga mo'ljallangan tinch, yorug' tipografika",
+        ],
+        seoTitle: 'Velora — kosmetika brendi sayti | imbim keysi',
+        seoDescription: "imbim keysi: Velora kosmetika brendi sayti — mahsulotlar tadqiqot va haqiqiy muammolar orqali, ishlab chiqish raqamlari bloki, liniya statuslari.",
+      },
+    },
+  },
+  {
+    slug: 'interika-lab',
+    brand: 'Интерика Лаб',
+    tag: 'ai',
+    url: 'https://interikalab.com/',
+    copy: {
+      ru: {
+        format: 'Сайт услуг',
+        summary: 'Внедрение ИИ: процессы, расчёт окупаемости и заявка на диагностику',
+        task: 'Внедрение ИИ обычно продают словами, в которые руководитель не верит: «нейросети», «цифровизация». Ему нужно понять другое — какой именно процесс закроют, сколько часов это снимет и когда вложение окупится.',
+        solution: 'Разложили услуги не по технологиям, а по процессам: обращения клиентов, ввод документов, смены сотрудников, мониторинг отзывов. По каждому написали, что меняется после внедрения. Добавили калькулятор потерь — три вопроса, и посетитель видит свои часы и деньги. Главное действие на сайте — бесплатная диагностика, а не абстрактная консультация.',
+        features: [
+          'Услуги разложены по процессам компании, а не по технологиям',
+          'Калькулятор потерь: три вопроса — и расчёт экономии',
+          'Отдельная страница под каждое решение',
+          'Главное действие — заявка на бесплатную диагностику',
+        ],
+        seoTitle: 'Интерика Лаб — сайт по внедрению ИИ | Кейс imbim',
+        seoDescription: 'Кейс imbim: сайт Интерика Лаб о внедрении ИИ — услуги по процессам, калькулятор потерь, страницы решений и заявка на бесплатную диагностику.',
+      },
+      uz: {
+        format: 'Xizmatlar sayti',
+        summary: "AI joriy etish: jarayonlar, qoplanish hisobi va diagnostika arizasi",
+        task: "AI joriy etishni odatda rahbar ishonmaydigan so'zlar bilan sotishadi: «neyrotarmoqlar», «raqamlashtirish». Unga boshqa narsa kerak — aynan qaysi jarayon yopiladi, necha soat bo'shaydi va sarmoya qachon qoplanadi.",
+        solution: "Xizmatlarni texnologiyalar emas, jarayonlar bo'yicha joyladik: mijoz murojaatlari, hujjatlarni kiritish, xodimlar smenasi, sharhlar monitoringi. Har biri uchun joriy etishdan keyin nima o'zgarishini yozdik. Yo'qotishlar kalkulyatorini qo'shdik — uch savol, va tashrifchi o'z soatlari va pulini ko'radi. Saytdagi asosiy harakat — bepul diagnostika.",
+        features: [
+          "Xizmatlar texnologiya emas, kompaniya jarayonlari bo'yicha",
+          "Yo'qotishlar kalkulyatori: uch savol — va tejamkorlik hisobi",
+          'Har bir yechim uchun alohida sahifa',
+          'Asosiy harakat — bepul diagnostikaga ariza',
+        ],
+        seoTitle: 'Interika Lab — AI joriy etish sayti | imbim keysi',
+        seoDescription: "imbim keysi: Interika Lab sayti — AI joriy etish jarayonlar bo'yicha, yo'qotishlar kalkulyatori, yechim sahifalari va bepul diagnostika arizasi.",
+      },
+    },
+  },
+  {
+    slug: 'kriptoinspektor',
+    brand: 'Криптоинспектор',
+    tag: 'crypto',
+    url: 'https://криптоинспектор.рф/',
+    span: 'lg:col-span-2',
+    copy: {
+      ru: {
+        format: 'Сайт услуг',
+        summary: 'Расследование криптомошенничества: сценарии, форма кейса, команда',
+        task: 'На такой сайт приходят после кражи — в панике и часто уже под второй схемой: «оплатите комиссию, и средства разблокируют». Человеку нужно за минуту понять, что делать прямо сейчас и кому он пишет. При этом нельзя обещать возврат, которого никто не гарантирует.',
+        solution: 'Первый экран предупреждает о повторном платеже и даёт короткую памятку: что сохранить и зафиксировать. Дальше — выбор по ситуации вместо списка услуг, честный перечень того, что клиент получает по итогам анализа, и открытая команда с именами и опытом экспертов. Форма кейса сразу собирает TXID, сеть, сумму и дату, поэтому специалист получает данные без переписки.',
+        features: [
+          'Памятка первых шагов прямо на первом экране',
+          'Выбор по ситуации вместо перечня услуг',
+          'Форма кейса с TXID, сетью, суммой и датой инцидента',
+          'Открытая команда: имена, роли и опыт экспертов',
+        ],
+        seoTitle: 'Криптоинспектор — сайт блокчейн-расследований | Кейс imbim',
+        seoDescription: 'Кейс imbim: сайт Криптоинспектор о расследовании криптомошенничества — памятка первых шагов, выбор по ситуации, форма кейса с TXID и открытая команда.',
+      },
+      uz: {
+        format: 'Xizmatlar sayti',
+        summary: "Kripto-firibgarlikni tekshirish: vaziyat bo'yicha tanlov, keys formasi, jamoa",
+        task: "Bunday saytga o'g'irlikdan keyin kelishadi — vahimada va ko'pincha ikkinchi sxema ostida: «komissiyani to'lang, mablag' blokdan chiqadi». Odam bir daqiqada hozir nima qilishini va kimga yozayotganini tushunishi kerak. Shu bilan birga hech kim kafolatlamaydigan qaytarishni va'da qilib bo'lmaydi.",
+        solution: "Birinchi ekran takroriy to'lovdan ogohlantiradi va qisqa yo'riqnoma beradi: nimani saqlash va qayd etish kerak. Keyin — xizmatlar ro'yxati o'rniga vaziyat bo'yicha tanlov, tahlil yakunida mijoz nima olishining halol ro'yxati va ismlari ko'rsatilgan ochiq jamoa. Keys formasi darhol TXID, tarmoq, summa va sanani yig'adi.",
+        features: [
+          'Birinchi ekranda dastlabki qadamlar yo\'riqnomasi',
+          "Xizmatlar ro'yxati o'rniga vaziyat bo'yicha tanlov",
+          'TXID, tarmoq, summa va hodisa sanasi bilan keys formasi',
+          'Ochiq jamoa: ismlar, rollar va ekspertlar tajribasi',
+        ],
+        seoTitle: 'Kriptoinspektor — blokcheyn tekshiruvi sayti | imbim keysi',
+        seoDescription: "imbim keysi: Kriptoinspektor sayti — dastlabki qadamlar yo'riqnomasi, vaziyat bo'yicha tanlov, TXID bilan keys formasi va ochiq jamoa.",
+      },
+    },
+  },
+  {
+    slug: 'badis',
+    brand: 'Badis',
+    tag: 'sewing',
+    url: 'https://badis.uz/',
+    copy: {
+      ru: {
+        format: 'Сайт производства',
+        summary: 'Швейный цех полного цикла: посадка изделия в 3D до раскроя',
+        task: 'Дизайнеру, который запускает свою марку, страшно отдавать тираж вслепую: изделие он увидит только на образце, а правки к этому моменту стоят ткани и времени. Обычный сайт цеха — это список операций и телефон, по нему нельзя понять, как устроена работа.',
+        solution: 'Главным на сайте сделали само изделие: по мере прокрутки оно проходит три стадии — сетка построения, 3D-модель, посадка на фигуре, — и ракурс при этом не меняется. Рядом разложили этапы от технического описания до контроля тиража, а форма заявки сразу спрашивает, что шьём, каким тиражом и к какому сроку.',
+        features: [
+          'Изделие в 3D: сетка построения, модель, посадка на фигуре',
+          'Стадии сменяются по прокрутке, ракурс остаётся прежним',
+          'Этапы работы — от техописания до контроля качества тиража',
+          'Заявка с тиражом и сроком: расчёт без предварительного созвона',
+        ],
+        seoTitle: 'Badis — сайт швейного цеха в Ташкенте | Кейс imbim',
+        seoDescription: 'Кейс imbim: сайт швейного цеха полного цикла Badis — изделие в 3D с посадкой на фигуре, этапы работы и заявка с тиражом и сроком.',
+      },
+      uz: {
+        format: 'Ishlab chiqarish sayti',
+        summary: "To'liq tsiklli tikuv sexi: bichishdan oldin 3D'da o'tirishi",
+        task: "O'z markasini ishga tushirayotgan dizayner tirajni ko'r-ko'rona berishdan qo'rqadi: buyumni faqat namunada ko'radi, o'sha paytdagi tuzatishlar esa mato va vaqtga tushadi. Sexning oddiy sayti — operatsiyalar ro'yxati va telefon raqami, undan ish qanday tashkil etilganini tushunib bo'lmaydi.",
+        solution: "Saytda asosiy o'ringa buyumning o'zini qo'ydik: skroll paytida u uch bosqichdan o'tadi — qurilish to'ri, 3D-model, figurada o'tirishi, — rakurs esa o'zgarmaydi. Yonida texnik tavsifdan tiraj nazoratigacha bo'lgan bosqichlar, ariza formasi esa darhol nima tikilishi, tiraji va muddatini so'raydi.",
+        features: [
+          "3D'da buyum: qurilish to'ri, model, figurada o'tirishi",
+          "Bosqichlar skroll bilan almashadi, rakurs o'zgarmaydi",
+          'Ish bosqichlari — texnik tavsifdan tiraj sifat nazoratigacha',
+          "Tiraj va muddatli ariza: oldindan qo'ng'iroqsiz hisob-kitob",
+        ],
+        seoTitle: 'Badis — Toshkentdagi tikuv sexi sayti | imbim keysi',
+        seoDescription: "imbim keysi: Badis to'liq tsiklli tikuv sexi sayti — figurada o'tirishi ko'rsatilgan 3D buyum, ish bosqichlari va tiraj bilan ariza.",
+      },
+    },
+  },
   {
     slug: 'savushka',
     brand: 'Savushka',

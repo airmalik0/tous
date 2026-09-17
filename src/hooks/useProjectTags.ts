@@ -12,5 +12,9 @@ export function useProjectTags(): Record<ProjectTag, string> {
     books: t.portfolioTagBooks,
     arcade: t.portfolioTagArcade,
     florist: t.portfolioTagFlorist,
+    cosmetics: t.portfolioTagCosmetics,
+    ai: t.portfolioTagAi,
+    crypto: t.portfolioTagCrypto,
+    sewing: t.portfolioTagSewing,
   }
 }

@@ -46,7 +46,7 @@ public/og.png   — OG-картинка для превью ссылок
 ```
 /                                 /uz
 /uslugi                           /uslugi/:slug   (4 тарифа из content/plans.ts)
-/portfolio                        /portfolio/:slug (7 кейсов из content/projects.ts)
+/portfolio                        /portfolio/:slug (11 кейсов из content/projects.ts)
 /tseny  /o-nas  /kontakty
 /politika-konfidentsialnosti  /oferta
 *                                 → NotFound (noindex)
